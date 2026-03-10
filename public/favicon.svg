@@ -1,0 +1,10 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="32" height="32" rx="7" fill="#1C1E1F"/>
+  <!-- Signal arcs radiating from buried source -->
+  <path d="M16 24 L16 14" stroke="#D4A853" stroke-width="2" stroke-linecap="round"/>
+  <path d="M10.5 18.5 A7.5 7.5 0 0 1 21.5 18.5" stroke="#D4A853" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.9"/>
+  <path d="M7.5 16 A11 11 0 0 1 24.5 16" stroke="#D4A853" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.55"/>
+  <path d="M5 13.5 A14.5 14.5 0 0 1 27 13.5" stroke="#D4A853" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.25"/>
+  <!-- Buried dot -->
+  <circle cx="16" cy="26" r="2" fill="#D4A853"/>
+</svg>

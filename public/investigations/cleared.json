@@ -1,0 +1,119 @@
+{
+  "id": "cleared",
+  "ref": "BS-SPT-001",
+  "date": "March 2026",
+  "title": "Cleared",
+  "summary": "How Assam demolished the homes of 20,000 families. Between 2021 and 2026, the BJP-led government in India's far northeast conducted at least 33 documented eviction operations, displacing more than 100,000 people. This investigation combines field reporting across 20 demolished villages, satellite imagery analysis, court filings, and eviction data to document a campaign of systematic displacement.",
+  "collaborators": [
+    { "name": "Ahmer Khan" },
+    { "name": "The New Humanitarian" }
+  ],
+  "fundedBy": "Innovationsfonds für multimedialen Journalismus",
+  "notebookUrl": "https://notebooklm.google.com/notebook/e0be672a-48c4-4542-ba44-d82ae03d8e5a",
+  "sources": [
+    {
+      "claim": "No person can be dispossessed without due process of law, guaranteed by a prior notice, opportunity to respond",
+      "title": "Supreme Court of India — Judgment 2024 INSC 866",
+      "url": "https://api.sci.gov.in/supremecourt/2022/12239/12239_2022_2_1501_57147_Judgement_13-Nov-2024.pdf",
+      "meta": "Court Filing · Landmark demolition guidelines · Nov 2024"
+    },
+    {
+      "claim": "Evictions in Assam constitute forced evictions prohibited under international human rights law",
+      "title": "Amnesty International — India demolitions report",
+      "url": "https://www.amnesty.org/en/latest/news/2024/02/india-authorities-must-immediately-stop-unjust-targeted-demolition-of-muslim-properties/",
+      "meta": "Human Rights Report · 33 verified instances · Feb 2024"
+    },
+    {
+      "claim": "India must halt arbitrary demolitions targeting minorities and marginalised communities",
+      "title": "UN Human Rights Experts — Press release",
+      "url": "https://www.ohchr.org/en/press-releases/2025/06/india-must-halt-arbitrary-demolitions-targeting-minorities-and-marginalised",
+      "meta": "OHCHR · UN Special Rapporteurs · Jun 2025"
+    },
+    {
+      "claim": "Next time, five lakh bighas will be cleared of evictions. No Bangladeshi infiltrator will live in peace in Assam.",
+      "title": "CM Sarma statement at BJP campaign rally",
+      "url": "https://www.tribuneindia.com/news/india/will-carry-out-eviction-in-5-lakh-bighas-of-land-after-assam-polls-cm-himanta-biswa-sarma/",
+      "meta": "Tribune India · Direct quote · Mar 2026"
+    },
+    {
+      "claim": "The petitioners shall not be evicted from their possession without taking leave of this Court",
+      "title": "Gauhati High Court — WP(C)/4581/2025",
+      "url": null,
+      "meta": "Court Filing · Protection order for 220 petitioners · Aug 2025"
+    },
+    {
+      "claim": "At five in the morning, while we were sleeping, three JCBs came and started demolishing our house.",
+      "title": "Interviews with affected families across 20 villages",
+      "url": null,
+      "meta": "Original Reporting · On-the-ground · 2024–2026"
+    },
+    {
+      "claim": "My job is to make the Miya people suffer.",
+      "title": "CM Sarma public statement — Scroll.in",
+      "url": "https://scroll.in/article/1090396/himanta-sarmas-remarks-about-miyas-make-a-mockery-of-constitution",
+      "meta": "Direct quote · 27 Jan 2026"
+    },
+    {
+      "claim": "Between 2006 and 2009, a real estate company co-founded by the chief minister's wife acquired at least 18 acres of government land through transactions that appeared to contravene state land regulations",
+      "title": "The Wire & The Crosscurrent — Joint investigation",
+      "url": "https://thewire.in/government/assam-government-land-himanta-biswa-sarma-rbs-realtors",
+      "meta": "Investigative Report · Land records analysis · 2021"
+    },
+    {
+      "claim": "Assam government policies bear hallmarks of ethnic cleansing",
+      "title": "Joint statement by 188 scholars, lawyers, and activists",
+      "url": "https://thewire.in/communalism/himanta-government-policies-hallmarks-ethnic-cleansing-statement",
+      "meta": "Civil Society · The Wire · 2025"
+    },
+    {
+      "claim": "Adani Group to invest approximately $5.5 billion in power projects in India's Assam state",
+      "title": "Reuters — Adani power investment",
+      "url": "https://www.reuters.com/sustainability/climate-energy/adani-group-invest-717-bln-power-projects-indias-assam-state-2025-11-14/",
+      "meta": "Reuters · Corporate-state nexus · Nov 2025"
+    },
+    {
+      "claim": "India's methods and Israel's conduct in Palestine show an uncanny similarity — both use bulldozers to create chilling effects and punish entire communities",
+      "title": "UN Special Rapporteur Balakrishnan Rajagopal",
+      "url": "https://thepolisproject.com/research/un-rapporteur-balakrishnan-rajagopal-demolitions/",
+      "meta": "UN Expert Analysis · Comparative demolition patterns"
+    }
+  ],
+  "aiDisclosure": {
+    "models": [
+      "Claude (Anthropic) — eviction data structuring, court document analysis, research assistance"
+    ],
+    "tasks": [
+      "Structuring eviction event data from news reports and government statements into a searchable database",
+      "Population estimates using standard 5x multiplier for rural Indian households, where sources inconsistently reported families vs. individuals",
+      "Village-level geocoding from OpenStreetMap; district centroids used as fallback for locations not in OSM",
+      "Consolidation of government-stated eviction justifications into four analytical categories"
+    ],
+    "notAi": [
+      "All on-the-ground reporting, interviews, and testimony from affected families",
+      "Editorial decisions, narrative framing, and all conclusions about the campaign",
+      "Verification of court documents, land titles, and eviction notices against primary sources",
+      "Characterisation of evictions as systematic — based on human analysis of the documented pattern",
+      "All photography, video, and field documentation",
+      "Satellite imagery analysis and change detection — conducted manually",
+      "Village geolocation — coordinates collected on the ground by field collaborators"
+    ]
+  },
+  "methodology": [
+    "This investigation is based on field reporting conducted across Assam between 2024 and 2026, including visits to 20 demolished villages and interviews with more than 60 affected families, witnesses, local officials, and legal advocates.",
+    "Eviction data was compiled from official government records, court filings, media reports (Scroll.in, The Wire, Maktoob Media, Indian Express), and on-the-ground verification. We cross-referenced displacement figures using satellite imagery analysis, district-level administrative data, and reporting by local and international news organisations. Where official figures were unavailable or contested, we relied on corroborated estimates from humanitarian organisations and independent researchers. This is not a comprehensive dataset — additional evictions may be undocumented.",
+    "All testimony was gathered through in-person interviews conducted in Assamese, Bengali, and English, with translation assistance where necessary. Interviewees gave informed consent. Some names have been changed at the request of those who feared reprisal.",
+    "Satellite imagery was sourced from publicly available archives and analysed to document changes in settlement patterns before and after eviction operations. Legal documents, including eviction notices and court orders, were obtained directly from affected families and verified against public records. The Assam government was contacted for comment. At the time of publication, no response had been received."
+  ],
+  "downloads": [
+    {
+      "filename": "evictions_sorted.csv",
+      "format": "CSV",
+      "description": "33 events, sorted chronologically"
+    },
+    {
+      "filename": "assam_evictions.geojson",
+      "format": "GEOJSON",
+      "description": "Geocoded eviction locations"
+    }
+  ]
+}
