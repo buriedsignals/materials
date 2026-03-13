@@ -9,6 +9,11 @@
     { "name": "The New Humanitarian" }
   ],
   "fundedBy": "Innovationsfonds für multimedialen Journalismus",
+  "database": {
+    "url": "https://buriedsignals.github.io/slides/demos/assam-database/",
+    "label": "Explore Evictions Database",
+    "stats": "33 operations · 20,387 families · 101,935 people"
+  },
   "notebookUrl": "https://notebooklm.google.com/notebook/e0be672a-48c4-4542-ba44-d82ae03d8e5a",
   "sources": [
     {

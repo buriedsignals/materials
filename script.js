@@ -1,4 +1,5 @@
 const ICONS = {
+  database: `<svg class="file-icon" viewBox="0 0 16 16" fill="none"><ellipse cx="8" cy="4" rx="5.5" ry="2" stroke="#F5F2ED" stroke-width="1.2" fill="none" opacity="0.7"/><path d="M2.5 4V8C2.5 9.1 4.96 10 8 10C11.04 10 13.5 9.1 13.5 8V4" stroke="#F5F2ED" stroke-width="1.2" fill="none" opacity="0.7"/><path d="M2.5 8V12C2.5 13.1 4.96 14 8 14C11.04 14 13.5 13.1 13.5 12V8" stroke="#F5F2ED" stroke-width="1.2" fill="none" opacity="0.7"/></svg>`,
   sources: `<svg class="file-icon" viewBox="0 0 16 16" fill="none"><path d="M6.5 6L4.5 8C3.4 9.1 3.4 10.9 4.5 12C5.6 13.1 7.4 13.1 8.5 12L9.5 11" stroke="#F5F2ED" stroke-width="1.2" stroke-linecap="round" fill="none" opacity="0.7"/><path d="M9.5 10L11.5 8C12.6 6.9 12.6 5.1 11.5 4C10.4 2.9 8.6 2.9 7.5 4L6.5 5" stroke="#F5F2ED" stroke-width="1.2" stroke-linecap="round" fill="none" opacity="0.7"/></svg>`,
   ai: `<svg class="file-icon" viewBox="0 0 16 16" fill="none"><path d="M8 2L9.2 5.8L13 5.8L9.9 8.2L11.1 12L8 9.6L4.9 12L6.1 8.2L3 5.8L6.8 5.8Z" stroke="#F5F2ED" stroke-width="1" stroke-linejoin="round" fill="none" opacity="0.6"/></svg>`,
   methodology: `<svg class="file-icon" viewBox="0 0 16 16" fill="none"><path d="M5 4L3 8L5 12" stroke="#F5F2ED" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.6"/><path d="M11 4L13 8L11 12" stroke="#F5F2ED" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.6"/></svg>`,
@@ -53,6 +54,15 @@ function renderDownloads(downloads, invId) {
   </div>`).join('');
 }
 
+function renderDatabase(db) {
+  return `<div class="database-cta">
+    <a class="database-button" href="${esc(db.url)}" target="_blank" rel="noopener">
+      ${ICONS.database} ${esc(db.label)}
+    </a>
+    <span class="database-stats">${esc(db.stats)}</span>
+  </div>`;
+}
+
 function renderNotebook(url) {
   return `<div class="notebook-cta">
     <span class="notebook-heading">Query this investigation</span>
@@ -94,6 +104,7 @@ function render(inv) {
 
   const fileList = document.getElementById('file-list');
   fileList.innerHTML =
+    (inv.database ? buildFile(ICONS.database, 'Data', renderDatabase(inv.database)) : '') +
     buildFile(ICONS.sources, 'Sources', renderSources(inv.sources, inv.id)) +
     buildFile(ICONS.ai, 'AI Disclosure', renderDisclosure(inv.aiDisclosure)) +
     buildFile(ICONS.methodology, 'Methodology', renderMethodology(inv.methodology)) +

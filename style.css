@@ -436,6 +436,77 @@ body {
   opacity: 0.5;
 }
 
+/* Database CTA */
+.database-cta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.database-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: transparent;
+  color: var(--amber);
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 600;
+  border: 1.5px solid var(--amber);
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform 0.4s cubic-bezier(0.23, 1, 0.32, 1),
+    background 0.35s cubic-bezier(0.23, 1, 0.32, 1),
+    color 0.35s cubic-bezier(0.23, 1, 0.32, 1),
+    box-shadow 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.database-button:hover {
+  background: var(--amber);
+  color: var(--bg);
+  transform: scale(1.03);
+  box-shadow: 0 0 20px rgba(212, 168, 83, 0.25);
+  text-decoration: none;
+}
+
+.database-button:active {
+  transform: scale(0.97);
+  background: #c89a42;
+  color: var(--bg);
+  box-shadow: none;
+}
+
+.database-button svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.database-button svg ellipse,
+.database-button svg path {
+  stroke: var(--amber);
+  transition: stroke 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.database-button:hover svg ellipse,
+.database-button:hover svg path {
+  stroke: var(--bg);
+}
+
+.database-stats {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+  text-align: center;
+}
+
 /* NotebookLM CTA */
 .notebook-cta {
   display: flex;
