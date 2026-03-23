@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assam Evictions Database — Buried Signals</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #16191B;
+      --amber: #D4A853;
+      --text: #F5F2ED;
+      --muted: rgba(245, 242, 237, 0.5);
+      --dim: rgba(245, 242, 237, 0.1);
+      --font: 'Space Grotesk', system-ui, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body { padding: 2rem; }
+
+    .header {
+      max-width: 1200px;
+      margin: 0 auto 2rem;
+    }
+
+    .header__label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--amber);
+      opacity: 0.7;
+      margin-bottom: 0.5rem;
+    }
+
+    .header__title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .header__subtitle {
+      font-size: 0.95rem;
+      color: var(--muted);
+      max-width: 600px;
+      line-height: 1.5;
+    }
+
+    .stats {
+      display: flex;
+      gap: 2.5rem;
+      margin: 1.5rem 0 2rem;
+    }
+
+    .stat { text-align: center; }
+
+    .stat__number {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--amber);
+    }
+
+    .stat__label {
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .table-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      overflow-x: auto;
+      border: 1px solid var(--dim);
+      border-radius: 8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8rem;
+    }
+
+    th {
+      text-align: left;
+      padding: 0.75rem 1rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--amber);
+      background: rgba(212, 168, 83, 0.06);
+      border-bottom: 1px solid var(--dim);
+      white-space: nowrap;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    td {
+      padding: 0.6rem 1rem;
+      border-bottom: 1px solid rgba(245, 242, 237, 0.04);
+      color: var(--text);
+      vertical-align: top;
+    }
+
+    tr:hover td { background: rgba(212, 168, 83, 0.03); }
+
+    .num { text-align: right; font-variant-numeric: tabular-nums; }
+
+    .cat {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 600;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    .cat--env { background: rgba(91, 138, 138, 0.2); color: #8BC4C4; }
+    .cat--dev { background: rgba(212, 168, 83, 0.15); color: var(--amber); }
+    .cat--admin { background: rgba(245, 242, 237, 0.08); color: var(--muted); }
+    .cat--satra { background: rgba(180, 120, 80, 0.2); color: #D4956A; }
+
+    .deaths { color: #E85D5D; font-weight: 600; }
+
+    .source {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 2rem;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .source a { color: var(--amber); text-decoration: none; }
+    .source a:hover { text-decoration: underline; }
+
+    .source-link {
+      color: var(--amber);
+      text-decoration: none;
+      font-size: 0.75rem;
+      white-space: nowrap;
+    }
+    .source-link:hover { text-decoration: underline; }
+    .no-source { color: rgba(245, 242, 237, 0.2); }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="header__label">AI-Assisted Investigation</div>
+    <h1 class="header__title">Assam Evictions Database</h1>
+    <p class="header__subtitle">33 documented eviction operations in Assam, India (2021&ndash;2026). Compiled by AI research agents, verified against primary sources.</p>
+    <div class="stats">
+      <div class="stat">
+        <div class="stat__number">33</div>
+        <div class="stat__label">Operations</div>
+      </div>
+      <div class="stat">
+        <div class="stat__number">20,387</div>
+        <div class="stat__label">Families</div>
+      </div>
+      <div class="stat">
+        <div class="stat__number">101,935</div>
+        <div class="stat__label">People displaced</div>
+      </div>
+      <div class="stat">
+        <div class="stat__number">22,761</div>
+        <div class="stat__label">Structures demolished</div>
+      </div>
+      <div class="stat">
+        <div class="stat__number">12</div>
+        <div class="stat__label">Districts</div>
+      </div>
+      <div class="stat">
+        <div class="stat__number">6</div>
+        <div class="stat__label">Deaths</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Location</th>
+          <th>District</th>
+          <th class="num">Families</th>
+          <th class="num">People</th>
+          <th class="num">Structures</th>
+          <th class="num">Deaths</th>
+          <th>Category</th>
+          <th>Government Reason</th>
+          <th>Source</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>2021-06-07</td><td>Dhalpur No. 1</td><td>Darrang</td><td class="num">49</td><td class="num">245</td><td class="num">49</td><td class="num">0</td><td><span class="cat cat--satra">Religious Land</span></td><td>Clearing Dholpur Shiva Mandir land</td><td><a href="https://scroll.in/article/1015946/" target="_blank" rel="noopener" class="source-link">scroll.in</a></td></tr>
+        <tr><td>2021-09-20</td><td>Dhalpur No. 1 &amp; 3</td><td>Darrang</td><td class="num">800</td><td class="num">4,000</td><td class="num">800</td><td class="num">0</td><td><span class="cat cat--dev">Development</span></td><td>Garukhuti Agricultural Project</td><td><a href="https://scroll.in/article/1015946/" target="_blank" rel="noopener" class="source-link">scroll.in</a></td></tr>
+        <tr><td>2021-09-23</td><td>Dhalpur No. 3</td><td>Darrang</td><td class="num">500</td><td class="num">2,500</td><td class="num">500</td><td class="num deaths">2</td><td><span class="cat cat--dev">Development</span></td><td>Garukhuti Agricultural Project</td><td><a href="https://thewire.in/rights/assam-police-firing-darrang-eviction-drive" target="_blank" rel="noopener" class="source-link">thewire.in</a></td></tr>
+        <tr><td>2021-11-08</td><td>Lumding Reserve Forest</td><td>Hojai</td><td class="num">1,500</td><td class="num">7,500</td><td class="num">1,500</td><td class="num">0</td><td><span class="cat cat--env">Environment</span></td><td>Forest encroachment clearance</td><td><a href="https://maktoobmedia.com/tag/eviction-drive/" target="_blank" rel="noopener" class="source-link">maktoobmedia.com</a></td></tr>
+        <tr><td>2022-02-06</td><td>Bardalani, Mandia</td><td>Barpeta</td><td class="num">37</td><td class="num">185</td><td class="num">37</td><td class="num">0</td><td><span class="cat cat--satra">Religious Land</span></td><td>Barpeta Satra land clearance</td><td><a href="https://maktoobmedia.com/tag/eviction-drive/" target="_blank" rel="noopener" class="source-link">maktoobmedia.com</a></td></tr>
+        <tr><td>2022-04-01</td><td>Purana Bazar</td><td>Hojai</td><td class="num">60</td><td class="num">300</td><td class="num">60</td><td class="num deaths">1</td><td><span class="cat cat--dev">Development</span></td><td>Flyover construction</td><td><a href="https://maktoobmedia.com/tag/eviction-drive/" target="_blank" rel="noopener" class="source-link">maktoobmedia.com</a></td></tr>
+        <tr><td>2022-09-03</td><td>Chitalmari Char</td><td>Sonitpur</td><td class="num">550</td><td class="num">2,750</td><td class="num">550</td><td class="num">0</td><td><span class="cat cat--admin">Admin</span></td><td>Clearing illegal encroachment</td><td><a href="https://maktoobmedia.com/tag/eviction-drive/" target="_blank" rel="noopener" class="source-link">maktoobmedia.com</a></td></tr>
+        <tr><td>2022-12-19</td><td>Batadrava Mouza</td><td>Nagaon</td><td class="num">1,000</td><td class="num">5,000</td><td class="num">1,000</td><td class="num">0</td><td><span class="cat cat--satra">Religious Land</span></td><td>Satra land &amp; government land clearance</td><td><a href="https://scroll.in/article/1086811/" target="_blank" rel="noopener" class="source-link">scroll.in</a></td></tr>
+        <tr><td>2022-12-26</td><td>Baghbar Satra Kanara</td><td>Barpeta</td><td class="num">45</td><td class="num">225</td><td class="num">45</td><td class="num">0</td><td><span class="cat cat--satra">Religious Land</span></td><td>Satra land clearance</td><td><a href="https://maktoobmedia.com/tag/eviction-drive/" target="_blank" rel="noopener" class="source-link">maktoobmedia.com</a></td></tr>
+        <tr><td>2023-02-14</td><td>Burachapori Wildlife Sanctuary</td><td>Sonitpur</td><td class="num">2,513</td><td class="num">12,565</td><td class="num">2,513</td><td class="num">0</td><td><span class="cat cat--env">Environment</span></td><td>Wildlife sanctuary protection</td><td><a href="https://scroll.in/article/1086811/" target="_blank" rel="noopener" class="source-link">scroll.in</a></td></tr>
+        <tr><td>2023-02-15</td><td>Bhabanipur</td><td>Barpeta</td><td class="num">100</td><td class="num">500</td><td class="num">100</td><td class="num">0</td><td><span class="cat cat--satra">Religious Land</span></td><td>Gopal Dev Aata Satra land</td><td><a href="https://maktoobmedia.com/tag/eviction-drive/" target="_blank" rel="noopener" class="source-link">maktoobmedia.com</a></td></tr>
+        <tr><td>2023-10-31</td><td>Porua area, Tezpur</td><td>Sonitpur</td><td class="num">11</td><td class="num">55</td><td class="num">11</td><td class="num">0</td><td><span class="cat cat--admin">Admin</span></td><td>Clearing encroachment on government land (66 families total, 55 relocated voluntarily)</td><td><a href="https://theprint.in/india/assam-houses-of-11-families-demolished-to-clear-encroachment-on-govt-land/1826203/" target="_blank" rel="noopener" class="source-link">theprint.in</a></td></tr>
+        <tr><td>2023-11-15</td><td>Nalbari Reserve Forest</td><td>Goalpara</td><td class="num">246</td><td class="num">1,230</td><td class="num">246</td><td class="num">0</td><td><span class="cat cat--env">Environment</span></td><td>Anti-encroachment drive in reserve forest</td><td><a href="https://indianexpress.com/article/north-east-india/assam/246-families-evicted-in-anti-encroachment-drive-at-forest-in-goalpara-9017673/" target="_blank" rel="noopener" class="source-link">indianexpress.com</a></td></tr>
+        <tr><td>2024-03-04</td><td>Hojai-Karbi Anglong border</td><td>Hojai</td><td class="num">500</td><td class="num">2,500</td><td class="num">500</td><td class="num">0</td><td><span class="cat cat--env">Environment</span></td><td>Reserved forest clearance</td><td><a href="https://maktoobmedia.com/tag/eviction-drive/" target="_blank" rel="noopener" class="source-link">maktoobmedia.com</a></td></tr>
+        <tr><td>2024-05-20</td><td>Dhalpur Char</td><td>Darrang</td><td class="num">400</td><td class="num">2,000</td><td class="num">400</td><td class="num">0</td><td><span class="cat cat--dev">Development</span></td><td>Garukhuti Project expansion</td><td><a href="https://twocircles.net/2024jun04/449829.html" target="_blank" rel="noopener" class="source-link">twocircles.net</a></td></tr>
+        <tr><td>2024-06-24</td><td>Silbhanga, Jagiroad</td><td>Morigaon</td><td class="num">1,500</td><td class="num">7,500</td><td class="num">1,500</td><td class="num">0</td><td><span class="cat cat--env">Environment</span></td><td>Forest and railway land clearance</td><td><a href="https://maktoobmedia.com/tag/eviction-drive/" target="_blank" rel="noopener" class="source-link">maktoobmedia.com</a></td></tr>
+        <tr><td>2024-09-09</td><td>Kachutali, Sonapur</td><td>Kamrup Metropolitan</td><td class="num">150</td><td class="num">750</td><td class="num">150</td><td class="num">0</td><td><span class="cat cat--admin">Admin</span></td><td>Tribal belt protection</td><td><a href="https://landconflictwatch.org/conflicts/violent-eviction-kachutali" target="_blank" rel="noopener" class="source-link">landconflictwatch.org</a></td></tr>
+        <tr><td>2024-09-12</td><td>Kachutali</td><td>Kamrup Metropolitan</td><td class="num">500</td><td class="num">2,500</td><td class="num">500</td><td class="num deaths">2</td><td><span class="cat cat--admin">Admin</span></td><td>Tribal belt protection</td><td><a href="https://landconflictwatch.org/conflicts/violent-eviction-kachutali" target="_blank" rel="noopener" class="source-link">landconflictwatch.org</a></td></tr>
+        <tr><td>2024-09-24</td><td>Bandarmatha Reserve Forest</td><td>Goalpara</td><td class="num">450</td><td class="num">2,250</td><td class="num">450</td><td class="num">0</td><td><span class="cat cat--env">Environment</span></td><td>Human-elephant conflict reduction</td><td><a href="https://maktoobmedia.com/tag/eviction-drive/" target="_blank" rel="noopener" class="source-link">maktoobmedia.com</a></td></tr>
+        <tr><td>2024-10-15</td><td>No. 3 Dhalpur</td><td>Darrang</td><td class="num">167</td><td class="num">835</td><td class="num">167</td><td class="num">0</td><td><span class="cat cat--dev">Development</span></td><td>Garukhuti Project expansion</td><td><a href="https://assamtribune.com/assam/fresh-eviction-drive-in-darrang-1594482" target="_blank" rel="noopener" class="source-link">assamtribune.com</a></td></tr>
+        <tr><td>2024-12-13</td><td>Pancharatna</td><td>Goalpara</td><td class="num">44</td><td class="num">220</td><td class="num">44</td><td class="num">0</td><td><span class="cat cat--admin">Admin</span></td><td>Anti-encroachment drive</td><td><a href="https://www.landconflictwatch.org/conflicts/anti-encroachment-drive-in-assam-s-goalpara-renders-44-families-homeless" target="_blank" rel="noopener" class="source-link">landconflictwatch.org</a></td></tr>
+        <tr><td>2025-04-04</td><td>Kachutali</td><td>Kamrup Metropolitan</td><td class="num">30</td><td class="num">150</td><td class="num">30</td><td class="num">0</td><td><span class="cat cat--admin">Admin</span></td><td>Government land clearance</td><td><a href="https://maktoobmedia.com/tag/eviction-drive/" target="_blank" rel="noopener" class="source-link">maktoobmedia.com</a></td></tr>
+        <tr><td>2025-06-01</td><td>Rengma Reserve Forest</td><td>Golaghat</td><td class="num">2,700</td><td class="num">13,500</td><td class="num">2,700</td><td class="num">0</td><td><span class="cat cat--env">Environment</span></td><td>Forest conservation</td><td><a href="https://maktoobmedia.com/india/sc-halts-eviction-golaghat/" target="_blank" rel="noopener" class="source-link">maktoobmedia.com</a></td></tr>
+        <tr><td>2025-06-16</td><td>Hasila Beel wetland</td><td>Goalpara</td><td class="num">667</td><td class="num">3,335</td><td class="num">667</td><td class="num">0</td><td><span class="cat cat--env">Environment</span></td><td>Wetland conservation</td><td><a href="https://maktoobmedia.com/features/assam-houses-of-660-families/" target="_blank" rel="noopener" class="source-link">maktoobmedia.com</a></td></tr>
+        <tr><td>2025-06-30</td><td>Bakrikuchi, Mukalmua</td><td>Nalbari</td><td class="num">93</td><td class="num">465</td><td class="num">100</td><td class="num">0</td><td><span class="cat cat--admin">Admin</span></td><td>Clearing encroachment on government land (452 bighas). Largest eviction in Nalbari history.</td><td><a href="https://www.krctimes.com/news/massive-eviction-drive-in-nalbaris-bakrikuchi-93-families-displaced-as-bulldozers-roll-in/" target="_blank" rel="noopener" class="source-link">krctimes.com</a></td></tr>
+        <tr><td>2025-07-08</td><td>Chirakuta, Charuabakhra, Santoshpur</td><td>Dhubri</td><td class="num">1,400</td><td class="num">7,000</td><td class="num">1,400</td><td class="num">0</td><td><span class="cat cat--dev">Development</span></td><td>Land clearance for Adani 3200 MW thermal plant</td><td><a href="https://scroll.in/latest/1084333/" target="_blank" rel="noopener" class="source-link">scroll.in</a></td></tr>
+        <tr><td>2025-07-12</td><td>Paikan Reserve Forest</td><td>Goalpara</td><td class="num">1,080</td><td class="num">5,400</td><td class="num">2,700</td><td class="num deaths">1</td><td><span class="cat cat--env">Environment</span></td><td>Forest conservation, elephant corridors</td><td><a href="https://scroll.in/latest/1084452/" target="_blank" rel="noopener" class="source-link">scroll.in</a></td></tr>
+        <tr><td>2025-11-09</td><td>Dahikata Reserve Forest</td><td>Goalpara</td><td class="num">580</td><td class="num">2,900</td><td class="num">580</td><td class="num">0</td><td><span class="cat cat--env">Environment</span></td><td>Elephant corridor restoration</td><td><a href="https://nenews.in/assam/eviction-drive-clears-over-1100-bighas/" target="_blank" rel="noopener" class="source-link">nenews.in</a></td></tr>
+        <tr><td>2025-11-29</td><td>Lutimari Reserve Forest</td><td>Nagaon</td><td class="num">1,500</td><td class="num">7,500</td><td class="num">2,262</td><td class="num">0</td><td><span class="cat cat--env">Environment</span></td><td>Reserved forest protection</td><td><a href="https://outlookindia.com/national/assam-evicts-over-1100-families-nagaon" target="_blank" rel="noopener" class="source-link">outlookindia.com</a></td></tr>
+        <tr><td>2025-12-19</td><td>Nagaon (declared foreigners pushed via Sribhumi border)</td><td>Nagaon</td><td class="num">7</td><td class="num">35</td><td class="num">0</td><td class="num">0</td><td><span class="cat cat--admin">Admin</span></td><td>24-hour expulsion orders under Immigrants Act, 1950</td><td><a href="https://scroll.in/article/1089947/assams-nowhere-people-given-24-hours-to-leave-india-tossed-back-and-forth-across-bangladesh-order" target="_blank" rel="noopener" class="source-link">scroll.in</a></td></tr>
+        <tr><td>2025-12-26</td><td>Ambika village, Ersama (Odisha)</td><td>Jagatsinghpur</td><td class="num">1</td><td class="num">5</td><td class="num">0</td><td class="num">0</td><td><span class="cat cat--admin">Admin</span></td><td>BSF illegal pushback &mdash; family had valid Indian documents</td><td><a href="https://maktoobmedia.com/india/bsf-illegally-pushed-14-bengali-speaking-muslims-from-odisha-into-bangladesh-families-allege/" target="_blank" rel="noopener" class="source-link">maktoobmedia.com</a></td></tr>
+        <tr><td>2025-12-28</td><td>Nagaon (re-pushback via Dhubri border)</td><td>Nagaon</td><td class="num">7</td><td class="num">35</td><td class="num">0</td><td class="num">0</td><td><span class="cat cat--admin">Admin</span></td><td>Third forced pushback after Dec 19 expulsion</td><td><a href="https://scroll.in/article/1089947/assams-nowhere-people-given-24-hours-to-leave-india-tossed-back-and-forth-across-bangladesh-order" target="_blank" rel="noopener" class="source-link">scroll.in</a></td></tr>
+        <tr><td>2026-01-05</td><td>Burhachapori Wildlife Sanctuary</td><td>Sonitpur</td><td class="num">1,200</td><td class="num">6,000</td><td class="num">1,200</td><td class="num">0</td><td><span class="cat cat--env">Environment</span></td><td>Clearing encroachments from wildlife sanctuary (650 hectares)</td><td><a href="https://scroll.in/latest/1089853/assam-over-1200-bengali-muslim-homes-demolished-as-state-continues-eviction-drive" target="_blank" rel="noopener" class="source-link">scroll.in</a></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="source">
+    <p>Data compiled by AI research agents (Investigator + Fact-Checker) from 50+ primary sources. Each operation verified against news reports, court filings, and satellite imagery. Part of the <a href="https://preview.thenewhumanitarian.org/cleared">CLEARED</a> investigation by Ahmer Khan & Tom Vaillant.</p>
+  </div>
+</body>
+</html>
