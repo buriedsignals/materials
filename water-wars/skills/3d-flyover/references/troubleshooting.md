@@ -1,4 +1,4 @@
-# Cesium Flyover — troubleshooting
+# 3D Flyover — troubleshooting
 
 ## The headless dead-end (why we render through Remotion)
 
@@ -18,7 +18,7 @@ loop with these four non-negotiables:
    (`initializeFrame` → tile streaming → render); `scene.render()` skips frame-init, so tiles never
    advance and the globe never appears. **This is the single most important line.**
 3. `contextOptions: { webgl: { preserveDrawingBuffer: true } }` so Remotion's screenshot captures pixels.
-4. Gate init + every frame with `delayRender(…, {timeout})` — tile loading blows past Remotion's ~28 s
+4. Gate init + every frame with `delayRender(…, {timeoutInMilliseconds})` — tile loading can exceed Remotion's
    default; use 60–120 s.
 
 The standalone `flythrough.html` / `render.mjs` / `probe.mjs` from the original spike are kept only as the
@@ -37,11 +37,11 @@ record of this dead-end. The canonical render path is the Remotion component (`.
 | Google root tileset returns 403 | Map Tiles API disabled, billing absent, wrong key, or application restriction blocks local headless rendering | Enable Map Tiles API and billing; restrict the key to that API while allowing the Remotion request. |
 | Google scene shows a duplicate/competing surface | MapTiler or the Cesium globe is still enabled | Do not add MapTiler; set `viewer.scene.globe.show=false`. |
 | Google mesh remains coarse | Screen-space error is too high or the capture starts before refinement | Lower `maximumScreenSpaceError`; settle on `tileset.tilesLoaded`. |
-| Buildings are flat-colored boxes | Cesium OSM Buildings selected | Expected; use Google Photorealistic 3D Tiles for textured architecture. |
 | WebGL unavailable / software renderer | Missing GL flag | Render with `--gl=angle`. |
 | Camera looks at sky / ground, not terrain | Pitch sign / convention | Cesium pitch 0 = horizon, negative = down (inverse of MapLibre); `-(90 - PITCH_FROM_NADIR)`. |
 | Aim/turn-probe clamps near the end | Path too short | `PATHKM ≥ TRAVEL_KM + 2·LOOK_AHEAD_KM`; raise `WINDOW_KM` in prep. |
 | Path feels like straight-then-corner | Douglas-Peucker simplification | Use resample → moving-average smooth (see architecture §2), not `turf.simplify`. |
+| Camera bumps left and right instead of swerving | Sparse route vertices are still being followed as straight segments | Keep `pathSmoothingPasses={3}`; use sparse intentional control points and arc-length movement. |
 
 ## Gotchas checklist
 

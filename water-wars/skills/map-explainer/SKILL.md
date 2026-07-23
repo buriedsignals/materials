@@ -11,14 +11,14 @@ A flat investigative map beat: a **river (or route) draws on**, and as it flows 
 country **animates in** — its border draws, its fill blooms, its label rises. The bundled assets are a
 working sample; replace all geography, visual tokens, and typography with the production's own system.
 
-For 3D terrain fly-overs use the **cesium-flyover** skill; for plain animated maps see remotion's
+For 3D terrain fly-overs use the **3d-flyover** skill; for plain animated maps see remotion's
 `maps.md` / `maplibre.md`.
 
 ## When to use
 
 - "Where is this?" / "what's the path of this river/route?" / "who is upstream of whom?"
 - A choropleth-style reveal where countries or regions light up in a meaningful sequence.
-- **Not** for: 3D terrain reveals (→ cesium-flyover) or non-geographic data viz.
+- **Not** for: 3D terrain reveals (→ 3d-flyover) or non-geographic data viz.
 
 ## Architecture — three layers, each one job
 
@@ -50,7 +50,7 @@ map. It contains the fixed-map-plate recipe, diagnostics, and render checks.
 
 - Use the live MapTiler camera only for a static shot.
 - Keep pitch and bearing constant for a fixed plate. A genuine changing 3D camera needs the
-  `cesium-flyover` skill instead.
+  `3d-flyover` skill instead.
 - Verify the moving preview and a short rendered MP4 before approving a beat. If any basemap detail
   wavers, switch to the fixed-plate pattern; do not try to solve it with tile retries or camera easing.
 

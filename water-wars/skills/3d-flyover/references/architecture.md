@@ -1,21 +1,20 @@
-# Cesium Flyover — architecture reference
+# 3D Flyover — architecture reference
 
 Deep detail behind `SKILL.md`: provider loading, the camera-path pipeline, per-frame camera math, and
-the proven terrain values. Terrain values are from the operator-approved water-wars render; the
-Google buildings path was forward-tested over the Eiffel Tower.
+the proven terrain values. Both landscape and city modes have been forward-tested through Remotion.
 
 ## 1. Provider initialization
 
 Create the Viewer with `baseLayer: false`, UI widgets disabled, and
 `contextOptions.webgl.preserveDrawingBuffer: true`. Never hide the credit display.
 
-### Terrain-satellite
+### Landscape
 
 Add MapTiler `satellite-v2` with `UrlTemplateImageryProvider`, then load
 `terrain-quantized-mesh-v2` with `CesiumTerrainProvider.fromUrl({requestVertexNormals: true})`.
 MapTiler supplies both datasets; no Cesium ion token is required.
 
-### Buildings: Google photorealistic
+### City
 
 Do not add MapTiler. Hide the globe, then add:
 
@@ -32,29 +31,31 @@ Lower `maximumScreenSpaceError` improves refinement at substantial download/rend
 `4` for a hero landmark and `6–8` for wider urban shots. Enforce the Google 30-second promotional
 video ceiling in the component.
 
-### Buildings: Cesium OSM comparison
-
-Initialize MapTiler ground as above, set `Cesium.Ion.defaultAccessToken`, and add
-`createOsmBuildingsAsync()`. This is building massing, not textured photogrammetry.
-
 Load Cesium from the CDN after setting `window.CESIUM_BASE_URL`; the tested version is `1.143`.
 
 ## 2. The camera path — structure & generation
 
-Three properties matter, in order:
+Four properties matter, in order:
 
 1. **Continuous curvature** — the camera must flow through curves, never "fly straight, snap to a new
-   heading, fly straight." This rules out aggressive Douglas-Peucker (`turf.simplify`): few sparse
-   control points → a spline that's near-straight between them with all bend at each point → snap-to-
-   corner. **Resample → moving-average smooth instead** (a moving average is inherently continuous).
-2. **Minimized amplitude** — gentle leans, not weaving. **Dampen the smoothed path toward its straight
-   start→end chord** by a fixed fraction `DAMP` (0 = dead straight, 1 = full river). The single swerve knob.
-3. **Enough length** — `PATHKM ≥ TRAVEL_KM + 2·LOOK_AHEAD_KM` so the look-ahead aim never clamps.
+   heading, fly straight." The component applies three passes of **Chaikin corner cutting** to every
+   supplied path. Each pass replaces a segment with quarter and three-quarter points, rounding a
+   corner into a curve. Three passes are the default; four is softer, two is tighter.
+2. **Constant ground speed** — precompute cumulative distance along the rounded curve and interpolate
+   by arc length. Do not animate by source-point index; unequal source spacing creates speed bumps.
+3. **Minimized amplitude** — for detailed landscape centerlines, dampen the prepared path toward its
+   straight start→end chord by a fixed fraction `DAMP` (0 = dead straight, 1 = full river). This is
+   the single swerve-amplitude knob.
+4. **Enough length** — `PATHKM ≥ TRAVEL_KM + 2·LOOK_AHEAD_KM` so the look-ahead aim never clamps.
 
 `scripts/prep-cesium-path.mjs` does: clip a window of the source centerline → resample to even
 arc-length spacing (0.1 km) → moving-average smooth (±2.8 km window, 2 passes) → dampen toward the chord
 (`DAMP=0.45`). Validate with the heading-delta probe it prints — deltas should be small and change
 *gradually* (water-wars: `3,0,-1,-3,-4,1,7,9,5,-5,-12,-7,…`). Big jumps = corners = bad.
+
+The component then applies Chaikin smoothing to this prepared route, or directly to a short
+hand-authored city route. Keep city control points sparse and intentional; smoothing cannot rescue a
+zig-zagging route that crosses the subject repeatedly.
 
 **Source data:** OSM via Overpass (~0.3 km vertex spacing) — Natural Earth is too coarse for inner
 gorges. overpass-api.de is often busy → mirror `overpass.kumi.systems`.
@@ -113,8 +114,8 @@ The full, runnable component is `../assets/CesiumFlythrough.tsx` — read it dir
 
 - `loadCesium()` — inject `CESIUM_BASE_URL` + the CDN `Cesium.js`, resolve when loaded.
 - init effect — build the Viewer (§1), `setCamera(…, 0)`, `await settle(viewer)`, `continueRender`.
-- `settle(viewer)` — loop `viewer.render()` until `globe.tilesLoaded` for terrain or
-  `tileset.tilesLoaded` for buildings is stable for ~8 ticks (cap ~600).
+- `settle(viewer)` — loop `viewer.render()` until `globe.tilesLoaded` for landscapes or
+  `tileset.tilesLoaded` for cities is stable for ~8 ticks (cap ~600).
 - per-frame effect — `delayRender({timeoutInMilliseconds: 60000})` → `setCamera(prog)` → `settle()` → `continueRender`.
 
 ## 6. Render

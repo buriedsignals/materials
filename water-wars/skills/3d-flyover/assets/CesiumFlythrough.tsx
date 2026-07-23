@@ -8,15 +8,15 @@ import {
   useVideoConfig,
 } from "remotion";
 import terrainPath from "./cesium-path.json";
+import {smoothFlightPath, type LngLat} from "./flight-path";
 
-export type FlyoverMode = "terrain-satellite" | "buildings";
-export type BuildingsProvider = "google-photorealistic" | "cesium-osm";
-export type LngLat = [number, number];
+export type FlyoverMode = "landscape" | "city";
+export type {LngLat} from "./flight-path";
 
 export type CesiumFlythroughProps = {
   mode?: FlyoverMode;
-  buildingsProvider?: BuildingsProvider;
   path?: LngLat[];
+  pathSmoothingPasses?: number;
   altitudeStart?: number;
   altitudeEnd?: number;
   lookAheadKm?: number;
@@ -28,7 +28,6 @@ export type CesiumFlythroughProps = {
 
 const MAPTILER_KEY = process.env.REMOTION_MAPTILER_KEY;
 const GOOGLE_MAPS_API_KEY = process.env.REMOTION_GOOGLE_MAPS_API_KEY;
-const CESIUM_ION_TOKEN = process.env.REMOTION_CESIUM_ION_TOKEN;
 const CESIUM_VER = "1.143";
 const CDN = `https://cesium.com/downloads/cesiumjs/releases/${CESIUM_VER}/Build/Cesium/`;
 const R = 6371;
@@ -100,9 +99,9 @@ const loadCesium = () =>
   });
 
 export const CesiumFlythrough: React.FC<CesiumFlythroughProps> = ({
-  mode = "terrain-satellite",
-  buildingsProvider = "google-photorealistic",
+  mode = "landscape",
   path = terrainPath as LngLat[],
+  pathSmoothingPasses = 3,
   altitudeStart = 4600,
   altitudeEnd = 4300,
   lookAheadKm = 1.5,
@@ -121,7 +120,10 @@ export const CesiumFlythrough: React.FC<CesiumFlythroughProps> = ({
   const [handle] = useState(() =>
     delayRender(`cesium init: ${mode}`, {timeoutInMilliseconds: 120000}),
   );
-  const walker = useMemo(() => makePathWalker(path), [path]);
+  const walker = useMemo(
+    () => makePathWalker(smoothFlightPath(path, pathSmoothingPasses)),
+    [path, pathSmoothingPasses],
+  );
 
   const setCamera = (C: any, viewer: any, progress: number) => {
     const maxTravel = Math.max(0, walker.lengthKm - lookAheadKm * 2);
@@ -148,13 +150,7 @@ export const CesiumFlythrough: React.FC<CesiumFlythroughProps> = ({
   };
 
   const tilesAreLoaded = (viewer: any) => {
-    if (mode === "terrain-satellite") return viewer.scene.globe.tilesLoaded;
-    if (buildingsProvider === "cesium-osm") {
-      return (
-        viewer.scene.globe.tilesLoaded &&
-        Boolean(tilesetRef.current?.tilesLoaded)
-      );
-    }
+    if (mode === "landscape") return viewer.scene.globe.tilesLoaded;
     return Boolean(tilesetRef.current?.tilesLoaded);
   };
 
@@ -180,37 +176,23 @@ export const CesiumFlythrough: React.FC<CesiumFlythroughProps> = ({
     if (started.current) return;
     started.current = true;
     (async () => {
-      if (!MAPTILER_KEY) {
-        if (
-          mode === "terrain-satellite" ||
-          buildingsProvider === "cesium-osm"
-        ) {
-          throw new Error(
-            "Set REMOTION_MAPTILER_KEY for MapTiler terrain and imagery",
-          );
-        }
-      }
-      if (
-        mode === "buildings" &&
-        buildingsProvider === "google-photorealistic" &&
-        !GOOGLE_MAPS_API_KEY
-      ) {
+      if (mode === "landscape" && !MAPTILER_KEY) {
         throw new Error(
-          "Set REMOTION_GOOGLE_MAPS_API_KEY for Google Photorealistic 3D Tiles",
+          "Set REMOTION_MAPTILER_KEY. Create a key at https://cloud.maptiler.com/account/keys/",
         );
       }
-      if (
-        mode === "buildings" &&
-        buildingsProvider === "google-photorealistic" &&
-        durationInFrames / fps > 30
-      ) {
+      if (mode === "city" && !GOOGLE_MAPS_API_KEY) {
+        throw new Error(
+          "Set REMOTION_GOOGLE_MAPS_API_KEY. Create a Map Tiles API key at https://developers.google.com/maps/documentation/tile/get-api-key",
+        );
+      }
+      if (mode === "city" && durationInFrames / fps > 30) {
         throw new Error(
           "Google Photorealistic 3D Tiles compositions must not exceed 30 seconds",
         );
       }
 
       const C = await loadCesium();
-      if (CESIUM_ION_TOKEN) C.Ion.defaultAccessToken = CESIUM_ION_TOKEN;
       const viewer = new C.Viewer(containerRef.current, {
         baseLayer: false,
         baseLayerPicker: false,
@@ -225,10 +207,7 @@ export const CesiumFlythrough: React.FC<CesiumFlythroughProps> = ({
         selectionIndicator: false,
         contextOptions: {webgl: {preserveDrawingBuffer: true}},
       });
-      if (
-        mode === "terrain-satellite" ||
-        buildingsProvider === "cesium-osm"
-      ) {
+      if (mode === "landscape") {
         viewer.imageryLayers.addImageryProvider(
           new C.UrlTemplateImageryProvider({
             url: `https://api.maptiler.com/tiles/satellite-v2/{z}/{x}/{y}.jpg?key=${MAPTILER_KEY}`,
@@ -246,10 +225,7 @@ export const CesiumFlythrough: React.FC<CesiumFlythroughProps> = ({
           ),
         );
       }
-      if (
-        mode === "buildings" &&
-        buildingsProvider === "google-photorealistic"
-      ) {
+      if (mode === "city") {
         viewer.scene.globe.show = false;
         const tileset = await C.Cesium3DTileset.fromUrl(
           `https://tile.googleapis.com/v1/3dtiles/root.json?key=${GOOGLE_MAPS_API_KEY}`,
@@ -258,14 +234,6 @@ export const CesiumFlythrough: React.FC<CesiumFlythroughProps> = ({
             maximumScreenSpaceError,
           },
         );
-        viewer.scene.primitives.add(tileset);
-        tilesetRef.current = tileset;
-      }
-      if (mode === "buildings" && buildingsProvider === "cesium-osm") {
-        const tileset = await C.createOsmBuildingsAsync({
-          maximumScreenSpaceError,
-          showOutline: false,
-        });
         viewer.scene.primitives.add(tileset);
         tilesetRef.current = tileset;
       }
@@ -282,7 +250,7 @@ export const CesiumFlythrough: React.FC<CesiumFlythroughProps> = ({
       setReady(true);
       continueRender(handle);
     })().catch((error) => cancelRender(error));
-  }, [buildingsProvider, durationInFrames, fps, handle, mode]);
+  }, [durationInFrames, fps, handle, mode]);
 
   useEffect(() => {
     if (!ready) return;
@@ -303,8 +271,7 @@ export const CesiumFlythrough: React.FC<CesiumFlythroughProps> = ({
         ref={containerRef}
         style={{width, height, position: "absolute"}}
       />
-      {mode === "buildings" &&
-      buildingsProvider === "google-photorealistic" ? (
+      {mode === "city" ? (
         <div
           style={{
             position: "absolute",

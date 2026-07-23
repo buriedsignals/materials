@@ -9,21 +9,20 @@ import {
 export const RemotionRoot: React.FC = () => (
   <>
     <Composition
-      id="TerrainSatelliteFlyover"
+      id="LandscapeFlyover"
       component={CesiumFlythrough}
-      defaultProps={{mode: "terrain-satellite"} satisfies CesiumFlythroughProps}
+      defaultProps={{mode: "landscape"} satisfies CesiumFlythroughProps}
       durationInFrames={24 * 30}
       fps={30}
       width={1920}
       height={1080}
     />
     <Composition
-      id="GooglePhotorealisticFlyover"
+      id="CityFlyover"
       component={CesiumFlythrough}
       defaultProps={
         {
-          mode: "buildings",
-          buildingsProvider: "google-photorealistic",
+          mode: "city",
           path: cityPath as [number, number][],
           altitudeStart: 700,
           altitudeEnd: 500,

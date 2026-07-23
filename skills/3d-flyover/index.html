@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3D Flyover Skill | Buried Signals</title>
+    <meta
+      name="description"
+      content="A public Remotion and CesiumJS skill for smooth cinematic flyovers of cities and landscapes."
+    />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./skill-page.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="Buried Signals materials">
+        <span class="brand-buried">BURIED</span>
+        <span class="brand-signals">SIGNALS</span>
+      </a>
+      <span class="header-tag">PUBLIC SKILL</span>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="eyebrow">
+          <span>REMOTION</span>
+          <span class="eyebrow-dot"></span>
+          <span>CESIUMJS</span>
+        </div>
+        <h1>Cinematic flyovers<br />without camera jitter.</h1>
+        <p class="hero-copy">
+          Turn a sparse geographic route into a smooth, banked aerial swerve—then render every
+          fully loaded frame deterministically.
+        </p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="./SKILL.md">Read SKILL.md</a>
+          <a
+            class="button button-secondary"
+            href="./SKILL.md"
+            download="3d-flyover-SKILL.md"
+          >Download skill</a>
+        </div>
+      </section>
+
+      <section class="decision" aria-labelledby="choose-heading">
+        <div class="section-heading">
+          <span class="section-number">01</span>
+          <h2 id="choose-heading">Choose the world you are flying through</h2>
+        </div>
+
+        <div class="mode-grid">
+          <article class="mode-card mode-card-city">
+            <div class="mode-topline">
+              <span class="mode-label">CITY</span>
+              <span class="mode-code">mode="city"</span>
+            </div>
+            <h3>Photorealistic architecture</h3>
+            <p>
+              Google Photorealistic 3D Tiles provide one textured mesh containing terrain,
+              buildings and imagery. No crude footprint extrusions.
+            </p>
+            <dl>
+              <div><dt>Geometry</dt><dd>Google 3D mesh</dd></div>
+              <div><dt>Texture</dt><dd>Integrated aerial imagery</dd></div>
+              <div><dt>Renderer</dt><dd>CesiumJS</dd></div>
+            </dl>
+            <a
+              class="text-link"
+              href="https://developers.google.com/maps/documentation/tile/get-api-key"
+              target="_blank"
+              rel="noopener"
+            >Get a Google Map Tiles API key <span>↗</span></a>
+          </article>
+
+          <article class="mode-card mode-card-landscape">
+            <div class="mode-topline">
+              <span class="mode-label">LANDSCAPE</span>
+              <span class="mode-code">mode="landscape"</span>
+            </div>
+            <h3>Satellite-draped terrain</h3>
+            <p>
+              MapTiler supplies quantized-mesh elevation and satellite imagery. CesiumJS renders
+              the mountains, coastlines and long-distance horizon.
+            </p>
+            <dl>
+              <div><dt>Geometry</dt><dd>MapTiler terrain mesh</dd></div>
+              <div><dt>Texture</dt><dd>MapTiler satellite</dd></div>
+              <div><dt>Renderer</dt><dd>CesiumJS</dd></div>
+            </dl>
+            <a
+              class="text-link"
+              href="https://cloud.maptiler.com/account/keys/"
+              target="_blank"
+              rel="noopener"
+            >Get a MapTiler key <span>↗</span></a>
+          </article>
+        </div>
+      </section>
+
+      <section class="flight-path" aria-labelledby="path-heading">
+        <div class="section-heading">
+          <span class="section-number">02</span>
+          <h2 id="path-heading">A curve, not a sequence of corrections</h2>
+        </div>
+        <p class="section-intro">
+          Sparse control points are rounded before the camera moves. The result is a deliberate
+          swerve through each turn instead of repeated left-right bumps.
+        </p>
+        <div class="pipeline" aria-label="Flight path processing pipeline">
+          <div class="pipeline-step">
+            <span class="pipeline-index">A</span>
+            <strong>Control points</strong>
+            <small>A short geographic route</small>
+          </div>
+          <span class="pipeline-arrow">→</span>
+          <div class="pipeline-step">
+            <span class="pipeline-index">B</span>
+            <strong>Chaikin curve</strong>
+            <small>Three smoothing passes</small>
+          </div>
+          <span class="pipeline-arrow">→</span>
+          <div class="pipeline-step">
+            <span class="pipeline-index">C</span>
+            <strong>Arc-length walk</strong>
+            <small>Constant ground speed</small>
+          </div>
+          <span class="pipeline-arrow">→</span>
+          <div class="pipeline-step">
+            <span class="pipeline-index">D</span>
+            <strong>Look-ahead bank</strong>
+            <small>Heading and roll flow together</small>
+          </div>
+        </div>
+      </section>
+
+      <section class="implementation" aria-labelledby="implementation-heading">
+        <div class="section-heading">
+          <span class="section-number">03</span>
+          <h2 id="implementation-heading">One component, deterministic frames</h2>
+        </div>
+        <div class="implementation-grid">
+          <pre><code>&lt;CesiumFlythrough
+  mode="city"
+  path={cameraPath}
+  pathSmoothingPasses={3}
+  altitudeStart={700}
+  altitudeEnd={500}
+  lookAheadKm={0.7}
+  travelKm={4.5}
+/&gt;</code></pre>
+          <div class="principles">
+            <div>
+              <span>01</span>
+              <p>Remotion owns time and frame capture.</p>
+            </div>
+            <div>
+              <span>02</span>
+              <p>CesiumJS renders the selected geographic source.</p>
+            </div>
+            <div>
+              <span>03</span>
+              <p>Every frame waits for the visible tiles to settle.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="policy-note">
+        <span class="policy-label">GOOGLE MAP TILES POLICY</span>
+        <p>
+          The city mode enforces the current 30-second promotional-video ceiling, retains
+          on-screen credits and adds the required promotional marker. Review Google’s terms for
+          the intended use.
+        </p>
+        <a
+          href="https://developers.google.com/maps/documentation/tile/policies"
+          target="_blank"
+          rel="noopener"
+        >Read the policy ↗</a>
+      </aside>
+    </main>
+
+    <footer>
+      <span>Buried Signals · Materials</span>
+      <span>3D flyover skill</span>
+    </footer>
+  </body>
+</html>
