@@ -23,5 +23,30 @@
   "methodology": [
     "This materials page currently publishes the three reusable Remotion skills developed during Water Wars production. Investigation sourcing and publication methodology will be added as a separate verified package before publication."
   ],
+  "skills": [
+    {
+      "name": "Map Explainer",
+      "description": "2D routes, regions, rivers and geographic explainers.",
+      "href": "/skill-docs/map-explainer/"
+    },
+    {
+      "name": "3D Flyover",
+      "description": "Photorealistic cities and satellite-draped landscapes.",
+      "href": "/skill-docs/3d-flyover/"
+    },
+    {
+      "name": "Chart Animations",
+      "description": "Evidence-led charts, timelines and newsroom graphics.",
+      "href": "/skill-docs/newsroom-chart-animations/"
+    }
+  ],
+  "labs": [
+    {
+      "name": "Medog Tunnel AR Map",
+      "description": "Place the Medog tunnel and surrounding terrain in augmented reality.",
+      "href": "/lab/water-wars/ar-map/",
+      "meta": "Interactive companion · Mobile and desktop"
+    }
+  ],
   "downloads": []
 }

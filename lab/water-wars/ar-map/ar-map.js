@@ -1,4 +1,4 @@
-import "../materials-nav.js";
+import "../../../src/components/materials-nav.js";
 
 const key = import.meta.env.VITE_MAPTILER_API_KEY;
 const status = document.querySelector(".status");
@@ -150,7 +150,7 @@ map.on("load", async () => {
       return response.json();
     };
 
-    const border = await loadGeoJSON("/geo/china-india-border.geojson");
+    const border = await loadGeoJSON("/water-wars/geo/china-india-border.geojson");
 
     map.addSource("china-india-border", {type: "geojson", data: border});
     map.addLayer({

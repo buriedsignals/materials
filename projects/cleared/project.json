@@ -10,7 +10,7 @@
   ],
   "fundedBy": "Innovationsfonds für multimedialen Journalismus",
   "database": {
-    "url": "https://materials.buriedsignals.com/data/cleared/database/",
+    "url": "/cleared/data/database/",
     "label": "Explore Evictions Database",
     "stats": "33 operations · 20,387 families · 101,935 people"
   },

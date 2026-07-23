@@ -2,10 +2,10 @@
   "name": "materials",
   "version": "1.0.0",
   "description": "",
-  "main": "script.js",
+  "main": "src/investigation-page.js",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && node scripts/publish-skill.mjs",
+    "build": "vite build && node scripts/build-projects.mjs && node scripts/publish-skills.mjs",
     "preview": "vite preview"
   },
   "keywords": [],

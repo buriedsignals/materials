@@ -7,8 +7,8 @@ const skills = [
   "3d-flyover",
   "newsroom-chart-animations",
 ];
-const skillsRoot = resolve("water-wars/skills");
-const publishedRoot = resolve("dist/skills");
+const skillsRoot = resolve("skills");
+const publishedRoot = resolve("dist/skill-docs");
 const downloadsRoot = resolve("dist/downloads");
 
 mkdirSync(publishedRoot, {recursive: true});

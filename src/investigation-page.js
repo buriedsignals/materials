@@ -52,7 +52,7 @@ function renderDownloads(downloads, invId) {
         <span class="download-size">${esc(d.description)}</span>
       </div>
     </div>
-    <a href="data/${invId}/${encodeURIComponent(d.filename)}" download>${ICONS.downloadRow}</a>
+    <a href="/${encodeURIComponent(invId)}/data/${encodeURIComponent(d.filename)}" download>${ICONS.downloadRow}</a>
   </div>`).join('');
 }
 
@@ -75,38 +75,20 @@ function renderNotebook(url) {
   </div>`;
 }
 
-function renderSkills() {
-  const skills = [
-    {
-      name: 'Map Explainer',
-      description: '2D routes, regions, rivers and geographic explainers.',
-      href: 'skills/map-explainer/'
-    },
-    {
-      name: '3D Flyover',
-      description: 'Photorealistic cities and satellite-draped landscapes.',
-      href: 'skills/3d-flyover/'
-    },
-    {
-      name: 'Chart Animations',
-      description: 'Evidence-led charts, timelines and newsroom graphics.',
-      href: 'skills/newsroom-chart-animations/',
-      meta: 'Remotion skill · Includes ZIP download'
-    }
-  ];
+function renderSkills(skills) {
   return `<div class="source-list">${skills.map(skill => `<div class="source-item">
     <span class="source-claim">${esc(skill.description)}</span>
-    <a class="source-title" href="${skill.href}">${esc(skill.name)}</a>
+    <a class="source-title" href="${esc(skill.href)}">${esc(skill.name)}</a>
     <span class="source-meta">${esc(skill.meta || 'Remotion skill · Includes ZIP download')}</span>
   </div>`).join('')}</div>`;
 }
 
-function renderARMap() {
-  return `<div class="source-list"><div class="source-item">
-    <span class="source-claim">Place the Medog tunnel and surrounding terrain in augmented reality.</span>
-    <a class="source-title" href="skills/ar-map/">Open the AR Map</a>
-    <span class="source-meta">Interactive companion · Mobile and desktop</span>
-  </div></div>`;
+function renderLabs(labs) {
+  return `<div class="source-list">${labs.map(lab => `<div class="source-item">
+    <span class="source-claim">${esc(lab.description)}</span>
+    <a class="source-title" href="${esc(lab.href)}">${esc(lab.name)}</a>
+    <span class="source-meta">${esc(lab.meta || 'Experimental companion')}</span>
+  </div>`).join('')}</div>`;
 }
 
 function buildFile(icon, label, content, open = false) {
@@ -141,12 +123,12 @@ function render(inv) {
   const fileList = document.getElementById('file-list');
   fileList.innerHTML =
     (inv.database ? buildFile(ICONS.database, 'Data', renderDatabase(inv.database)) : '') +
-    buildFile(ICONS.sources, 'Sources', renderSources(inv.sources, inv.id)) +
+    (inv.sources?.length ? buildFile(ICONS.sources, 'Sources', renderSources(inv.sources, inv.id)) : '') +
     buildFile(ICONS.ai, 'AI Disclosure', renderDisclosure(inv.aiDisclosure)) +
     buildFile(ICONS.methodology, 'Methodology', renderMethodology(inv.methodology)) +
-    buildFile(ICONS.skills, 'Skills', renderSkills()) +
-    buildFile(ICONS.ar, 'AR Map', renderARMap()) +
-    buildFile(ICONS.downloads, 'Downloads', renderDownloads(inv.downloads, inv.id)) +
+    (inv.skills?.length ? buildFile(ICONS.skills, 'Skills', renderSkills(inv.skills)) : '') +
+    (inv.labs?.length ? buildFile(ICONS.ar, 'Lab', renderLabs(inv.labs)) : '') +
+    (inv.downloads?.length ? buildFile(ICONS.downloads, 'Downloads', renderDownloads(inv.downloads, inv.id)) : '') +
     (inv.notebookUrl ? buildFile(ICONS.notebook, 'NotebookLM', renderNotebook(inv.notebookUrl)) : '');
 
   bindAccordion();
@@ -165,14 +147,16 @@ function bindAccordion() {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-  const id = new URLSearchParams(location.search).get('id');
+  const queryId = new URLSearchParams(location.search).get('id');
+  const pathId = location.pathname.split('/').filter(Boolean)[0];
+  const id = queryId || pathId;
   if (!id) {
     document.getElementById('title').textContent = 'Investigation not found';
-    document.getElementById('summary-text').textContent = 'No investigation ID provided. Use ?id=cleared to load an investigation.';
+    document.getElementById('summary-text').textContent = 'No project provided. Visit /cleared/ or /water-wars/.';
     return;
   }
   try {
-    const res = await fetch(`investigations/${encodeURIComponent(id)}.json`);
+    const res = await fetch(`/${encodeURIComponent(id)}/project.json`);
     if (!res.ok) throw new Error(res.status);
     render(await res.json());
   } catch (e) {

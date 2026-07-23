@@ -1,4 +1,4 @@
-import "./materials-nav.js";
+import "../src/components/materials-nav.js";
 
 const prompt = `Create a Remotion animation for:
 

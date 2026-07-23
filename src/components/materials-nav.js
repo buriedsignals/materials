@@ -4,6 +4,8 @@ const SKILLS = [
   {slug: "newsroom-chart-animations", label: "Chart Animations"},
 ];
 
+const REPOSITORY_URL = "https://github.com/buriedsignals/materials";
+
 const copyIcon = `
   <svg viewBox="0 0 24 24" aria-hidden="true">
     <rect x="8" y="8" width="11" height="11" rx="2"></rect>
@@ -15,7 +17,7 @@ class MaterialsNav extends HTMLElement {
     if (this.shadowRoot) return;
     const current = this.getAttribute("current");
     const backOnly = this.hasAttribute("back-only");
-    const backHref = this.getAttribute("back-href") || "../../?id=water-wars";
+    const backHref = this.getAttribute("back-href") || "/water-wars/";
     const currentLabel = SKILLS.find((skill) => skill.slug === current)?.label || "Choose a skill";
     const skillHref = (slug) => `../${slug}/`;
 
@@ -131,10 +133,11 @@ class MaterialsNav extends HTMLElement {
         .prompt-row {
           margin-top: 9px;
           display: flex;
+          align-items: center;
           justify-content: center;
         }
 
-        .copy {
+        .prompt-action {
           min-height: 36px;
           padding: 0 13px;
           display: inline-flex;
@@ -150,8 +153,8 @@ class MaterialsNav extends HTMLElement {
           transition: color 160ms ease;
         }
 
-        .copy:hover,
-        .copy:focus-visible {
+        .prompt-action:hover,
+        .prompt-action:focus-visible {
           color: var(--nav-gold);
           outline: none;
         }
@@ -164,6 +167,16 @@ class MaterialsNav extends HTMLElement {
           stroke-linecap: round;
           stroke-linejoin: round;
           stroke-width: 1.7;
+        }
+
+        .repo-link {
+          text-decoration: none;
+        }
+
+        .prompt-divider {
+          width: 1px;
+          height: 14px;
+          background: var(--nav-line);
         }
 
         .mobile-skills { display: none; }
@@ -280,7 +293,9 @@ class MaterialsNav extends HTMLElement {
         </div>
         ${backOnly ? "" : `
           <div class="prompt-row">
-            <button class="copy" type="button">${copyIcon}<span>Copy agent prompt</span></button>
+            <button class="copy prompt-action" type="button">${copyIcon}<span>Copy agent prompt</span></button>
+            <span class="prompt-divider" aria-hidden="true"></span>
+            <a class="repo-link prompt-action" href="${REPOSITORY_URL}" target="_blank" rel="noreferrer">GitHub repository ↗</a>
           </div>
         `}
       </nav>`;
