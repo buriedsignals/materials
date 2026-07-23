@@ -1,6 +1,6 @@
 ---
 name: map-explainer
-description: Use when you need a 2D geographic explainer map for video — showing where something is, a river or route's path, or who is upstream/downstream of whom, with countries or regions highlighting in sequence. Keywords map, explainer, river, route, choropleth, country highlight, dataviz, geography, upstream, watershed, border, label, remotion, maptiler.
+description: Use when you need a 2D geographic explainer map for video — showing where something is, a river or route's path, or who is upstream/downstream of whom, with MapTiler provider vectors or custom geodata and countries or regions highlighting in sequence. Keywords map, explainer, river, route, roads, boundaries, choropleth, country highlight, dataviz, geography, upstream, watershed, border, label, vector tiles, geojson, remotion, maptiler.
 ---
 
 # Map Explainer — 2D geographic explainer maps
@@ -24,7 +24,7 @@ For 3D terrain fly-overs use the **3d-flyover** skill; for plain animated maps s
 
 | Layer | Role |
 | --- | --- |
-| **MapTiler SDK** (`@maptiler/sdk`) | Draws the basemap + all GeoJSON layers (river, fills, borders) into a WebGL canvas. Default styled-vector starting point: `MapStyle.BASIC`; satellite is an equally valid evidence-led choice. |
+| **MapTiler SDK** (`@maptiler/sdk`) | Draws the basemap plus MapTiler Planet vector layers and custom GeoJSON into a WebGL canvas. Default styled-vector starting point: `MapStyle.BASIC`; satellite is an equally valid evidence-led choice. |
 | **Remotion** | Frame-by-frame harness. Imperatively update `setData`/`setPaintProperty`; use `jumpTo` only for a static shot, or a fixed map plate for any pan/zoom. Gate with `delayRender` until `map.once('idle')`. `--gl=angle`, `preserveDrawingBuffer:true`. |
 | **React HTML overlay** | The country **labels** — positioned `<div>`s, NOT MapLibre symbols. Gives full project-defined typography and animation control. Positioned each frame via `map.project(lngLat)` → `setState`. |
 
@@ -38,6 +38,22 @@ country fills and dark marker halos with no coloured cores.
 Choose the basemap by evidence: begin styled-vector work with `MapStyle.BASIC`; use satellite when terrain,
 land use, construction, or a river's physical course is itself evidence. The skill owns no fixed palette,
 font, or branded treatment—put those in the production's local configuration.
+
+## Choose the source for each map element
+
+Do not begin by manufacturing GeoJSON. First check whether MapTiler Planet already exposes the element
+as filtered vector data. Make the choice separately for roads, waterways, water bodies, boundaries, land
+cover, places, and every story-specific overlay.
+
+| Mode | Use when | Animation |
+| --- | --- | --- |
+| **MapTiler vector** | The feature exists in a provider `source-layer`, its attributes support an exact filter, and provider geometry is editorially acceptable. | Fade, bloom, recolour, widen, blur, pulse, change radius, or use stable feature state. |
+| **Custom GeoJSON** | The feature is proposed, historical, disputed, corrected, privately sourced, absent from provider data, or must be drawn in a verified order. | Full paint animation plus deterministic line/perimeter slicing and geometry changes. |
+| **Hybrid** | Ordinary geographic context can come from MapTiler while the claim depends on custom evidence. | Animate each layer according to its source and meaning. |
+
+MapTiler vector features remain split across tiles. Do not use them for a semantic start-to-end line draw;
+extract, verify, order, and bake that element to GeoJSON first. Read **`references/data-sources.md`** and
+reuse **`assets/MapTilerVectorElement.ts`** for provider-layer setup and per-frame paint updates.
 
 ## Motion stability — use a fixed map plate for camera moves
 
@@ -56,9 +72,10 @@ map. It contains the fixed-map-plate recipe, diagnostics, and render checks.
 
 ## How it works (the shape)
 
-1. **Geo prep** (`scripts/prep-geo.mjs`) → `country-meta.json` + `borders.geojson` + the river line.
-   Per country it bakes: `stop` (river-arrival fraction), `anchor` (label centre = pole of
-   inaccessibility), `border` (complete source geometry, never a viewport crop). Details → `references/geo-prep.md`.
+1. **Source selection** — use MapTiler vector layers for suitable provider features and custom GeoJSON
+   for story-specific or ordered geometry. If the beat needs country-entry triggers or a progressive line
+   draw, run `scripts/prep-geo.mjs` to bake `country-meta.json`, `borders.geojson`, and the ordered line.
+   Details → `references/data-sources.md` and `references/geo-prep.md`.
 2. **Basemap** — strip clutter on `load`: remove `symbol` layers (place labels) and `/other border/i`
    (admin-1 inner borders); hide the logo via CSS. Keep country + disputed borders.
 3. **River** — `turf.lineSliceAlong(line, 0, lineKm*reveal)` per frame, led by a **white-hot electric
@@ -86,18 +103,19 @@ borders, bbox/nudge tuning) → **`references/geo-prep.md`**.
   source the named full bilateral line. For country fills, avoid duplicating full outline strokes, which
   makes shared borders double up.
 
-## Quick start (adapt to a new river + countries)
+## Quick start
 
-1. Copy `assets/{RiverReveal,CountryLabel}.tsx`, `assets/tokens.ts`, and `assets/example-Root.tsx` into a
-   Remotion project. The exact folder layout (component imports must line up with the geo files) → `assets/README.md`.
-2. Supply a river GeoJSON (**one clean source→mouth LineString** — route braided OSM first; see
-   `references/geo-prep.md`) + one polygon GeoJSON per country. Edit `scripts/prep-geo.mjs` `CONFIG`
-   (`COUNTRIES`, input paths, `FRAME_BBOX`/`ANCHOR_BBOX`/`NUDGE`), run it → river line + `country-meta.json`
-   + `borders.geojson`. (Or use the sample outputs in `assets/sample-data/` to verify the component.)
-3. Keep the country keys identical across `prep-geo.mjs`, `RiverReveal.tsx` `ORDER`, and `tokens.ts` (the
+1. Inventory the required map elements and choose MapTiler vector, custom GeoJSON, or hybrid mode for
+   each one using `references/data-sources.md`.
+2. For provider elements, copy `assets/MapTilerVectorElement.ts`, add each exact `source-layer` and
+   attribute filter, then drive paint properties from the Remotion frame.
+3. For ordered custom geometry, copy `assets/{RiverReveal,CountryLabel}.tsx`, `assets/tokens.ts`, and
+   `assets/example-Root.tsx`. Supply one clean ordered LineString and polygon GeoJSONs, configure
+   `scripts/prep-geo.mjs`, and run it to produce the line, `country-meta.json`, and `borders.geojson`.
+4. Keep the country keys identical across `prep-geo.mjs`, `RiverReveal.tsx` `ORDER`, and `tokens.ts` (the
    four-file contract in `assets/README.md`). Set `REMOTION_MAPTILER_KEY`; add a font package only if the
    project's typography requires one.
-4. Render with `--gl=angle --timeout=120000` (`--gl=angle` is mandatory — WebGL map). Adapt-points → `assets/README.md`.
+5. Render with `--gl=angle --timeout=120000` (`--gl=angle` is mandatory — WebGL map). Adapt-points → `assets/README.md`.
 
 ## Tuning knobs (each is one number)
 
@@ -116,6 +134,7 @@ borders, bbox/nudge tuning) → **`references/geo-prep.md`**.
 ## Files
 
 - `assets/RiverReveal.tsx` — the main component (river reveal + sequenced country animate-ins).
+- `assets/MapTilerVectorElement.ts` — add filtered MapTiler Planet elements and animate their paint.
 - `assets/CountryLabel.tsx` — reusable example label (accent rule, rise-and-fade).
 - `assets/tokens.ts` — example palette + durations; replace with project tokens.
 - `assets/example-Root.tsx` — minimal Remotion `<Composition>` scaffold (duration = the beat).
@@ -123,5 +142,6 @@ borders, bbox/nudge tuning) → **`references/geo-prep.md`**.
 - `assets/preview.png` — a still from the proven render.
 - `scripts/prep-geo.mjs` — geo pipeline (river, borders, entry stops, label anchors).
 - `references/architecture.md` — timing model, river/electric head, country sequence, labels, full code.
+- `references/data-sources.md` — element-by-element provider vector vs custom GeoJSON selection.
 - `references/geo-prep.md` — basemap stripping + the geo pipeline internals.
 - `references/render-stability.md` — required reference for camera motion, shimmer/jitter diagnosis, and stable headless renders.

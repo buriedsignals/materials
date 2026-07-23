@@ -97,6 +97,50 @@ map.on("load", async () => {
   });
   map.setTerrain({source: "terrain", exaggeration: 1});
 
+  map.addSource("maptiler-planet", {
+    type: "vector",
+    url: `https://api.maptiler.com/tiles/v3/tiles.json?key=${key}`,
+  });
+
+  const riverFilter = [
+    "all",
+    ["==", ["get", "class"], "river"],
+    [
+      "match",
+      ["coalesce", ["get", "name_en"], ["get", "name"], ""],
+      ["Yarlung Tsangpo", "Brahmaputra", "Brahmaputra River", "Jamuna River"],
+      true,
+      false,
+    ],
+  ];
+
+  map.addLayer({
+    id: "yarlung-glow",
+    type: "line",
+    source: "maptiler-planet",
+    "source-layer": "waterway",
+    filter: riverFilter,
+    layout: {"line-join": "round", "line-cap": "round"},
+    paint: {
+      "line-color": "#49C6FF",
+      "line-width": 11,
+      "line-opacity": 0.32,
+      "line-blur": 6,
+    },
+  });
+  map.addLayer({
+    id: "yarlung-core",
+    type: "line",
+    source: "maptiler-planet",
+    "source-layer": "waterway",
+    filter: riverFilter,
+    layout: {"line-join": "round", "line-cap": "round"},
+    paint: {
+      "line-color": "#E8F7FF",
+      "line-width": 3.2,
+    },
+  });
+
   try {
     const loadGeoJSON = async (url) => {
       const response = await fetch(url);
@@ -106,34 +150,7 @@ map.on("load", async () => {
       return response.json();
     };
 
-    const [river, border] = await Promise.all([
-      loadGeoJSON("/geo/yarlung-tsangpo.geojson"),
-      loadGeoJSON("/geo/china-india-border.geojson"),
-    ]);
-
-    map.addSource("yarlung-tsangpo", {type: "geojson", data: river});
-    map.addLayer({
-      id: "yarlung-glow",
-      type: "line",
-      source: "yarlung-tsangpo",
-      layout: {"line-join": "round", "line-cap": "round"},
-      paint: {
-        "line-color": "#49C6FF",
-        "line-width": 11,
-        "line-opacity": 0.32,
-        "line-blur": 6,
-      },
-    });
-    map.addLayer({
-      id: "yarlung-core",
-      type: "line",
-      source: "yarlung-tsangpo",
-      layout: {"line-join": "round", "line-cap": "round"},
-      paint: {
-        "line-color": "#E8F7FF",
-        "line-width": 3.2,
-      },
-    });
+    const border = await loadGeoJSON("/geo/china-india-border.geojson");
 
     map.addSource("china-india-border", {type: "geojson", data: border});
     map.addLayer({

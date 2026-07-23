@@ -7,6 +7,7 @@ The runnable example. Copy into a Remotion project and adapt.
 | File | What | Goes to (in your project) |
 | --- | --- | --- |
 | `RiverReveal.tsx` | Main component (river reveal + electric head + sequenced country animate-ins). | `src/components/` |
+| `MapTilerVectorElement.ts` | Adds filtered MapTiler Planet features and updates their paint per frame. | `src/components/` |
 | `CountryLabel.tsx` | Reusable label mechanics; typography comes from project CSS variables. | `src/components/` |
 | `tokens.ts` | Example palette + durations; replace with project tokens. | `src/theme/` |
 | `example-Root.tsx` | Minimal `<Composition>` scaffold (duration = the beat). | `src/Root.tsx` |
@@ -49,9 +50,9 @@ The label text is `country.toUpperCase()`. So for the Nile: `["ethiopia","sudan"
 
 ## Generic vs project-specific
 
-**Generic:** the choreography (river reveal, electric head, border→fill→label sequence), `CountryLabel.tsx`,
-the geo algorithms (entry stops, pole of inaccessibility, complete source border), the overlay-labels-via-
-`map.project` pattern, and the fixed-map-plate renderer pattern.
+**Generic:** provider-vector element setup, the custom-geometry choreography (river reveal, electric head,
+border→fill→label sequence), `CountryLabel.tsx`, the geo algorithms (entry stops, pole of inaccessibility,
+complete source border), the overlay-labels-via-`map.project` pattern, and the fixed-map-plate renderer pattern.
 
 **Change for a new river + countries:**
 

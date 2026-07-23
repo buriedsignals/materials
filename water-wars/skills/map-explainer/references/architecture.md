@@ -2,7 +2,9 @@
 
 Deep detail behind `SKILL.md`: the timing model, the river reveal + electric head, the per-country
 sequence, and label projection. The supplied values are examples, not a production style system.
-The full runnable code is `../assets/RiverReveal.tsx` + `../assets/CountryLabel.tsx` + `../assets/tokens.ts`.
+The custom-geometry example is `../assets/RiverReveal.tsx` + `../assets/CountryLabel.tsx` +
+`../assets/tokens.ts`. Provider-vector setup is in `../assets/MapTilerVectorElement.ts`; choose between
+the two modes with `data-sources.md`.
 
 ## 1. The render harness (per frame)
 
@@ -34,7 +36,17 @@ const reveal = interpolate(t, [RIVER_START, RIVER_END], [0,1], { ...clamp, easin
 **Constant durations matter:** drive the border draw by *time since trigger*, not a slice of the reveal —
 otherwise complex or long borders flash by in a fraction of a second.
 
-## 3. River animation — line reveal + electric draw-head
+## 3. Provider-vector animation
+
+MapTiler Planet elements can be animated directly in place. Filter an exact `source-layer` feature,
+initialize its paint in the hidden or neutral state, then update paint properties from the Remotion frame.
+This works for line, fill, circle, and symbol layers without copying provider geometry into the project.
+
+Do not assume tiled geometry has a global order. Provider features are split at tile boundaries: opacity,
+colour, width, blur, radius, fill, and feature-state changes are reliable; semantic start-to-end line
+draws are not. Bake ordered GeoJSON when the direction of the draw carries meaning.
+
+## 4. Custom line animation — reveal + electric draw-head
 
 The "electricity" is a **white-hot head** leading the draw — the last few % of the drawn line in its own
 bright + glow layers, faded out once the river completes.
@@ -55,7 +67,7 @@ Layers, bottom→top: `river-glow` (electric blue `#49C6FF`, w11, op0.32, blur6)
 (icy core `#E8F7FF`, w3) → `river-headglow` (`rgba(120,225,255,.95)`, w16, blur9) → `river-head`
 (white `#FFFFFF`, w4.5). **No dark casing** — the bright icy core reads over every fill on its own.
 
-## 4. Country animation — border draws → fill blooms → label rises
+## 5. Country animation — border draws → fill blooms → label rises
 
 Triggered by river arrival, each country runs three sequential phases. The border is a **darker shade**
 of the country colour (the electricity is on the river, not here).
@@ -92,7 +104,7 @@ const sliceBorder = (d, fromKm, toKm) => {
 Choose fill, border, and river colours in the production's local token file. The bundled token values are
 examples only; do not carry a source project's palette into another production.
 
-## 5. Labels — HTML overlay, projected each frame
+## 6. Labels — HTML overlay, projected each frame
 
 Labels are React, not map symbols (full typography control). `CountryLabel` is an example accent-rule,
 rise-and-fade treatment; select the typeface and final values in the production.
@@ -108,7 +120,7 @@ setLabels(pos);                          // re-render the overlay; effect deps e
 and `pointerEvents:none`. Select font, weight, size, spacing, contrast, and colour from the production's
 own type and palette system.
 
-## 6. Camera — fixed map plate for any movement
+## 7. Camera — fixed map plate for any movement
 
 Read `render-stability.md`. Do not use per-frame `map.jumpTo()` for a moving 2D shot; it can shimmer in
 headless renders even on satellite imagery. Interpolate the intended camera for the CSS plate transform,

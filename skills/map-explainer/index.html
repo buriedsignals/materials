@@ -67,7 +67,7 @@
       <p class="label">/ Architecture</p><h2>Three layers, one job each</h2>
       <p class="lead">The map draws the geography, Remotion runs the clock, and the labels live in React where typography is fully in your control.</p>
       <div class="facts">
-        <article class="fact"><p class="role">Draws the map</p><h3>MapTiler SDK</h3><p>A vector or satellite basemap, stripped of its own labels and inner admin borders, plus GeoJSON layers for the route, fills, and borders.</p></article>
+        <article class="fact"><p class="role">Draws the map</p><h3>MapTiler SDK</h3><p>A vector or satellite basemap, stripped of unwanted labels and inner borders, plus filtered MapTiler Planet vectors and custom GeoJSON layers.</p></article>
         <article class="fact"><p class="role">Runs the clock</p><h3>Remotion</h3><p>Per frame, update layers imperatively and hold capture until the map reports idle. For camera moves, use a fixed map plate rather than per-frame <code>jumpTo()</code>.</p></article>
         <article class="fact"><p class="role">Sets the type</p><h3>React HTML overlay</h3><p>Labels are positioned HTML elements projected from map coordinates to screen pixels every frame: any font, any entrance, pixel-exact.</p></article>
       </div>
@@ -83,6 +83,16 @@
     </div></section>
 
     <section class="content-section"><div class="inner">
+      <p class="label">/ Element data</p><h2>Use provider vectors before duplicating geography</h2>
+      <p class="lead">Choose the source for each map element. Roads, waterways, water bodies, boundaries, land cover, and places can often be surfaced directly from MapTiler Planet and filtered by their attributes. Custom geodata remains essential when the story owns the geometry.</p>
+      <div class="facts two-col">
+        <article class="fact"><p class="role">Option 01</p><h3>MapTiler vector layers</h3><p>Use an existing <code>source-layer</code> when its feature and attributes are editorially correct. Animate opacity, colour, width, blur, radius, fill, or stable feature state without maintaining duplicate GeoJSON.</p></article>
+        <article class="fact"><p class="role">Option 02</p><h3>Custom GeoJSON</h3><p>Use verified custom data for proposed, historical, disputed, corrected, private, or missing features—and whenever motion must follow an exact geometry in a meaningful order.</p></article>
+      </div>
+      <div class="callout"><h3>Hybrid is usually the strongest choice</h3><p>Use MapTiler vectors for ordinary geographic context and custom GeoJSON only for the story-specific evidence. A tiled provider line can fade or highlight cleanly, but a deterministic start-to-end draw requires an ordered line baked to custom geometry.</p></div>
+    </div></section>
+
+    <section class="content-section"><div class="inner">
       <p class="label">/ Labels</p><h2>Label by what it is</h2>
       <div class="facts">
         <article class="fact"><p class="role">Geographic region</p><h3>Country or region</h3><p>Use a high-contrast uppercase display label with a short accent divider. Position it in clear territory, never over a marker cluster or river.</p></article>
@@ -95,7 +105,8 @@
     <section class="content-section"><div class="inner">
       <p class="label">/ Pipeline</p><h2>From raw geodata to a finished beat</h2>
       <div class="steps">
-        <article class="step"><div><h3>Bake the geography</h3><p>The prep script calculates the river-entry trigger, the most-interior label anchor, and complete border geometry for each country. Never trim a line to the viewport.</p></div></article>
+        <article class="step"><div><h3>Choose each element’s source</h3><p>Check MapTiler Planet first. Use provider vectors when their geometry and attributes support the claim; use custom GeoJSON when the story requires its own verified or ordered geometry.</p></div></article>
+        <article class="step"><div><h3>Bake custom geography</h3><p>When custom data is required, the prep script calculates entry triggers, interior label anchors, and complete border geometry. Never trim a line or boundary to the viewport.</p></div></article>
         <article class="step"><div><h3>Strip the basemap</h3><p>Remove basemap labels and inner admin borders. What remains is quiet context, so the story geography is the only thing talking.</p></div></article>
         <article class="step"><div><h3>Reveal the river</h3><p>Draw the line by arc length, led by a white-hot electric head—the final few percent rendered in its own bright, glowing layers.</p></div></article>
         <article class="step"><div><h3>Light the countries</h3><p>As the head enters each country, its complete border draws over a constant duration, its fill blooms with a slight overshoot, and its label rises.</p></div></article>
@@ -124,12 +135,13 @@
       <div class="files">
         <div class="file"><code>SKILL.md</code><span>workflow, architecture, semantics, and stability rules</span></div>
         <div class="file"><code>assets/RiverReveal.tsx</code><span>river reveal and country sequence</span></div>
+        <div class="file"><code>assets/MapTilerVectorElement.ts</code><span>provider-vector layer setup and paint animation</span></div>
         <div class="file"><code>assets/CountryLabel.tsx</code><span>reusable example label</span></div>
         <div class="file"><code>assets/tokens.ts</code><span>example palette and durations</span></div>
         <div class="file"><code>assets/example-Root.tsx</code><span>minimal composition scaffold</span></div>
         <div class="file"><code>assets/sample-data/</code><span>runnable sample geography</span></div>
         <div class="file"><code>scripts/prep-geo.mjs</code><span>geo preparation pipeline</span></div>
-        <div class="file"><code>references/</code><span>architecture, geo prep, and render stability</span></div>
+        <div class="file"><code>references/</code><span>data sourcing, architecture, geo prep, and render stability</span></div>
       </div>
     </div></section>
 
