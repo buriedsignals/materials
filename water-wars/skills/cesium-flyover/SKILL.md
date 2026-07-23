@@ -1,88 +1,91 @@
 ---
 name: cesium-flyover
-description: Use when you need a cinematic 3D-terrain fly-over or fly-through of real geography (canyon, gorge, mountain range, coastline, route) rendered to video — a slow drone/helicopter glide over satellite-draped terrain. Keywords cesium, flythrough, flyover, terrain, drone, aerial, gorge, canyon, mountains, quantized-mesh, remotion.
+description: Create deterministic Remotion videos of real geography with CesiumJS. Use for cinematic flyovers or fly-throughs using either satellite-draped 3D terrain or textured 3D cities and landmarks. Covers MapTiler quantized-mesh terrain, Google Photorealistic 3D Tiles, Cesium OSM Buildings comparison renders, camera paths, tile settling, attribution, and headless WebGL rendering.
 ---
 
-# Cesium Flyover — cinematic 3D-terrain fly-throughs
+# Cesium flyovers
 
-## Overview
+Use CesiumJS as the renderer and Remotion as the deterministic frame driver. Choose the data stack
+before building the camera path.
 
-**Cesium draws the mountains; Remotion drives the timeline and captures the frames.** Neither alone
-works — Cesium won't render reliably headless on its own, and Remotion has no 3D globe. They stack.
-Proven on water-wars (Yarlung Tsangpo Grand Canyon) — a slow, peaceful "helicopter" glide with a gentle
-bank into the curves.
+## Choose one flyover option
 
-For 2D explainer maps (river path + country highlights) use the **map-explainer** skill instead; for
-plain flat animated maps see remotion's `maps.md` / `maplibre.md`.
-
-## When to use
-
-- A cinematic reveal of real terrain: fly *through* a canyon/gorge, *over* a coastline or mountain range, *along* a route.
-- You want Google-Earth-grade terrain (quantized-mesh) draped with satellite imagery, rendered deterministically to mp4.
-- **Not** for: flat 2D maps, choropleths, data overlays, or "where is this" explainers → use **map-explainer**.
-
-## The one gotcha that will waste your day (read first)
-
-Cesium's globe **will not draw in a standalone headless Playwright/Chromium** harness — WebGL works
-(skybox renders) but the globe produces **zero draw commands** and `tilesLoaded` never goes true. Dead
-end. **Render through Remotion instead.** Inside the component: `useDefaultRenderLoop = false`, drive each
-frame with **`viewer.render()` (NOT `scene.render()`)**, `preserveDrawingBuffer: true`, and gate every
-frame with `delayRender` until `globe.tilesLoaded`. Full story + fixes → `references/troubleshooting.md`.
-
-## Architecture
-
-| Layer | Choice | Why |
+| Option | Data stack | Use for |
 | --- | --- | --- |
-| 3D engine | **CesiumJS** (loaded from CDN at runtime) | True free camera, renders to the horizon, quantized-mesh terrain. CDN load avoids bundling Cesium's webpack assets. |
-| Terrain | MapTiler **terrain-quantized-mesh-v2** (`requestVertexNormals`) | Real 3D geometry, sharp silhouettes; reuses the MapTiler key. |
-| Imagery | MapTiler **satellite-v2** raster tiles | Draped on the mesh. |
-| Harness | **Remotion** (`remotion render --gl=angle`) | Deterministic frame stepping + `delayRender` = every frame fully tile-loaded before capture. Bundled ffmpeg encodes. |
+| `terrain-satellite` | MapTiler quantized-mesh terrain + MapTiler satellite imagery | Mountains, gorges, coastlines, river corridors, long rural routes |
+| `buildings` | Google Photorealistic 3D Tiles by default | Cities, landmarks, recognizable architecture |
 
-Env `REMOTION_MAPTILER_KEY`, **unrestricted** (a domain-locked key 403s headless).
+CesiumJS is not the terrain or imagery source. It renders the selected provider data.
 
-## How it works (the shape)
+For `buildings`, use `buildingsProvider: "google-photorealistic"` for final visual quality. Google
+provides one textured photogrammetric mesh containing terrain, buildings, and imagery; hide Cesium's
+globe and do not add MapTiler underneath it.
 
-1. **Path** — `scripts/prep-cesium-path.mjs` turns a river/route GeoJSON into a smooth camera path:
-   clip a window → resample to even spacing → moving-average smooth (continuous curves, **not**
-   Douglas-Peucker, which makes straight-then-corner) → dampen lateral deviation toward the chord
-   (the single "how much swerve" knob). Output `cesium-path.json`.
-2. **Component** — `assets/CesiumFlythrough.tsx`: walk the path by arc length; aim at a real point
-   `LOOK_AHEAD_KM` further along (far aim = smooth heading that follows the curve); constant pitch;
-   roll = bank into the turn; per frame `settle()` renders until `tilesLoaded`, then `continueRender`.
-3. **Render** — `npx remotion render … --gl=angle --concurrency=1`.
+Use `buildingsProvider: "cesium-osm"` only for a low-cost comparison or when photorealism is not
+needed. It adds Cesium OSM Buildings over the MapTiler terrain/satellite ground. These are
+OpenStreetMap-derived building forms, not textured photogrammetry. MapTiler's Buildings product is a
+vector-footprint tileset for extrusion in a vector-map renderer, not a drop-in photorealistic
+CesiumJS mesh.
 
-Full per-frame camera math, the path pipeline, the exact feel values (alt 4600→4300 m, 13 km over 24 s ≈
-0.54 km/s, pitch 76° from nadir, bank ±7.5°), and the complete component → **`references/architecture.md`**.
+Read `references/data-sources.md` before choosing a buildings provider.
 
-## Quick start (adapt to a new location)
+## Google usage constraint
 
-1. Copy `assets/CesiumFlythrough.tsx` + `assets/example-Root.tsx` into a Remotion project (`src/components/`
-   + `src/Root.tsx`). The Composition (in the scaffold) is where duration/dimensions live — see `assets/README.md` for the layout.
-2. Get a centerline GeoJSON for your canyon/route (OSM via Overpass; sample in `assets/sample-river.geojson`).
-   `node scripts/prep-cesium-path.mjs` runs against the sample out of the box; for your own: pass `<input> <output>`
-   and edit `START`/`WINDOW_KM`.
-3. Set `REMOTION_MAPTILER_KEY` (unrestricted). Render with `--gl=angle --timeout=180000`.
-4. What's generic vs project-specific (path, key, exaggeration, speed) → `assets/README.md`.
+Enforce all of the following for `google-photorealistic`:
 
-## Tuning knobs (each is one number)
+- Keep the composition at **30 seconds or less**. The component rejects longer compositions.
+- Keep `showCreditsOnScreen: true`; never hide or crop the Cesium credit display.
+- Keep the visible “For promotional purposes only” marker.
+- Use it only for a promotional video about the application. Google's current Map Tiles policy does
+  not grant general documentary/editorial video use.
+- Do not cache, prefetch, extract, or derive data from the tiles.
 
-| Want | Knob | Where |
-| --- | --- | --- |
-| Slower / more peaceful | composition duration (seconds) | `<Composition>` |
-| More / less swerve | `DAMP` (0.45) | `scripts/prep-cesium-path.mjs` |
-| Longer / shorter journey | `TRAVEL_KM` (13) + `WINDOW_KM` | component + script |
-| Higher / lower camera | `ALT_START` / `ALT_END` (4600 / 4300 m) | component |
-| More horizon | `PITCH_FROM_NADIR` (76°) | component |
-| Stronger / weaker bank | `MAX_BANK` / `BANK_GAIN` | component |
-| Terrain drama | `verticalExaggeration` (1.1) | component |
+## Required environment
 
-## Files
+```text
+REMOTION_MAPTILER_KEY=...          # terrain-satellite; also cesium-osm ground
+REMOTION_GOOGLE_MAPS_API_KEY=...   # Google Map Tiles API key
+REMOTION_CESIUM_ION_TOKEN=...      # cesium-osm production use
+```
 
-- `assets/CesiumFlythrough.tsx` — the one excellent runnable example (the real component).
-- `assets/example-Root.tsx` — minimal Remotion `<Composition>` scaffold (duration = the speed knob).
-- `assets/sample-river.geojson` — small OSM gorge centerline; the script's default input.
-- `assets/cesium-path.json` — the path the script produces; the component imports it.
-- `assets/preview.png` — a still from the proven render.
-- `scripts/prep-cesium-path.mjs` — the camera-path generator.
-- `references/architecture.md` — full camera math, path pipeline, feel values, complete component.
-- `references/troubleshooting.md` — the headless dead-end + every symptom → fix.
+Use an unrestricted MapTiler key for local headless rendering. Restrict the Google key to the Map
+Tiles API; local Remotion rendering must be permitted by its application restriction.
+
+## Build
+
+1. Copy `assets/CesiumFlythrough.tsx`, the relevant path JSON, and `assets/example-Root.tsx` into the
+   Remotion project, or import the component directly.
+2. For terrain, generate a smoothed path with `scripts/prep-cesium-path.mjs`.
+3. For a city, create a short `[longitude, latitude][]` path passing the subject and set lower
+   absolute camera altitudes.
+4. Select `mode` and, for buildings, `buildingsProvider`.
+5. Render a middle-frame still and inspect subject framing, mesh refinement, credits, and blur.
+6. Render with one browser:
+
+```bash
+npx remotion still src/index.ts <Comp> out.png --frame=N --gl=angle --timeout=180000
+npx remotion render src/index.ts <Comp> out.mp4 --gl=angle --concurrency=1 --timeout=180000
+```
+
+## Non-negotiable render mechanics
+
+- Set `viewer.useDefaultRenderLoop = false`.
+- Call `viewer.render()`, never `scene.render()`, while settling each frame.
+- Use `preserveDrawingBuffer: true`.
+- Gate initialization and every frame with `delayRender(..., {timeoutInMilliseconds: ...})`.
+- For terrain, settle on `globe.tilesLoaded`.
+- For buildings, settle on `tileset.tilesLoaded`.
+- Keep provider attribution visible.
+
+Read `references/architecture.md` for camera math and `references/troubleshooting.md` when a frame is
+blank, coarse, unauthorized, or times out.
+
+## Assets
+
+- `assets/CesiumFlythrough.tsx` — reusable two-option component.
+- `assets/example-Root.tsx` — terrain and Google buildings compositions.
+- `assets/cesium-path.json` — proven Yarlung Tsangpo terrain path.
+- `assets/city-path.json` — urban example path.
+- `assets/sample-river.geojson` — input for the path generator.
+- `assets/preview.png` — terrain reference still.
+- `scripts/prep-cesium-path.mjs` — dependency-free route smoother.

@@ -1,38 +1,43 @@
 # Cesium Flyover — architecture reference
 
-Deep detail behind `SKILL.md`: terrain/imagery loading, the camera-path pipeline, the per-frame camera
-math, the proven "feel" values, and the complete component. Values are from the operator-approved
-water-wars render (24 s helicopter glide through the Yarlung Tsangpo gorge).
+Deep detail behind `SKILL.md`: provider loading, the camera-path pipeline, per-frame camera math, and
+the proven terrain values. Terrain values are from the operator-approved water-wars render; the
+Google buildings path was forward-tested over the Eiffel Tower.
 
-## 1. Terrain & imagery (MapTiler in Cesium)
+## 1. Provider initialization
+
+Create the Viewer with `baseLayer: false`, UI widgets disabled, and
+`contextOptions.webgl.preserveDrawingBuffer: true`. Never hide the credit display.
+
+### Terrain-satellite
+
+Add MapTiler `satellite-v2` with `UrlTemplateImageryProvider`, then load
+`terrain-quantized-mesh-v2` with `CesiumTerrainProvider.fromUrl({requestVertexNormals: true})`.
+MapTiler supplies both datasets; no Cesium ion token is required.
+
+### Buildings: Google photorealistic
+
+Do not add MapTiler. Hide the globe, then add:
 
 ```ts
-const viewer = new Cesium.Viewer(container, {
-  baseLayer: false,                 // no Cesium-ion default imagery; add our own
-  baseLayerPicker: false, geocoder: false, homeButton: false, sceneModePicker: false,
-  navigationHelpButton: false, animation: false, timeline: false, fullscreenButton: false,
-  infoBox: false, selectionIndicator: false,
-  contextOptions: { webgl: { preserveDrawingBuffer: true } },   // Remotion screenshot needs this
-});
-viewer.imageryLayers.addImageryProvider(new Cesium.UrlTemplateImageryProvider({
-  url: `https://api.maptiler.com/tiles/satellite-v2/{z}/{x}/{y}.jpg?key=${KEY}`,
-  maximumLevel: 20, credit: "MapTiler",
-}));
-viewer.useDefaultRenderLoop = false;       // we drive frames by hand (see §5 / troubleshooting)
-viewer.scene.skyAtmosphere.show = true;    // blue horizon, not a void at high pitch
-viewer.scene.fog.enabled = true;           // distance haze
-viewer.scene.globe.enableLighting = false; // imagery already lit → even, neutral look
-viewer.scene.verticalExaggeration = 1.1;   // 1.0 = true scale; 1.1 = subtle drama
-viewer.cesiumWidget.creditContainer.style.display = "none";
-viewer.terrainProvider = await Cesium.CesiumTerrainProvider.fromUrl(
-  `https://api.maptiler.com/tiles/terrain-quantized-mesh-v2/?key=${KEY}`,
-  { requestVertexNormals: true },          // normals = correct silhouette shading
+viewer.scene.globe.show = false;
+const tileset = await Cesium.Cesium3DTileset.fromUrl(
+  `https://tile.googleapis.com/v1/3dtiles/root.json?key=${GOOGLE_KEY}`,
+  {showCreditsOnScreen: true, maximumScreenSpaceError: 4},
 );
+viewer.scene.primitives.add(tileset);
 ```
 
-No Cesium-ion token needed — MapTiler provides both terrain and imagery. Load Cesium from CDN (set
-`window.CESIUM_BASE_URL` to the CDN before injecting `Cesium.js`, so its Web Workers load from the CDN
-too); pin a version (`1.124` shipped water-wars).
+Lower `maximumScreenSpaceError` improves refinement at substantial download/render cost. Start at
+`4` for a hero landmark and `6–8` for wider urban shots. Enforce the Google 30-second promotional
+video ceiling in the component.
+
+### Buildings: Cesium OSM comparison
+
+Initialize MapTiler ground as above, set `Cesium.Ion.defaultAccessToken`, and add
+`createOsmBuildingsAsync()`. This is building massing, not textured photogrammetry.
+
+Load Cesium from the CDN after setting `window.CESIUM_BASE_URL`; the tested version is `1.143`.
 
 ## 2. The camera path — structure & generation
 
@@ -108,10 +113,9 @@ The full, runnable component is `../assets/CesiumFlythrough.tsx` — read it dir
 
 - `loadCesium()` — inject `CESIUM_BASE_URL` + the CDN `Cesium.js`, resolve when loaded.
 - init effect — build the Viewer (§1), `setCamera(…, 0)`, `await settle(viewer)`, `continueRender`.
-- `settle(viewer)` — the per-frame tile gate: loop `viewer.render()` until `globe.tilesLoaded` is stable
-  for ~8 ticks (cap ~600), then resolve. **`viewer.render()`, never `scene.render()`** (the latter skips
-  frame-init, so tiles never advance — see `troubleshooting.md`).
-- per-frame effect — `delayRender({timeout: 60000})` → `setCamera(prog)` → `settle()` → `continueRender`.
+- `settle(viewer)` — loop `viewer.render()` until `globe.tilesLoaded` for terrain or
+  `tileset.tilesLoaded` for buildings is stable for ~8 ticks (cap ~600).
+- per-frame effect — `delayRender({timeoutInMilliseconds: 60000})` → `setCamera(prog)` → `settle()` → `continueRender`.
 
 ## 6. Render
 
@@ -120,6 +124,4 @@ npx remotion still   src/index.ts <Comp> out.png --frame=N --gl=angle --timeout=
 npx remotion render  src/index.ts <Comp> out.mp4  --gl=angle --concurrency=1 --timeout=180000
 ```
 
-`--gl=angle` is mandatory (WebGL globe). `--concurrency=1` — one browser; `settle()` already serializes
-tile loading. Unlike a MapLibre raster-DEM drape, the Cesium stare-ahead render does **not** accumulate
-terrain memory into a late-frame stall (720 frames, one pass).
+`--gl=angle` is mandatory. Use `--concurrency=1`; `settle()` already serializes tile loading.
