@@ -1,14 +1,26 @@
 ---
 name: newsroom-chart-animations
 description: Use for designing, building, reviewing, or revising evidence-led
-  charts, graphs, timelines, counters, rankings, ledgers, and other data
-  animations for Buried Signals. Load alongside the project Remotion skill;
-  includes Newpress reference research, newsroom visual standards, motion
-  grammar, sourcing, and multi-format QA.
+  newsroom charts, graphs, timelines, counters, rankings, ledgers, and other
+  data animations in Remotion. Requires a Remotion project preflight and covers
+  reference research, editorial design, data integrity, motion grammar,
+  sourcing, and multi-format QA.
 ---
 # Newsroom Chart Animations
 
-Use this skill together with the project `remotion` skill. The Remotion skill governs frame-accurate React implementation; this skill governs reference research, editorial design, data integrity, and chart-specific motion.
+Use this skill for evidence-led chart animation in Remotion. Remotion governs frame-accurate React implementation; this skill governs reference research, editorial design, data integrity, and chart-specific motion.
+
+## Preflight: verify the Remotion project
+
+Complete this check before research, design, or code changes:
+
+1. Locate the Remotion project root, composition entry point, package manifest, and project instructions.
+2. Load the project's Remotion skill when one exists. Otherwise follow the project's established Remotion conventions and current official documentation.
+3. Confirm compatible `remotion`, React, and TypeScript dependencies; identify the Studio, type-check, still-render, and video-render commands.
+4. Identify the target compositions, frame rate, duration, output dimensions, required aspect ratios, existing design tokens, and reusable chart components.
+5. Run the cheapest relevant check—normally the project type-check or composition listing—before implementation. Record missing dependencies, broken compositions, or unavailable render prerequisites instead of designing around them.
+
+Do not begin chart implementation until this preflight passes. If the target is not a Remotion project, apply the editorial rules only and use the target framework's own implementation and QA workflow.
 
 ## Editorial standard
 
@@ -16,18 +28,18 @@ Treat every chart as an evidence-bearing news document, not an illustration, das
 
 Every visible layer must encode data, supply context, establish hierarchy, support verification, or direct attention to the narrator's current claim. If removing a layer does not reduce comprehension, remove it.
 
-A map can use terrain, contours, rivers, and administrative lines because those features may be evidence. A chart must not borrow that vocabulary merely to resemble the map. The rejected Water Wars direction used sand relief, contour lines, river traces, particles, and ambient parallax; it felt decorative and weakened the evidence. The successful version used a flat warm field, explicit scale, sparse dates, neutral history, one semantic accent, direct annotation, and visible sourcing.
+Do not borrow visual vocabulary from maps, documentaries, or dashboards unless it carries evidence in the chart. Terrain, contours, river traces, particles, ambient parallax, and similar decoration weaken the argument when they encode nothing. Prefer a quiet field, explicit scale, sparse dates, neutral history, one semantic accent, direct annotation, and visible sourcing.
 
 Visual interest comes from sequencing, comparison, annotation, and the arrival of evidence—not ornamental motion.
 
-## Required research before design
+## Required evidence and reference research
 
 Before coding a substantial chart or establishing a new chart family:
 
 1. Read the exact narration. State what the chart must prove, what it merely contextualizes, and what it cannot establish.
 2. Inspect the data: categories, years, units, denominators, missing values, revisions, and effective dates. Independently recalculate highlighted totals, differences, percentages, and records.
-3. Find three to six concrete news or documentary examples. Start with Newpress-network work when relevant, then other rigorous newsroom graphics. Search for the same chart type or argument structure, not vague aesthetic terms.
-4. Use `yt-dlp` for metadata or a low-resolution internal reference copy and FFmpeg for exact-frame extraction. Record channel, title, URL, timestamp, and transferable lesson. Never reuse reference media in production.
+3. Find three to six concrete news or documentary examples. Use the Newpress reference set below when relevant, then inspect other rigorous newsroom graphics. Search for the same chart type or argument structure, not vague aesthetic terms.
+4. When permitted and available, use `yt-dlp` for metadata or a low-resolution internal reference copy and FFmpeg for exact-frame extraction. Record channel, title, URL, timestamp, and transferable lesson. Never reuse reference media in production.
 5. Write a short brief before implementation: evidence hierarchy, annotation logic, reveal order, source placement, transferable rules, and explicit anti-patterns.
 6. Translate editorial logic; do not imitate another channel's brand surface.
 
@@ -36,8 +48,6 @@ yt-dlp --no-update --skip-download --print '%(title)s | %(channel)s | %(webpage_
 yt-dlp --no-update -f 'bestvideo[height<=720]/best[height<=720]' -o '<reference-dir>/%(id)s.%(ext)s' '<url>'
 ffmpeg -ss '<timestamp>' -i '<reference-video>' -frames:v 1 '<reference-dir>/<label>.jpg'
 ```
-
-For the Water Wars example, review `production/water-wars/motion/references/newpress/reference-notes.md` and its extracted stills.
 
 ## Information architecture
 
@@ -123,7 +133,7 @@ Use one data model and visual system, but recompose each ratio. Never treat 9:16
 
 ## Anti-patterns
 
-- Decorative terrain, contours, river traces, particles, ambient parallax, glow, or vignette
+- Map-derived or cinematic decoration that does not encode evidence, including irrelevant terrain, contours, particles, ambient parallax, glow, or vignette
 - Fake paper texture, ornamental frames, glassmorphism, dashboard chrome, or gratuitous cards
 - Gradients without quantitative meaning
 - Repeated years/values, dense labels, detached legends, or tiny footer sources
@@ -139,10 +149,11 @@ Before design, confirm the claim, dataset version, units, source, effective date
 
 After implementation:
 
-- Run TypeScript and the project's standard Remotion checks.
+- Run the project's verified TypeScript, lint, test, and Remotion checks.
+- List the registered compositions again and render the actual target composition IDs.
 - Render early, middle, climax, and final-hold frames.
-- Render 16:9 and 9:16 at actual output size.
-- Inspect pixels rather than relying on code or Studio playback.
+- Render every required aspect ratio at actual output size.
+- Inspect rendered pixels rather than relying on source code or Studio playback.
 
 Final checks: honest scale; source-traceable values; visible source/unit; no overclaim; no duplicate labels; one semantic accent; compression-safe axes; narration-aligned reveal; readable final hold; static background; actual registered-composition renders.
 
@@ -162,6 +173,9 @@ The shared pattern is evidence first: near-plain backgrounds, visible sourcing, 
 ## Compact Remotion pattern
 
 ```tsx
+import {interpolate, useCurrentFrame} from 'remotion';
+
+const frame = useCurrentFrame();
 const tickStep = 25;
 const maxValue = Math.max(...data.map((d) => d.value));
 const scaleMax = Math.ceil(maxValue / tickStep) * tickStep;
