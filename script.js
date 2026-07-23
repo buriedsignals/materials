@@ -5,6 +5,8 @@ const ICONS = {
   methodology: `<svg class="file-icon" viewBox="0 0 16 16" fill="none"><path d="M5 4L3 8L5 12" stroke="#F5F2ED" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.6"/><path d="M11 4L13 8L11 12" stroke="#F5F2ED" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.6"/></svg>`,
   downloads: `<svg class="file-icon" viewBox="0 0 16 16" fill="none"><path d="M8 3V10.5" stroke="#F5F2ED" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/><path d="M5.5 8.5L8 11L10.5 8.5" stroke="#F5F2ED" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.6"/><path d="M3 13H13" stroke="#F5F2ED" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/></svg>`,
   notebook: `<svg class="file-icon" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="5.5" stroke="#F5F2ED" stroke-width="1.2" fill="none" opacity="0.6"/><path d="M5.5 7.5H8.5" stroke="#F5F2ED" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/><path d="M5.5 9.5H10" stroke="#F5F2ED" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/><path d="M10.5 11.5L13 14" stroke="#F5F2ED" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/></svg>`,
+  skills: `<svg class="file-icon" viewBox="0 0 16 16" fill="none"><rect x="2.5" y="3" width="11" height="3" rx="1" stroke="#F5F2ED" stroke-width="1.1" opacity="0.7"/><rect x="2.5" y="7" width="11" height="3" rx="1" stroke="#F5F2ED" stroke-width="1.1" opacity="0.7"/><rect x="2.5" y="11" width="11" height="3" rx="1" stroke="#F5F2ED" stroke-width="1.1" opacity="0.7"/></svg>`,
+  ar: `<svg class="file-icon" viewBox="0 0 16 16" fill="none"><path d="M8 2.5L13 5.3L8 8.1L3 5.3L8 2.5Z" stroke="#F5F2ED" stroke-width="1.1" stroke-linejoin="round" opacity="0.7"/><path d="M3 5.3V10.7L8 13.5V8.1M13 5.3V10.7L8 13.5" stroke="#F5F2ED" stroke-width="1.1" stroke-linejoin="round" opacity="0.7"/></svg>`,
   downloadRow: `<svg class="download-icon" viewBox="0 0 16 16" fill="none"><path d="M8 3V10.5" stroke="#F5F2ED" stroke-width="1.2" stroke-linecap="round"/><path d="M5.5 8.5L8 11L10.5 8.5" stroke="#F5F2ED" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 13H13" stroke="#F5F2ED" stroke-width="1.2" stroke-linecap="round"/></svg>`,
   chevron: `<svg class="file-chevron" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
   notebookBtn: `<svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="5.5" stroke="#16191B" stroke-width="1.2" fill="none"/><path d="M5.5 7.5H8.5" stroke="#16191B" stroke-width="1.2" stroke-linecap="round"/><path d="M5.5 9.5H10" stroke="#16191B" stroke-width="1.2" stroke-linecap="round"/></svg>`
@@ -73,6 +75,40 @@ function renderNotebook(url) {
   </div>`;
 }
 
+function renderSkills() {
+  const skills = [
+    {
+      name: 'Map Explainer',
+      description: '2D routes, regions, rivers and geographic explainers.',
+      href: 'skills/map-explainer/'
+    },
+    {
+      name: '3D Flyover',
+      description: 'Photorealistic cities and satellite-draped landscapes.',
+      href: 'skills/3d-flyover/'
+    },
+    {
+      name: 'Chart Animations',
+      description: 'Evidence-led charts, timelines and newsroom graphics.',
+      href: 'skills/newsroom-chart-animations/',
+      meta: 'Remotion skill · Includes ZIP download'
+    }
+  ];
+  return `<div class="source-list">${skills.map(skill => `<div class="source-item">
+    <span class="source-claim">${esc(skill.description)}</span>
+    <a class="source-title" href="${skill.href}">${esc(skill.name)}</a>
+    <span class="source-meta">${esc(skill.meta || 'Remotion skill · Includes ZIP download')}</span>
+  </div>`).join('')}</div>`;
+}
+
+function renderARMap() {
+  return `<div class="source-list"><div class="source-item">
+    <span class="source-claim">Place the Medog tunnel and surrounding terrain in augmented reality.</span>
+    <a class="source-title" href="skills/ar-map/">Open the AR Map</a>
+    <span class="source-meta">Interactive companion · Mobile and desktop</span>
+  </div></div>`;
+}
+
 function buildFile(icon, label, content, open = false) {
   return `<div class="file${open ? ' open' : ''}">
     <div class="file-bar" role="button" tabindex="0" aria-expanded="${open}">
@@ -108,8 +144,10 @@ function render(inv) {
     buildFile(ICONS.sources, 'Sources', renderSources(inv.sources, inv.id)) +
     buildFile(ICONS.ai, 'AI Disclosure', renderDisclosure(inv.aiDisclosure)) +
     buildFile(ICONS.methodology, 'Methodology', renderMethodology(inv.methodology)) +
+    buildFile(ICONS.skills, 'Skills', renderSkills()) +
+    buildFile(ICONS.ar, 'AR Map', renderARMap()) +
     buildFile(ICONS.downloads, 'Downloads', renderDownloads(inv.downloads, inv.id)) +
-    buildFile(ICONS.notebook, 'NotebookLM', renderNotebook(inv.notebookUrl));
+    (inv.notebookUrl ? buildFile(ICONS.notebook, 'NotebookLM', renderNotebook(inv.notebookUrl)) : '');
 
   bindAccordion();
 }

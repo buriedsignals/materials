@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Medog Tunnel AR Map — Buried Signals</title>
+  <meta name="description" content="Place the Medog tunnel and surrounding Himalayan terrain in augmented reality.">
+  <meta name="theme-color" content="#11181c">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://cdn.maptiler.com">
+  <script src="https://cdn.maptiler.com/maptiler-sdk-js/v3.6.1/maptiler-sdk.umd.min.js"></script>
+  <script src="https://cdn.maptiler.com/maptiler-ar-control/v3.0.3/maptiler-ar-control.umd.min.js"></script>
+  <script src="https://cdn.maptiler.com/maptiler-3d/v2.1.0/maptiler-3d.umd.min.js"></script>
+  <link href="https://cdn.maptiler.com/maptiler-sdk-js/v3.6.1/maptiler-sdk.css" rel="stylesheet">
+  <link rel="stylesheet" href="./ar-map.css">
+</head>
+<body>
+  <div id="map" aria-label="3D terrain map of the Medog tunnel"></div>
+
+  <materials-nav back-only overlay></materials-nav>
+
+  <section class="intro">
+    <p class="eyebrow">Water Wars · AR companion</p>
+    <h1>Place the Medog tunnel in your space</h1>
+    <p>Explore the proposed tunnel route and the surrounding Himalayan terrain at table scale.</p>
+    <button class="ar-launch" type="button">
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M16 5 25 10.5 16 16 7 10.5 16 5Z"></path>
+        <path d="m7 10.5 9 5.5v11L7 21.5v-11Zm18 0L16 16v11l9-5.5v-11Z"></path>
+      </svg>
+      Enter AR mode
+    </button>
+    <p class="hint"><span class="desktop-hint">Keyboard: A opens AR · Q closes it</span><span class="mobile-hint">For the best result, rotate to landscape after opening AR.</span></p>
+  </section>
+
+  <div class="map-key" aria-label="Map legend">
+    <span><i class="tunnel"></i>Proposed tunnel</span>
+    <span><i class="river"></i>Yarlung Tsangpo</span>
+    <span><i class="border"></i>China–India border</span>
+    <span>Terrain at natural scale</span>
+  </div>
+
+  <div class="rotate-prompt" hidden>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"></rect><path d="M4 8 2 10l2 2m16-4 2 2-2 2"></path></svg>
+    <strong>Rotate to landscape</strong>
+    <span>AR will open automatically</span>
+  </div>
+
+  <button class="ar-exit" type="button" hidden>Exit</button>
+  <div class="status" role="status" aria-live="polite">Loading terrain…</div>
+  <script type="module" src="./ar-map.js"></script>
+</body>
+</html>

@@ -89,6 +89,35 @@ Data entering the frame is the motion event. The background generally remains st
 
 Use clamped `interpolate()` or restrained `spring()` timing. Reveals must follow time/category order rather than arbitrary bounce.
 
+## Studio-adjustable editorial timeline
+
+Treat Studio editability as part of the deliverable. Do not hide all editorial timing inside scattered frame literals or one opaque procedural component.
+
+Create one central, typed timing contract. Name its roles for editorial function rather than a particular story:
+
+- `establish`: initial context and orientation
+- `camera`: framing, pan, zoom, orbit, or focus changes
+- `elementReveals`: generic evidence-bearing elements such as lines, rivers, routes, series, dams, sites, icons, documents, or photographs
+- `boundaries`: borders, thresholds, divisions, ranges, or comparison lines
+- `fills`: countries, regions, bars, areas, categories, or other bounded shapes
+- `labels`: place names, values, dates, captions, callouts, or annotations
+- `hold`: a stable completed state for reading and editorial handles
+
+Model repeatable roles as named arrays, not fixed subject-specific fields. Each event should normally expose `name`, `start`, `duration` or `end`, and only the parameters its renderer needs. For example, `elementReveals` may contain `{name: "Primary route", start, end}` in one animation and `{name: "Dams", start, end}` in another.
+
+Make these events visible and adjustable in Remotion Studio:
+
+1. Represent major events as clearly named timeline items. Use `<Sequence name="…">` or an equivalent structural wrapper even when the renderer remains procedural.
+2. When the installed Remotion version supports it, wrap reusable controls with `Interactive.withSchema()` so Studio exposes and saves their timing and relevant properties. Give every component a stable `componentIdentity`.
+3. Keep the central timing object or composition props as the source of truth. Derive interpolation windows from it; do not duplicate frame numbers throughout JSX and effects.
+4. Expose editorial control points, not every calculated animation sample. A camera move needs a start, end, and target framing—not hundreds of generated keyframes.
+5. Group child events under readable roles and give each a human name. “Element reveal — Dams” is useful; “Layer 7” is not.
+6. Preserve deterministic rendering: Studio adjustments must produce the same result in stills, previews, and CLI renders.
+
+If the project’s Remotion version lacks interactive timeline controls, keep the typed timing contract and named sequences, expose it through composition input props where practical, and report the limitation during preflight. Do not silently fall back to buried magic numbers.
+
+Before handoff, open the composition in Studio and verify that an editor can locate the camera, element reveals, boundaries, fills, labels, and final hold; adjust one representative timing value; reload Studio; and confirm the change persists and renders correctly.
+
 ## Chart-type rules
 
 ### Bars and columns

@@ -1,188 +1,137 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>3D Flyover Skill | Buried Signals</title>
-    <meta
-      name="description"
-      content="A public Remotion and CesiumJS skill for smooth cinematic flyovers of cities and landscapes."
-    />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="./skill-page.css" />
-  </head>
-  <body>
-    <header class="site-header">
-      <a class="brand" href="/" aria-label="Buried Signals materials">
-        <span class="brand-buried">BURIED</span>
-        <span class="brand-signals">SIGNALS</span>
-      </a>
-      <span class="header-tag">PUBLIC SKILL</span>
-    </header>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>3D Flyover Skill — Buried Signals</title>
+  <meta name="description" content="A Remotion skill for smooth 3D flyovers of cities and landscapes.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../skill-page.css">
+</head>
+<body>
+  <materials-nav current="3d-flyover"></materials-nav>
 
-    <main>
-      <section class="hero">
-        <div class="eyebrow">
-          <span>REMOTION</span>
-          <span class="eyebrow-dot"></span>
-          <span>CESIUMJS</span>
-        </div>
-        <h1>Cinematic flyovers<br />without camera jitter.</h1>
-        <p class="hero-copy">
-          Turn a sparse geographic route into a smooth, banked aerial swerve—then render every
-          fully loaded frame deterministically.
-        </p>
-        <div class="hero-actions">
-          <a class="button button-primary" href="./SKILL.md">Read SKILL.md</a>
-          <a
-            class="button button-secondary"
-            href="./SKILL.md"
-            download="3d-flyover-SKILL.md"
-          >Download skill</a>
-        </div>
-      </section>
+  <main>
+    <section><div class="inner">
+      <p class="label">Technique 01 — 3D Flyover</p>
+      <h1>A helicopter glide through real terrain</h1>
+      <p class="lead">Google-Earth-grade 3D landscapes—with quantized-mesh terrain draped in satellite imagery—or photorealistic city tiles, with a camera that flows along a route, banks into the bends, and never jitters. For the beat where the viewer needs to <em>feel</em> the landscape: a city, canyon, gorge, coastline, or route.</p>
+      <div class="meta-chips">
+        <span class="chip">Engine <b>CesiumJS</b></span>
+        <span class="chip">Cities <b>Google 3D Tiles</b></span>
+        <span class="chip">Landscapes <b>MapTiler</b></span>
+        <span class="chip">Render <b>Remotion</b></span>
+      </div>
+    </div></section>
 
-      <section class="decision" aria-labelledby="choose-heading">
-        <div class="section-heading">
-          <span class="section-number">01</span>
-          <h2 id="choose-heading">Choose the world you are flying through</h2>
-        </div>
+    <section class="content-section"><div class="inner">
+      <p class="label">/ Rendered proof</p><h2>A flight through the Great Bend</h2>
+      <p class="lead">Quantized-mesh terrain draped in satellite imagery, rendered through Remotion. This 24-second shot follows the Yarlung Tsangpo through the gorge.</p>
+      <figure class="proof">
+        <video controls muted loop playsinline preload="metadata" poster="/media/3d-flyover-preview.png">
+          <source src="/media/3d-flyover-great-bend.mp4" type="video/mp4">
+        </video>
+        <figcaption><span>Actual output · Yarlung Tsangpo Great Bend</span><span>24 seconds · 1920 × 1080 source</span></figcaption>
+      </figure>
+    </div></section>
 
-        <div class="mode-grid">
-          <article class="mode-card mode-card-city">
-            <div class="mode-topline">
-              <span class="mode-label">CITY</span>
-              <span class="mode-code">mode="city"</span>
-            </div>
-            <h3>Photorealistic architecture</h3>
-            <p>
-              Google Photorealistic 3D Tiles provide one textured mesh containing terrain,
-              buildings and imagery. No crude footprint extrusions.
-            </p>
-            <dl>
-              <div><dt>Geometry</dt><dd>Google 3D mesh</dd></div>
-              <div><dt>Texture</dt><dd>Integrated aerial imagery</dd></div>
-              <div><dt>Renderer</dt><dd>CesiumJS</dd></div>
-            </dl>
-            <a
-              class="text-link"
-              href="https://developers.google.com/maps/documentation/tile/get-api-key"
-              target="_blank"
-              rel="noopener"
-            >Get a Google Map Tiles API key <span>↗</span></a>
-          </article>
-
-          <article class="mode-card mode-card-landscape">
-            <div class="mode-topline">
-              <span class="mode-label">LANDSCAPE</span>
-              <span class="mode-code">mode="landscape"</span>
-            </div>
-            <h3>Satellite-draped terrain</h3>
-            <p>
-              MapTiler supplies quantized-mesh elevation and satellite imagery. CesiumJS renders
-              the mountains, coastlines and long-distance horizon.
-            </p>
-            <dl>
-              <div><dt>Geometry</dt><dd>MapTiler terrain mesh</dd></div>
-              <div><dt>Texture</dt><dd>MapTiler satellite</dd></div>
-              <div><dt>Renderer</dt><dd>CesiumJS</dd></div>
-            </dl>
-            <a
-              class="text-link"
-              href="https://cloud.maptiler.com/account/keys/"
-              target="_blank"
-              rel="noopener"
-            >Get a MapTiler key <span>↗</span></a>
-          </article>
+    <section class="content-section"><div class="inner">
+      <p class="label">/ Live demo</p><h2>The camera path, interactive</h2>
+      <p class="lead">This is the actual path algorithm running in your browser, top-down. The thin grey line is the raw route; the gold line is the smoothed, dampened camera path; the marker aims at a point ahead of itself and banks with the turn. Drag the sliders.</p>
+      <div class="demo" data-demo="flight">
+        <div class="demo-stage"><canvas aria-label="Interactive smoothed flight-path demonstration"></canvas>
+          <div class="demo-legend"><span><i class="raw"></i>Input route</span><span><i></i>Camera path</span><span data-demo-status>Bank 0.0°</span></div>
         </div>
-      </section>
-
-      <section class="flight-path" aria-labelledby="path-heading">
-        <div class="section-heading">
-          <span class="section-number">02</span>
-          <h2 id="path-heading">A curve, not a sequence of corrections</h2>
+        <div class="demo-controls">
+          <label><span>Swerve <output data-output="swerve">45%</output></span><small>How closely the camera follows lateral bends.</small><input data-control="swerve" type="range" min="0" max="100" value="45"></label>
+          <label><span>Look-ahead <output data-output="lookahead">1.5 km</output></span><small>Farther ahead produces gentler heading changes.</small><input data-control="lookahead" type="range" min="5" max="30" value="15"></label>
+          <label><span>Smoothing <output data-output="smoothing">3 passes</output></span><small>Repeated corner cutting turns vertices into a curve.</small><input data-control="smoothing" type="range" min="0" max="4" value="3"></label>
+          <label><span>Speed <output data-output="speed">1.0×</output></span><small>Changes travel speed, never the path geometry.</small><input data-control="speed" type="range" min="25" max="200" value="100"></label>
         </div>
-        <p class="section-intro">
-          Sparse control points are rounded before the camera moves. The result is a deliberate
-          swerve through each turn instead of repeated left-right bumps.
-        </p>
-        <div class="pipeline" aria-label="Flight path processing pipeline">
-          <div class="pipeline-step">
-            <span class="pipeline-index">A</span>
-            <strong>Control points</strong>
-            <small>A short geographic route</small>
-          </div>
-          <span class="pipeline-arrow">→</span>
-          <div class="pipeline-step">
-            <span class="pipeline-index">B</span>
-            <strong>Chaikin curve</strong>
-            <small>Three smoothing passes</small>
-          </div>
-          <span class="pipeline-arrow">→</span>
-          <div class="pipeline-step">
-            <span class="pipeline-index">C</span>
-            <strong>Arc-length walk</strong>
-            <small>Constant ground speed</small>
-          </div>
-          <span class="pipeline-arrow">→</span>
-          <div class="pipeline-step">
-            <span class="pipeline-index">D</span>
-            <strong>Look-ahead bank</strong>
-            <small>Heading and roll flow together</small>
-          </div>
-        </div>
-      </section>
+      </div>
+    </div></section>
 
-      <section class="implementation" aria-labelledby="implementation-heading">
-        <div class="section-heading">
-          <span class="section-number">03</span>
-          <h2 id="implementation-heading">One component, deterministic frames</h2>
-        </div>
-        <div class="implementation-grid">
-          <pre><code>&lt;CesiumFlythrough
-  mode="city"
-  path={cameraPath}
-  pathSmoothingPasses={3}
-  altitudeStart={700}
-  altitudeEnd={500}
-  lookAheadKm={0.7}
-  travelKm={4.5}
-/&gt;</code></pre>
-          <div class="principles">
-            <div>
-              <span>01</span>
-              <p>Remotion owns time and frame capture.</p>
-            </div>
-            <div>
-              <span>02</span>
-              <p>CesiumJS renders the selected geographic source.</p>
-            </div>
-            <div>
-              <span>03</span>
-              <p>Every frame waits for the visible tiles to settle.</p>
-            </div>
-          </div>
-        </div>
-      </section>
+    <section class="content-section"><div class="inner">
+      <p class="label">/ Fit</p><h2>What it’s for</h2>
+      <div class="facts two-col">
+        <article class="fact"><h3>Reach for it when</h3><ul>
+          <li>The story needs a cinematic reveal of a real place—fly <em>through</em> a canyon, <em>over</em> a city or mountain range, or <em>along</em> a border or supply route.</li>
+          <li>You want true 3D geometry with sharp ridgelines or recognizable architecture, not a flat map tilted back.</li>
+          <li>The shot must be reproducible: re-render after a script change and get the identical move.</li>
+        </ul></article>
+        <article class="fact"><h3>Use another skill when</h3><ul>
+          <li>A flat “where is this?” map communicates the geography more clearly.</li>
+          <li>The evidence is primarily numerical and belongs in a chart.</li>
+          <li>A Google city render cannot meet its current usage conditions.</li>
+        </ul></article>
+      </div>
+    </div></section>
 
-      <aside class="policy-note">
-        <span class="policy-label">GOOGLE MAP TILES POLICY</span>
-        <p>
-          The city mode enforces the current 30-second promotional-video ceiling, retains
-          on-screen credits and adds the required promotional marker. Review Google’s terms for
-          the intended use.
-        </p>
-        <a
-          href="https://developers.google.com/maps/documentation/tile/policies"
-          target="_blank"
-          rel="noopener"
-        >Read the policy ↗</a>
-      </aside>
-    </main>
+    <section class="content-section"><div class="inner">
+      <p class="label">/ Modes</p><h2>Choose the world the story needs</h2>
+      <div class="facts two-col">
+        <article class="fact"><p class="role">City mode</p><h3>Google Photorealistic 3D Tiles</h3><p>Use for cities, architecture, and recognizable landmarks. Set a billing-enabled Google Map Tiles API key and keep provider attribution visible.</p></article>
+        <article class="fact"><p class="role">Landscape mode</p><h3>MapTiler terrain + satellite</h3><p>Use quantized-mesh terrain and satellite imagery for mountains, gorges, rivers, coastlines, and rural routes.</p></article>
+      </div>
+      <div class="callout"><h3>City-render constraint</h3><p>Google’s current Map Tiles policy limits promotional application videos to 30 seconds and requires the “For promotional purposes only” marker. The component enforces both conditions.</p></div>
+    </div></section>
 
-    <footer>
-      <span>Buried Signals · Materials</span>
-      <span>3D flyover skill</span>
-    </footer>
-  </body>
+    <section class="content-section"><div class="inner">
+      <p class="label">/ Architecture</p><h2>Three parts, one job each</h2>
+      <p class="lead">Cesium draws the world, the selected tile provider feeds it, and Remotion runs the clock.</p>
+      <div class="facts">
+        <article class="fact"><p class="role">Draws the world</p><h3>CesiumJS</h3><p>A true free camera in a 3D globe that renders to the horizon, driven one frame at a time with its default render loop switched off.</p></article>
+        <article class="fact"><p class="role">Feeds the world</p><h3>Google or MapTiler</h3><p>Photorealistic 3D Tiles supply cities. Quantized-mesh terrain plus draped satellite imagery supplies landscapes.</p></article>
+        <article class="fact"><p class="role">Runs the clock</p><h3>Remotion</h3><p>Steps the timeline frame by frame and holds each frame until the required streamed tiles are settled before capture.</p></article>
+      </div>
+    </div></section>
+
+    <section class="content-section"><div class="inner">
+      <p class="label">/ Pipeline</p><h2>From a line on a map to a finished shot</h2>
+      <div class="steps">
+        <article class="step"><div><h3>Prepare the camera path</h3><p>Start from a route centerline or sparse control points. For landscapes, the prep script clips, resamples, smooths, and dampens the line. The component then applies repeated curve smoothing.</p></div></article>
+        <article class="step"><div><h3>Fly the path</h3><p>The camera walks the curve by arc length and aims at a real point farther along it. The rate of turn drives a subtle roll, so the camera banks into bends instead of twitching left and right.</p></div></article>
+        <article class="step"><div><h3>Settle and render</h3><p>Remotion waits for the globe or tileset to load, calls <code>viewer.render()</code>, and captures deterministic frames through headless Chrome with <code>--gl=angle</code>.</p></div></article>
+      </div>
+    </div></section>
+
+    <section class="content-section"><div class="inner">
+      <p class="label">/ Tuning</p><h2>Every feel decision is one number</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>You want</th><th>Turn this</th><th>Starting point</th></tr></thead>
+        <tbody>
+          <tr><td>Softer continuous turns</td><td><code>pathSmoothingPasses</code></td><td>3; use 4 softer, 2 tighter</td></tr>
+          <tr><td>Slower, more peaceful movement</td><td>Composition duration</td><td>Speed = distance ÷ seconds</td></tr>
+          <tr><td>More or less landscape swerve</td><td><code>DAMP</code> in the prep script</td><td>0.45</td></tr>
+          <tr><td>Higher or lower camera</td><td><code>altitudeStart</code> / <code>altitudeEnd</code></td><td>Set for the location and mode</td></tr>
+          <tr><td>Gentler heading changes</td><td><code>lookAheadKm</code></td><td>Aim farther along the curve</td></tr>
+          <tr><td>More dramatic relief</td><td><code>verticalExaggeration</code></td><td>1.1</td></tr>
+        </tbody>
+      </table></div>
+      <div class="callout"><h3>The rendering gotcha this skill exists to spare you</h3><p>Disable Cesium’s own render loop, drive every frame with <code>viewer.render()</code>—never <code>scene.render()</code>—and gate initialization and capture with <code>delayRender</code> until the relevant tiles are loaded.</p></div>
+    </div></section>
+
+    <section class="content-section"><div class="inner">
+      <p class="label">/ Contents</p><h2>What ships in the skill</h2>
+      <div class="files">
+        <div class="file"><code>SKILL.md</code><span>mode choice, credentials, workflow, rendering contract</span></div>
+        <div class="file"><code>assets/CesiumFlythrough.tsx</code><span>reusable two-mode Remotion component</span></div>
+        <div class="file"><code>assets/flight-path.ts</code><span>dependency-free curved-route smoothing</span></div>
+        <div class="file"><code>assets/example-Root.tsx</code><span>landscape and city compositions</span></div>
+        <div class="file"><code>assets/cesium-path.json</code><span>sample landscape route</span></div>
+        <div class="file"><code>assets/city-path.json</code><span>sample city route</span></div>
+        <div class="file"><code>scripts/prep-cesium-path.mjs</code><span>landscape route preparation</span></div>
+        <div class="file"><code>references/</code><span>architecture, providers, and troubleshooting</span></div>
+      </div>
+    </div></section>
+
+    <section><div class="inner download-row">
+      <p>Canonical skill, reusable component, route tools, references, and examples.</p>
+      <a class="download" href="/downloads/3d-flyover.zip" download>Download ZIP</a>
+    </div></section>
+  </main>
+  <footer><div class="inner"><span>Buried Signals · Materials</span><a href="./SKILL.md">Read SKILL.md</a></div></footer>
+  <script type="module" src="../skill-page.js"></script>
+  <script type="module" src="../skill-demos.js"></script>
+</body>
 </html>

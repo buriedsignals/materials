@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Map Explainer Skill — Buried Signals</title>
+  <meta name="description" content="A Remotion skill for animated routes, rivers, regions and geographic explainers.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../skill-page.css">
+</head>
+<body>
+  <materials-nav current="map-explainer"></materials-nav>
+  <main>
+    <section><div class="inner">
+      <p class="label">Technique 02 — Map Explainer</p>
+      <h1>A river draws itself across the map</h1>
+      <p class="lead">A flat, editorial explainer beat: a river or route traces on with a white-hot electric head, and each country lights up the moment the water reaches it—border draws, fill blooms, label rises. For “where is this?”, “what’s the path?”, and “who is upstream of whom?”</p>
+      <div class="meta-chips">
+        <span class="chip">Basemap <b>MapTiler</b></span><span class="chip">Geometry <b>GeoJSON</b></span>
+        <span class="chip">Labels <b>React overlay</b></span><span class="chip">Render <b>Remotion</b></span>
+      </div>
+    </div></section>
+
+    <section class="content-section"><div class="inner">
+      <p class="label">/ Rendered proof</p><h2>The river system in sequence</h2>
+      <p class="lead">A finished Water Wars render: the route establishes the geography, then the countries and labels enter in the order required by the narration.</p>
+      <figure class="proof">
+        <video controls muted loop playsinline preload="metadata" poster="/media/map-explainer-preview.png">
+          <source src="/media/map-explainer-river-system.mp4" type="video/mp4">
+        </video>
+        <figcaption><span>Actual output · China → India → Bangladesh</span><span>6 seconds · 1920 × 1080 source</span></figcaption>
+      </figure>
+    </div></section>
+
+    <section class="content-section"><div class="inner">
+      <p class="label">/ Interactive model</p><h2>Control the reveal choreography</h2>
+      <p class="lead">The same visual grammar in a simplified model: the draw head follows the river; each region’s complete border, fill, and label respond to its entry trigger.</p>
+      <div class="demo" data-demo="map">
+        <div class="demo-stage"><canvas aria-label="Interactive river and country reveal demonstration"></canvas>
+          <div class="demo-legend"><span><i></i>River head</span><span><i class="region"></i>Triggered region</span><span data-demo-status>Region 1 · border</span></div>
+        </div>
+        <div class="demo-controls">
+          <label><span>Pace <output data-output="pace">1.0×</output></span><small>Controls the river draw window and total beat length.</small><input data-control="pace" type="range" min="50" max="180" value="100"></label>
+          <label><span>Head length <output data-output="head">3%</output></span><small>The bright leading segment of the route.</small><input data-control="head" type="range" min="1" max="8" value="3"></label>
+          <label><span>Border draw <output data-output="border">2.5 s</output></span><small>A constant duration independent of border length.</small><input data-control="border" type="range" min="10" max="40" value="25"></label>
+          <label><span>Fill bloom <output data-output="bloom">1.25×</output></span><small>Opacity overshoot before the fill settles.</small><input data-control="bloom" type="range" min="100" max="150" value="125"></label>
+        </div>
+      </div>
+    </div></section>
+
+    <section class="content-section"><div class="inner">
+      <p class="label">/ Fit</p><h2>What it’s for</h2>
+      <div class="facts two-col">
+        <article class="fact"><h3>Reach for it when</h3><ul>
+          <li>The viewer needs to place the story: where the river runs, which countries it crosses, and in what order.</li>
+          <li>Regions should light up in a meaningful sequence—upstream before downstream, cause before consequence.</li>
+          <li>Labels must be typographically yours, not map-engine text.</li>
+        </ul></article>
+        <article class="fact"><h3>Not the tool for</h3><ul>
+          <li>3D terrain or city reveals—use the 3D Flyover skill.</li>
+          <li>Non-geographic data visualisation—use Chart Animations.</li>
+        </ul></article>
+      </div>
+    </div></section>
+
+    <section class="content-section"><div class="inner">
+      <p class="label">/ Architecture</p><h2>Three layers, one job each</h2>
+      <p class="lead">The map draws the geography, Remotion runs the clock, and the labels live in React where typography is fully in your control.</p>
+      <div class="facts">
+        <article class="fact"><p class="role">Draws the map</p><h3>MapTiler SDK</h3><p>A vector or satellite basemap, stripped of its own labels and inner admin borders, plus GeoJSON layers for the route, fills, and borders.</p></article>
+        <article class="fact"><p class="role">Runs the clock</p><h3>Remotion</h3><p>Per frame, update layers imperatively and hold capture until the map reports idle. For camera moves, use a fixed map plate rather than per-frame <code>jumpTo()</code>.</p></article>
+        <article class="fact"><p class="role">Sets the type</p><h3>React HTML overlay</h3><p>Labels are positioned HTML elements projected from map coordinates to screen pixels every frame: any font, any entrance, pixel-exact.</p></article>
+      </div>
+    </div></section>
+
+    <section class="content-section"><div class="inner">
+      <p class="label">/ Basemap</p><h2>Basemap and camera choices</h2>
+      <div class="facts">
+        <article class="fact"><p class="role">Default vector mode</p><h3>MapTiler Basic</h3><p>Begin with <code>MapStyle.BASIC</code>. Remove labels and inner admin borders, then let the production’s own configuration define colour and type.</p></article>
+        <article class="fact"><p class="role">Surface truth</p><h3>Satellite</h3><p>Use satellite imagery when terrain, land use, construction, or the river’s physical course carries narrative evidence. Keep overlays sparse.</p></article>
+        <article class="fact"><p class="role">Documentary framing</p><h3>Subtle tilt</h3><p>For depth without a flythrough, use a restrained pitch of 6–12° and bearing offset of roughly ±6–12°. Verify the rendered map for shimmer.</p></article>
+      </div>
+    </div></section>
+
+    <section class="content-section"><div class="inner">
+      <p class="label">/ Labels</p><h2>Label by what it is</h2>
+      <div class="facts">
+        <article class="fact"><p class="role">Geographic region</p><h3>Country or region</h3><p>Use a high-contrast uppercase display label with a short accent divider. Position it in clear territory, never over a marker cluster or river.</p></article>
+        <article class="fact"><p class="role">Physical geography</p><h3>River or route</h3><p>Anchor a leader directly on the real geometry and run it to the label. Use the route accent colour; omit redundant category words such as “RIVER”.</p></article>
+        <article class="fact"><p class="role">Constructed object</p><h3>Dam, tunnel, plant, site</h3><p>Use a smaller italic callout beside its actual point or line. Infrastructure is an object in geography, not geography itself.</p></article>
+      </div>
+      <div class="callout"><h3>Sequence labels after evidence</h3><p>Animate each label only after its geographic or data layer is established. Keep it visible long enough to read, avoid overlap, and test the actual 16:9 and 9:16 renders.</p></div>
+    </div></section>
+
+    <section class="content-section"><div class="inner">
+      <p class="label">/ Pipeline</p><h2>From raw geodata to a finished beat</h2>
+      <div class="steps">
+        <article class="step"><div><h3>Bake the geography</h3><p>The prep script calculates the river-entry trigger, the most-interior label anchor, and complete border geometry for each country. Never trim a line to the viewport.</p></div></article>
+        <article class="step"><div><h3>Strip the basemap</h3><p>Remove basemap labels and inner admin borders. What remains is quiet context, so the story geography is the only thing talking.</p></div></article>
+        <article class="step"><div><h3>Reveal the river</h3><p>Draw the line by arc length, led by a white-hot electric head—the final few percent rendered in its own bright, glowing layers.</p></div></article>
+        <article class="step"><div><h3>Light the countries</h3><p>As the head enters each country, its complete border draws over a constant duration, its fill blooms with a slight overshoot, and its label rises.</p></div></article>
+      </div>
+    </div></section>
+
+    <section class="content-section"><div class="inner">
+      <p class="label">/ Tuning</p><h2>Every feel decision is one number</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>You want</th><th>Turn this</th><th>Proven value</th></tr></thead>
+        <tbody>
+          <tr><td>River colour or glow</td><td><code>COLORS</code> in <code>tokens.ts</code></td><td>Icy core, electric-blue glow</td></tr>
+          <tr><td>Bigger or smaller electric head</td><td>Head length and widths</td><td>3% of the line</td></tr>
+          <tr><td>Border draw time</td><td><code>BORDER_S</code></td><td>2.5 seconds per country</td></tr>
+          <tr><td>Fill bloom strength</td><td>Opacity overshoot curve</td><td>×1.25, settling to ×1</td></tr>
+          <tr><td>Label position</td><td>Story-region bbox + nudge</td><td>Per country</td></tr>
+          <tr><td>Country trigger</td><td>River-arrival fraction</td><td>Recompute from geometry</td></tr>
+          <tr><td>Overall pace</td><td>River draw window</td><td>Beat length follows</td></tr>
+        </tbody>
+      </table></div>
+      <div class="callout"><h3>The contract that prevents silent failures</h3><p>Each country’s lowercase key must be identical in the prep script’s country list, the component’s draw order, the palette tokens, and the generated data. A mismatch does not error—the country simply never appears.</p></div>
+    </div></section>
+
+    <section class="content-section"><div class="inner">
+      <p class="label">/ Contents</p><h2>What ships in the skill</h2>
+      <div class="files">
+        <div class="file"><code>SKILL.md</code><span>workflow, architecture, semantics, and stability rules</span></div>
+        <div class="file"><code>assets/RiverReveal.tsx</code><span>river reveal and country sequence</span></div>
+        <div class="file"><code>assets/CountryLabel.tsx</code><span>reusable example label</span></div>
+        <div class="file"><code>assets/tokens.ts</code><span>example palette and durations</span></div>
+        <div class="file"><code>assets/example-Root.tsx</code><span>minimal composition scaffold</span></div>
+        <div class="file"><code>assets/sample-data/</code><span>runnable sample geography</span></div>
+        <div class="file"><code>scripts/prep-geo.mjs</code><span>geo preparation pipeline</span></div>
+        <div class="file"><code>references/</code><span>architecture, geo prep, and render stability</span></div>
+      </div>
+    </div></section>
+
+    <section><div class="inner download-row"><p>Canonical skill, components, preparation script, sample data, and stability guidance.</p><a class="download" href="/downloads/map-explainer.zip" download>Download ZIP</a></div></section>
+  </main>
+  <footer><div class="inner"><span>Buried Signals · Materials</span><a href="./SKILL.md">Read SKILL.md</a></div></footer>
+  <script type="module" src="../skill-page.js"></script>
+  <script type="module" src="../skill-demos.js"></script>
+</body>
+</html>

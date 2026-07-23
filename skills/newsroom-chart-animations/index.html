@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chart Animations Skill — Buried Signals</title>
+  <meta name="description" content="A Remotion skill for evidence-led newsroom chart animation.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../skill-page.css">
+</head>
+<body>
+  <materials-nav current="newsroom-chart-animations"></materials-nav>
+  <main>
+    <section><div class="inner">
+      <p class="label">Technique 03 — Chart Animations</p>
+      <h1>Evidence-led chart animation in Remotion</h1>
+      <p class="lead">Remotion governs frame-accurate React implementation; this skill governs reference research, editorial design, data integrity, and chart-specific motion.</p>
+      <div class="meta-chips">
+        <span class="chip">Charts <b>Evidence-led</b></span><span class="chip">Timing <b>Studio-adjustable</b></span>
+        <span class="chip">Formats <b>16:9 + 9:16</b></span><span class="chip">Render <b>Remotion</b></span>
+      </div>
+    </div></section>
+
+    <section class="content-section"><div class="inner">
+      <p class="label">/ Rendered proof</p><h2>A chart built around the claim</h2>
+      <p class="lead">A finished Water Wars chart beat. Context arrives first, the highlighted evidence becomes the motion event, and the completed frame holds for narration.</p>
+      <figure class="proof">
+        <video controls muted loop playsinline preload="metadata">
+          <source src="/media/chart-animation-water-wars.mp4" type="video/mp4">
+        </video>
+        <figcaption><span>Actual output · Water Wars</span><span>4 seconds · 1920 × 1080 source</span></figcaption>
+      </figure>
+    </div></section>
+
+    <section class="content-section"><div class="inner">
+      <p class="label">/ Interactive model</p><h2>Edit the argument, not decoration</h2>
+      <p class="lead">Adjust the editorial timing contract. The plot remains still; only evidence, annotation, and the final reading hold move through the sequence.</p>
+      <div class="demo" data-demo="chart">
+        <div class="demo-stage"><canvas aria-label="Interactive evidence-led chart timing demonstration"></canvas>
+          <div class="demo-legend"><span><i class="neutral"></i>History</span><span><i></i>Subject</span><span data-demo-status>Establishing context</span></div>
+        </div>
+        <div class="demo-controls">
+          <label><span>Establish <output data-output="establish">1.0 s</output></span><small>Title, source, unit, grid, and axes.</small><input data-control="establish" type="range" min="5" max="20" value="10"></label>
+          <label><span>History reveal <output data-output="history">1.8 s</output></span><small>Neutral comparison data in chronological order.</small><input data-control="history" type="range" min="8" max="30" value="18"></label>
+          <label><span>Subject reveal <output data-output="subject">0.8 s</output></span><small>The highlighted period enters as a distinct event.</small><input data-control="subject" type="range" min="4" max="18" value="8"></label>
+          <label><span>Final hold <output data-output="hold">1.0 s</output></span><small>Stable completed state for reading and edit handles.</small><input data-control="hold" type="range" min="5" max="25" value="10"></label>
+        </div>
+      </div>
+    </div></section>
+
+    <section class="content-section"><div class="inner">
+      <p class="label">/ Editorial standard</p><h2>Treat the chart as a news document</h2>
+      <p class="lead">Every visible layer must encode data, supply context, establish hierarchy, support verification, or direct attention to the narrator’s current claim. If removing a layer does not reduce comprehension, remove it.</p>
+      <div class="facts two-col">
+        <article class="fact"><h3>Evidence first</h3><p>Prefer a quiet field, explicit scale, sparse dates, neutral history, one semantic accent, direct annotation, and visible sourcing.</p></article>
+        <article class="fact"><h3>Motion with a purpose</h3><p>Visual interest comes from sequencing, comparison, annotation, and the arrival of evidence—not ornamental motion.</p></article>
+      </div>
+    </div></section>
+
+    <section class="content-section"><div class="inner">
+      <p class="label">/ Preflight</p><h2>Verify before design</h2>
+      <div class="steps">
+        <article class="step"><div><h3>Locate the project</h3><p>Find the Remotion root, composition entry point, package manifest, project instructions, and any project-specific Remotion skill.</p></div></article>
+        <article class="step"><div><h3>Confirm the environment</h3><p>Check compatible Remotion, React, and TypeScript dependencies and identify Studio, type-check, still-render, and video-render commands.</p></div></article>
+        <article class="step"><div><h3>Define the targets</h3><p>Record composition IDs, frame rate, duration, dimensions, required aspect ratios, design tokens, and reusable chart components.</p></div></article>
+        <article class="step"><div><h3>Run the cheapest check</h3><p>Normally type-check or list compositions. Record missing dependencies or render prerequisites instead of designing around them.</p></div></article>
+      </div>
+    </div></section>
+
+    <section class="content-section"><div class="inner">
+      <p class="label">/ Information architecture</p><h2>Build the frame in editorial order</h2>
+      <div class="steps">
+        <article class="step"><div><h3>State the measure</h3><p>Use a precise title, readable unit, and a visible source immediately below the header. Do not insert unsupported causality.</p></div></article>
+        <article class="step"><div><h3>Make magnitude legible</h3><p>Use an honest baseline, enough scale to interpret the data, and sparse axes or dates that supply context without becoming wallpaper.</p></div></article>
+        <article class="step"><div><h3>Annotate only the finding</h3><p>Directly annotate the one or two findings used by the narration. Do not duplicate dates, values, labels, or legends.</p></div></article>
+      </div>
+    </div></section>
+
+    <section class="content-section"><div class="inner">
+      <p class="label">/ Visual system</p><h2>One semantic accent, not decoration</h2>
+      <div class="facts two-col">
+        <article class="fact"><h3>Use</h3><ul>
+          <li>A flat warm paper, off-white, or dark editorial field.</li>
+          <li>Neutral colours for history or comparison.</li>
+          <li>One accent for the subject, anomaly, current period, or conclusion.</li>
+          <li>Readable axes, direct labels, restrained grid lines, and visible sourcing.</li>
+        </ul></article>
+        <article class="fact"><h3>Remove</h3><ul>
+          <li>Terrain, contours, particles, ambient parallax, glow, or vignette that encodes nothing.</li>
+          <li>Fake paper texture, ornamental frames, glassmorphism, dashboard chrome, and gratuitous cards.</li>
+          <li>Gradients without quantitative meaning, tiny footer sources, and accent colour on every mark.</li>
+        </ul></article>
+      </div>
+    </div></section>
+
+    <section class="content-section"><div class="inner">
+      <p class="label">/ Motion grammar</p><h2>Let the evidence be the event</h2>
+      <div class="steps">
+        <article class="step"><div><h3>Establish</h3><p>Bring in the title, source, unit, grid, and axes before the data asks for attention.</p></div></article>
+        <article class="step"><div><h3>Build the baseline</h3><p>Reveal historical or comparison data in chronological or argumentative order, then pause so it can be read.</p></div></article>
+        <article class="step"><div><h3>Introduce the subject</h3><p>Make the anomaly, current period, or second series a distinct event. Add the conclusion only after its evidence is visible.</p></div></article>
+        <article class="step"><div><h3>Hold</h3><p>Keep the completed chart stable for roughly 0.5–1 second or longer while narration continues.</p></div></article>
+      </div>
+    </div></section>
+
+    <section class="content-section"><div class="inner">
+      <p class="label">/ Editorial timeline</p><h2>Make the important timings adjustable</h2>
+      <p class="lead">Use one central, typed timing contract. Name roles for editorial function, expose meaningful events in Remotion Studio, and derive interpolation windows from that source of truth.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Role</th><th>Controls</th></tr></thead>
+        <tbody>
+          <tr><td><code>establish</code></td><td>Initial context and orientation</td></tr>
+          <tr><td><code>camera</code></td><td>Framing, pan, zoom, orbit, or focus changes</td></tr>
+          <tr><td><code>elementReveals</code></td><td>Evidence-bearing lines, series, icons, documents, or photographs</td></tr>
+          <tr><td><code>boundaries</code></td><td>Borders, thresholds, ranges, or comparison lines</td></tr>
+          <tr><td><code>fills</code></td><td>Bars, areas, regions, categories, or bounded shapes</td></tr>
+          <tr><td><code>labels</code></td><td>Values, dates, captions, callouts, or annotations</td></tr>
+          <tr><td><code>hold</code></td><td>Stable completed state for reading and editorial handles</td></tr>
+        </tbody>
+      </table></div>
+      <div class="callout"><h3>Studio is part of the deliverable</h3><p>Before handoff, verify that an editor can locate the major events, adjust one representative timing value, reload Studio, and confirm that the change persists and renders deterministically.</p></div>
+    </div></section>
+
+    <section class="content-section"><div class="inner">
+      <p class="label">/ Verification</p><h2>Inspect rendered pixels</h2>
+      <div class="facts two-col">
+        <article class="fact"><h3>Before implementation</h3><p>Confirm the exact claim, dataset version, units, source, effective date, calculations, missing values, revisions, and what deserves the single accent.</p></article>
+        <article class="fact"><h3>Before handoff</h3><p>Run project checks, list registered compositions, render early, middle, climax, and final-hold frames, and inspect every required aspect ratio at actual output size.</p></article>
+      </div>
+    </div></section>
+
+    <section><div class="inner download-row"><p>The canonical skill includes research, editorial design, chart-type rules, the Studio-adjustable timeline contract, multi-format composition, anti-patterns, and verification.</p><a class="download" href="/downloads/newsroom-chart-animations.zip" download>Download ZIP</a></div></section>
+  </main>
+  <footer><div class="inner"><span>Buried Signals · Materials</span><a href="./SKILL.md">Read SKILL.md</a></div></footer>
+  <script type="module" src="../skill-page.js"></script>
+  <script type="module" src="../skill-demos.js"></script>
+</body>
+</html>
