@@ -19,11 +19,17 @@ function esc(s) {
 }
 
 function renderSources(sources, invId) {
+  let activeGroup = null;
   return sources.map(s => {
+    const group = s.group || 'Reporting and evidence';
+    const groupHeading = group !== activeGroup
+      ? `<h3 class="source-group">${esc(group)}</h3>`
+      : '';
+    activeGroup = group;
     const titleTag = s.url
       ? `<a class="source-title" href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title)}</a>`
       : `<span class="source-title">${esc(s.title)}</span>`;
-    return `<div class="source-item">
+    return `${groupHeading}<div class="source-item">
       <span class="source-claim">\u201C${esc(s.claim)}\u201D</span>
       ${titleTag}
       <span class="source-meta">${esc(s.meta)}</span>
@@ -36,11 +42,29 @@ function renderDisclosure(d) {
     <span class="disclosure-label">${esc(label)}</span>
     <ul class="disclosure-list">${items.map(i => `<li>${esc(i)}</li>`).join('')}</ul>
   </div>`;
-  return section('Models used', d.models) + section('Tasks performed by AI', d.tasks) + section('Not AI-generated', d.notAi);
+  return [
+    ['Models and use', d.models],
+    ['Tasks performed by AI', d.tasks],
+    ['Not AI-generated', d.notAi],
+  ]
+    .filter(([, items]) => items?.length)
+    .map(([label, items]) => section(label, items))
+    .join('');
 }
 
 function renderMethodology(paragraphs) {
-  return paragraphs.map(p => `<p class="methodology-text">${esc(p)}</p>`).join('');
+  return paragraphs.map(p => {
+    if (typeof p === 'string') {
+      return `<p class="methodology-text">${esc(p)}</p>`;
+    }
+    const heading = p.heading
+      ? `<h3 class="methodology-heading">${esc(p.heading)}</h3>`
+      : '';
+    const link = p.url && p.linkText
+      ? ` <a class="methodology-link" href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.linkText)}</a>`
+      : '';
+    return `<div class="methodology-block">${heading}<p class="methodology-text">${esc(p.text)}${link}</p></div>`;
+  }).join('');
 }
 
 function renderDownloads(downloads, invId) {
