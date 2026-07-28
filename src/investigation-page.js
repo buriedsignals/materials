@@ -140,7 +140,16 @@ function render(inv) {
   ).join('');
 
   if (inv.fundedBy) {
-    document.getElementById('funded-by').textContent = inv.fundedBy;
+    const fundedBy = document.getElementById('funded-by');
+    const sponsor = typeof inv.fundedBy === 'string'
+      ? {name: inv.fundedBy}
+      : inv.fundedBy;
+    fundedBy.textContent = sponsor.name;
+    if (sponsor.url) {
+      fundedBy.href = sponsor.url;
+      fundedBy.target = '_blank';
+      fundedBy.rel = 'noopener';
+    }
     document.getElementById('funded-pill').style.display = '';
   }
 
