@@ -3,25 +3,258 @@
   "ref": "BS-WW-001",
   "date": "July 2026",
   "title": "Water Wars",
-  "summary": "Production materials and reusable animation skills developed for the Buried Signals Water Wars video. This page currently publishes the video-production toolkit; the investigation source package has not yet been added.",
+  "summary": "Sources, methodology, AI disclosure and reusable animation tools for the Buried Signals Water Wars video. Material corrections and technical caveats are recorded below.",
   "collaborators": [
     { "name": "Buried Signals" }
   ],
   "fundedBy": null,
   "database": null,
   "notebookUrl": null,
-  "sources": [],
+  "sources": [
+    {
+      "claim": "Early reporting estimated the project at up to 1 trillion yuan, about US$137 billion. At the July 2025 groundbreaking, China announced a higher estimate of 1.2 trillion yuan, about US$167.8 billion.",
+      "title": "State Council of China — Yarlung Zangbo project groundbreaking",
+      "url": "https://english.www.gov.cn/news/202507/19/content_WS687b6a8ac6d0868f4e8f4486.html",
+      "meta": "Primary announcement · Updated official estimate · 19 Jul 2025"
+    },
+    {
+      "claim": "Before construction began, published estimates placed the project at up to 1 trillion yuan, approximately US$137 billion.",
+      "title": "The Economist — China approves the world's most expensive infrastructure project",
+      "url": "https://archive.is/vgCQI",
+      "meta": "Contemporaneous reporting · Earlier estimate · 2 Jan 2025"
+    },
+    {
+      "claim": "The project is planned close to the India–China frontier, where the river falls nearly 2,000 metres; China has built hydropower projects upstream of India since work on Zangmu began in 2009.",
+      "title": "Made in China Journal — China's ambitions for the Lower Yarlung Tsangpo",
+      "url": "https://madeinchinajournal.com/2025/08/07/infrastructure-and-state-building-chinas-ambitions-for-the-lower-yarlung-tsangpo-project/",
+      "meta": "Expert analysis · Location, hydropower history and project scale"
+    },
+    {
+      "claim": "Standard references put the Brahmaputra/Yarlung Tsangpo at roughly 2,850–2,900 kilometres, or about 1,800 miles.",
+      "title": "Encyclopaedia Britannica — Brahmaputra River",
+      "url": "https://www.britannica.com/place/Brahmaputra-River",
+      "meta": "Reference source · River length"
+    },
+    {
+      "claim": "Banglapedia independently gives a source-to-mouth length of approximately 2,850 kilometres.",
+      "title": "Banglapedia — Brahmaputra River",
+      "url": "https://en.banglapedia.org/index.php/Brahmaputra_River",
+      "meta": "National reference source · Corroborates river length"
+    },
+    {
+      "claim": "Reporting supports a major tunnel-diversion scheme through the Great Bend. Detailed final engineering plans are not public, and earlier reports described multiple 20-kilometre tunnels.",
+      "title": "BBC — China begins building world's largest dam",
+      "url": "https://www.bbc.com/news/articles/c4gk1251w14o",
+      "meta": "Independent reporting · Tunnel-design caveat"
+    },
+    {
+      "claim": "The projected 300 TWh annual output is equivalent to about 94% of the UK's 2024 electricity demand—reasonable scale shorthand for powering Britain for roughly a year.",
+      "title": "UK Government — DUKES 2025, Chapter 5: Electricity",
+      "url": "https://assets.publishing.service.gov.uk/media/688a28656478525675739051/DUKES_2025_Chapter_5.pdf",
+      "meta": "Official statistics · Scale comparison"
+    },
+    {
+      "claim": "About 97 million basin-dependent people are estimated in India and Bangladesh alone; wider Brahmaputra basin estimates exceed 100 million.",
+      "title": "ICIMOD — Brahmaputra key messages",
+      "url": "https://www.icimod.org/wp-content/uploads/Brahmaputra-Key-Messages.pdf",
+      "meta": "Research synthesis · Supports rounded downstream scale"
+    },
+    {
+      "claim": "Arunachal Pradesh Chief Minister Pema Khandu called the project a 'water bomb' and an existential threat.",
+      "title": "The New Indian Express — Khandu calls project a ticking water bomb",
+      "url": "https://www.newindianexpress.com/nation/2025/Jul/09/chinas-mega-dam-a-ticking-water-bomb-and-existential-threat-to-arunachal-says-cm-khandu",
+      "meta": "Attributed statement · Indian official"
+    },
+    {
+      "claim": "Indian officials have warned of sudden-release risks and proposed the Upper Siang project as a buffer; China says downstream countries will not be harmed.",
+      "title": "Reuters — China's mega-dam triggers fears in India",
+      "url": "https://www.usnews.com/news/world/articles/2025-08-24/exclusive-chinas-new-mega-dam-triggers-fears-of-water-war-in-india",
+      "meta": "Reuters reporting · Competing claims and project status"
+    },
+    {
+      "claim": "Thousands rallied along the Teesta demanding what organisers described as Bangladesh's fair share of the river's water.",
+      "title": "The Business Standard — Teesta protest march",
+      "url": "https://www.tbsnews.net/bangladesh/protest-march-demand-fair-share-teesta-water-gets-louder-1071756",
+      "meta": "Local reporting · Corroborated by Bangladesh Sangbad Sangstha"
+    },
+    {
+      "claim": "The Indus system waters more than 90% of Pakistan's crops, while hydropower provides about one-fifth of its electricity.",
+      "title": "CSIS — Can India Cut Off Pakistan's Indus River Lifeline?",
+      "url": "https://www.csis.org/analysis/can-india-cut-pakistans-indus-river-lifeline",
+      "meta": "Policy analysis · Supports dependence claim"
+    },
+    {
+      "claim": "On 23 April 2025 India announced that the Indus Waters Treaty would be held in abeyance with immediate effect.",
+      "title": "Ministry of External Affairs, India — Special briefing",
+      "url": "https://www.mea.gov.in/media-briefings.htm?dtl/39403/Transcript_of_Special_briefing_by_Foreign_Secretary_on_the_decisions_of_the_Cabinet_Committee_on_Security_CCS_April_23_2025",
+      "meta": "Primary government record · Treaty status"
+    },
+    {
+      "claim": "The treaty was signed in 1960 and survived wars and repeated periods of tension before India's 2025 abeyance announcement.",
+      "title": "World Bank — Indus Waters Treaty fact sheet",
+      "url": "https://www.worldbank.org/en/region/sar/brief/fact-sheet-the-indus-waters-treaty-1960-and-the-world-bank",
+      "meta": "Institutional history · Supports duration context"
+    },
+    {
+      "claim": "Afghanistan's Ministry of Water and Energy announced Chinese investment interest in three named Kunar hydropower projects: Shal, Sagi and Sartaq.",
+      "title": "Khaama Press — Chinese firm to construct three Kunar dams",
+      "url": "https://www.khaama.com/chinese-firm-to-construct-three-hydroelectric-dams-in-kunar-afghanistan/",
+      "meta": "Local reporting on ministry announcement · 29 Jul 2024"
+    },
+    {
+      "claim": "The three announced Kunar projects could materially affect downstream Pakistan and have already prompted strong Pakistani concern.",
+      "title": "The Diplomat — The ripple effects of Afghanistan's dam plans",
+      "url": "https://thediplomat.com/2026/01/the-ripple-effects-of-afghanistans-dam-plans-on-pakistan/",
+      "meta": "Independent analysis · Downstream implications"
+    },
+    {
+      "claim": "The project's eight-country event filter yields 196 unique South Asian incidents in 2020–2024 and 73 in 2024—not the 76 shown in the video chart.",
+      "title": "Pacific Institute — Water Conflict Chronology event list",
+      "url": "https://www.worldwater.org/conflict/list/",
+      "meta": "Event-level dataset · Independently recalculated · Chart correction"
+    },
+    {
+      "claim": "Glacier mass loss in the Hindu Kush Himalaya has accelerated.",
+      "title": "ICIMOD — Hindu Kush Himalaya glacier-loss findings",
+      "url": "https://www.icimod.org/press-release/landmark-report-on-impacts-of-disappearing-snow-and-ice-in-the-hindu-kush-himalaya-current-emissions-path-threatens-two-billion-people-and-is-accelerating-species-extinction/",
+      "meta": "Scientific synthesis · Supports glacier claim"
+    },
+    {
+      "claim": "Wolf and colleagues found that dispute risk rises when rapid basin change exceeds institutional capacity; treaties are a central form of that capacity. The video applies this framework to the Indus treaty's disappearance as the final institutional break.",
+      "title": "Wolf et al. — Conflict and Cooperation Within International River Basins",
+      "url": "https://transboundarywaters.ceoas.oregonstate.edu/sites/transboundarywaters.ceoas.oregonstate.edu/files/Publications/wolf_et_al_2003.pdf",
+      "meta": "Original research · Treaty and conflict-risk framework"
+    },
+    {
+      "claim": "The RFA-branded footage shows Indian and Chinese troops clashing along their disputed border. RFA says the exact filming date is uncertain.",
+      "title": "Radio Free Asia — Chinese, Indian soldiers skirmish along disputed border",
+      "url": "https://www.rfa.org/english/news/tibet/clash-12132022182858.html",
+      "meta": "Original publisher · Footage verified · Updated 15 Dec 2022"
+    },
+    {
+      "claim": "The Kashmir dispute dates to 1947; China controls Aksai Chin, which India claims, and the Indus crosses the wider historical Kashmir region through Ladakh.",
+      "title": "Encyclopaedia Britannica — Kashmir",
+      "url": "https://www.britannica.com/place/Kashmir-region-Indian-subcontinent",
+      "meta": "Reference source · Territorial and river context"
+    },
+    {
+      "group": "Visual source images",
+      "claim": "The canyon comparison began with National Park Service Grand Canyon footage and used credited Yarlung Tsangpo and Namcha Barwa images as visual references.",
+      "title": "National Park Service — Grand Canyon b-roll",
+      "url": "https://www.nps.gov/media/video/view.htm?id=C2A43648-155D-451F-6722A3EAFE93E679",
+      "meta": "Richard Burton / National Park Service · Public domain"
+    },
+    {
+      "group": "Visual source images",
+      "claim": "A photograph of the narrow Yarlung Tsangpo gorge supplied river, rock-wall and scale references for the generated comparison.",
+      "title": "Wikimedia Commons — Yarlung Tsangpo Grand Canyon",
+      "url": "https://commons.wikimedia.org/wiki/File:%E9%9B%85%E9%B2%81%E8%97%8F%E5%B8%83%E5%A4%A7%E5%B3%A1%E8%B0%B7_-_panoramio_(1).jpg",
+      "meta": "mayanming · CC BY-SA 3.0"
+    },
+    {
+      "group": "Visual source images",
+      "claim": "A Namcha Barwa photograph supplied the high-relief mountain reference for the canyon sequence.",
+      "title": "Wikimedia Commons — Namcha Barwa from the west",
+      "url": "https://commons.wikimedia.org/wiki/File:Namcha_Barwa_from_the_west.jpg",
+      "meta": "Cherry933 · CC BY-SA 3.0"
+    },
+    {
+      "group": "Visual source images",
+      "claim": "The Imja Glacier animation begins from a real archival photograph taken by Erwin Schneider between 1956 and 1961.",
+      "title": "Wikimedia Commons — Imja Glacier archival photograph",
+      "url": "https://commons.wikimedia.org/wiki/File:Icimod5_3521608492.jpg",
+      "meta": "Erwin Schneider · CC BY 2.0"
+    },
+    {
+      "group": "Visual source images",
+      "claim": "The Kyetrak/Gyarag Glacier animation begins from a real 1921 photograph by E. O. Wheeler.",
+      "title": "China Books Review — From the Mines to the Glaciers",
+      "url": "https://chinabooksreview.com/2024/02/15/from-the-mines-to-the-glaciers/",
+      "meta": "E. O. Wheeler · Courtesy of the Royal Geographical Society"
+    },
+    {
+      "group": "Geodata",
+      "claim": "MapTiler supplied satellite and vector basemaps, terrain tiles and contextual country borders used in the map animations.",
+      "title": "MapTiler — Maps and geodata platform",
+      "url": "https://www.maptiler.com/",
+      "meta": "Basemaps, terrain and contextual boundary data"
+    },
+    {
+      "group": "Geodata",
+      "claim": "Country polygons and boundary lines—including the geometry used to distinguish disputed boundaries—were built from Natural Earth data and project curation.",
+      "title": "Natural Earth — 1:10m cultural vectors",
+      "url": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/",
+      "meta": "Admin 0 countries and boundaries · Public domain"
+    },
+    {
+      "group": "Geodata",
+      "claim": "The Indus, Jhelum, Chenab and other river routes used in the animations were prepared from Natural Earth river centerlines.",
+      "title": "Natural Earth — 1:10m rivers and lake centerlines",
+      "url": "https://www.naturalearthdata.com/downloads/10m-physical-vectors/10m-rivers-lake-centerlines/",
+      "meta": "River geometry · Public domain"
+    },
+    {
+      "group": "Geodata",
+      "claim": "Afghanistan and Pakistan river extracts were prepared from OpenStreetMap regional files distributed by Geofabrik.",
+      "title": "Geofabrik — Afghanistan OpenStreetMap extract",
+      "url": "https://download.geofabrik.de/asia/afghanistan.html",
+      "meta": "OpenStreetMap data · ODbL 1.0"
+    },
+    {
+      "group": "Geodata",
+      "claim": "The Pakistan river extract was prepared from the corresponding OpenStreetMap regional file.",
+      "title": "Geofabrik — Pakistan OpenStreetMap extract",
+      "url": "https://download.geofabrik.de/asia/pakistan.html",
+      "meta": "OpenStreetMap data · ODbL 1.0"
+    },
+    {
+      "group": "Geodata",
+      "claim": "The downstream population heatmap used 2020 one-kilometre population-density rasters for India and Bangladesh.",
+      "title": "WorldPop — Population Density, 2020, 1km",
+      "url": "https://doi.org/10.5258/SOTON/WP00674",
+      "meta": "India and Bangladesh population-density data"
+    },
+    {
+      "group": "Geodata",
+      "claim": "Named dams and barrages in the Indus story window were selected from OpenStreetMap using Overpass and checked against official and specialist dam registers.",
+      "title": "Overpass API — OpenStreetMap data query service",
+      "url": "https://overpass-api.de/",
+      "meta": "Dam and barrage locations · ODbL 1.0"
+    },
+    {
+      "group": "Geodata",
+      "claim": "Indian dam names and locations were checked against the National Register of Large Dams 2025.",
+      "title": "Central Water Commission — National Register of Large Dams 2025",
+      "url": "https://dharma.cwc.gov.in/dharma/public/uploads/front_upload_file/174860534186541140.pdf",
+      "meta": "Official register · India"
+    }
+  ],
   "aiDisclosure": {
-    "models": [],
-    "tasks": [
-      "Assistance with programmatic animation development and technical testing"
+    "models": [
+      "Krea and ComfyUI/Comfy Cloud were used to prototype and run Seedance 2.0 workflows for the Grand Canyon-to-Yarlung Tsangpo comparison.",
+      "ComfyUI/Comfy Cloud and Seedance 2.0 were used for glacier animations beginning from real archival photographs of Imja Glacier and Kyetrak/Gyarag Glacier. The generated endings are illustrative contemporary interpretations, not documentary photographs.",
+      "OpenAI Codex and other AI coding assistants supported Remotion development, source discovery, claim comparison and evidence organisation."
     ],
     "notAi": [
-      "Editorial conclusions and final production decisions"
+      "Source documents, published statistics, geodata and conflict-event data; AI output was not treated as evidence.",
+      "Reporting, narration, source selection, verification, editorial framing and publication decisions."
     ]
   },
   "methodology": [
-    "This materials page currently publishes the three reusable Remotion skills developed during Water Wars production. Investigation sourcing and publication methodology will be added as a separate verified package before publication."
+    {
+      "heading": "Research",
+      "text": "Reporting began with the script and source material. SearXNG was used for discovery and Crawl4AI to retrieve and preserve source pages. Primary records, original research and independent reporting were preferred."
+    },
+    {
+      "heading": "Verification",
+      "text": "Claims were separated into testable assertions and checked with SIFT: investigate the source, find better coverage, trace it to origin and search for contradictions. The Pacific Institute data was recalculated from the underlying records, producing 196 unique incidents for 2020–2024 and 73 in 2024.",
+      "linkText": "Epistemic-grounding method",
+      "url": "https://github.com/buriedsignals/spotlight/blob/main/skills/epistemic-grounding/SKILL.md"
+    },
+    {
+      "heading": "Visuals",
+      "text": "Maps and charts were built in Remotion from documented data and GeoJSON. MapTiler supplied satellite and vector basemaps, terrain and contextual country borders; explicit disputed boundaries and river routes used Natural Earth, OpenStreetMap and project-curated geometry. AI-assisted canyon and glacier sequences are disclosed separately."
+    }
   ],
   "skills": [
     {
@@ -48,5 +281,16 @@
       "meta": "Interactive companion · Mobile and desktop"
     }
   ],
-  "downloads": []
+  "downloads": [
+    {
+      "filename": "fact-check.json",
+      "format": "JSON",
+      "description": "31 claim-level verdicts, grounding assessments and evidence references"
+    },
+    {
+      "filename": "evidence.json",
+      "format": "JSON",
+      "description": "34-source evidence ledger with URLs, locators and capture hashes"
+    }
+  ]
 }

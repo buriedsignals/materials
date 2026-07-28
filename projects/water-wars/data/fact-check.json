@@ -1,0 +1,1089 @@
+{
+  "schema_version": "1.0",
+  "project": "Water Wars",
+  "checked_at": "2026-07-27",
+  "method": "SIFT plus claim-to-evidence grounding",
+  "publication_ready": false,
+  "human_review": "unreviewed",
+  "source_of_claims": {
+    "path": "../captions/water-wars.srt",
+    "sha256": "b844846e03b67c282ae0b0588a1cd5cf25dab553cd6bf4476447665e04f690b5"
+  },
+  "verdict_counts": {
+    "verified": 13,
+    "partially_verified": 6,
+    "unverified": 0,
+    "disputed": 0,
+    "contradicted": 4,
+    "mischaracterized": 8,
+    "total": 31
+  },
+  "critical_findings": [
+    "The official announced cost is about US$167.8bn, not US$137bn.",
+    "The Brahmaputra/Yarlung Tsangpo is about 1,800 miles (2,850-2,900km), not 2,500 miles.",
+    "300 TWh is below the UK's 2024 electricity demand of 319 TWh; it is not literally enough to power Britain for a full year on that measure.",
+    "The final chart shows 76 incidents for 2024, but the event-level South Asia filter used for the spoken 'nearly 200' claim yields 73 in 2024 and 196 in 2020-2024.",
+    "The current design is not public. Earlier reporting described multiple 20km tunnels; a separate older proposal described three 34km tunnels. The singular 'a 20km tunnel' is too definite.",
+    "The Afghanistan announcement concerned a Chinese company's interest/readiness to invest in three dams, not a confirmed Afghan construction programme.",
+    "Research does not identify 'no treaty' alone as the clearest predictor; the cited model is rapid basin change exceeding institutional capacity, with absence of a treaty as one example of weak capacity."
+  ],
+  "checks": [
+    {
+      "claim_id": "C001",
+      "verdict": "partially_verified",
+      "confidence": "high",
+      "finding": "Groundbreaking is verified. Sources describe it as the world's largest hydropower project if or when the planned five-station, up-to-60GW scheme is realised; 'world's most powerful dam' states a future superlative as a present fact and collapses a cascade project into one dam.",
+      "evidence_ids": [
+        "E002",
+        "E003",
+        "E008"
+      ],
+      "grounding": {
+        "support_type": "indirect",
+        "source_role": "official announcement plus independent expert/news corroboration",
+        "claim_elements_checked": [
+          "groundbreaking status",
+          "world-power superlative",
+          "single-dam versus cascade wording"
+        ],
+        "missing_assumptions": [
+          "Future completion, capacity and final design are not yet established."
+        ],
+        "confidence_cap": "high",
+        "misgrounding_risk": "High if the script wording is treated as fully established rather than narrowed to the supported formulation.",
+        "assessment": "Groundbreaking is verified. Sources describe it as the world's largest hydropower project if or when the planned five-station, up-to-60GW scheme is realised; 'world's most powerful dam' states a future superlative as a present fact and collapses a cascade project into one dam.",
+        "coverage": "direct for groundbreaking; partial for superlative",
+        "quality": "high",
+        "independence": 2
+      },
+      "human_review": "unreviewed",
+      "claim_text": "China just broke ground on the world's most powerful dam.",
+      "evidence_refs": [
+        "E002",
+        "E003",
+        "E008"
+      ]
+    },
+    {
+      "claim_id": "C002",
+      "verdict": "contradicted",
+      "confidence": "high",
+      "finding": "China's official announcement gives about US$167.8bn (1.2tn yuan); later independent reporting gives about US$167bn. US$137bn is approximately US$30.8bn low.",
+      "evidence_ids": [
+        "E002",
+        "E003",
+        "E008"
+      ],
+      "grounding": {
+        "support_type": "contradicted",
+        "source_role": "official cost announcement plus independent corroboration",
+        "claim_elements_checked": [
+          "announced project cost"
+        ],
+        "missing_assumptions": [
+          "Exchange rates can move, but not enough to reconcile these contemporaneous figures."
+        ],
+        "confidence_cap": "high",
+        "misgrounding_risk": "High if the script wording is treated as fully established rather than narrowed to the supported formulation.",
+        "assessment": "China's official announcement gives about US$167.8bn (1.2tn yuan); later independent reporting gives about US$167bn. US$137bn is approximately US$30.8bn low.",
+        "coverage": "direct",
+        "quality": "high",
+        "independence": 2
+      },
+      "human_review": "unreviewed",
+      "claim_text": "The project costs $137 billion.",
+      "evidence_refs": [
+        "E002",
+        "E003",
+        "E008"
+      ],
+      "spotlight_verdict": "false"
+    },
+    {
+      "claim_id": "C003",
+      "verdict": "mischaracterized",
+      "confidence": "high",
+      "finding": "The expected project area is in a border county and within roughly 50km of the disputed McMahon Line, just before the river crosses into India. That is near the border, not literally 'right on' it.",
+      "evidence_ids": [
+        "E003",
+        "E014"
+      ],
+      "grounding": {
+        "support_type": "contradicted",
+        "source_role": "independent geospatial description and reporting",
+        "claim_elements_checked": [
+          "distance and relation to India border"
+        ],
+        "missing_assumptions": [
+          "Beijing has not released a complete site plan."
+        ],
+        "confidence_cap": "high",
+        "misgrounding_risk": "High if the script wording is treated as fully established rather than narrowed to the supported formulation.",
+        "assessment": "The expected project area is in a border county and within roughly 50km of the disputed McMahon Line, just before the river crosses into India. That is near the border, not literally 'right on' it.",
+        "coverage": "direct",
+        "quality": "high",
+        "independence": 2
+      },
+      "human_review": "unreviewed",
+      "claim_text": "The project is right on India's border.",
+      "evidence_refs": [
+        "E003",
+        "E014"
+      ]
+    },
+    {
+      "claim_id": "C004",
+      "verdict": "contradicted",
+      "confidence": "high",
+      "finding": "The route from Tibet through India to Bangladesh is correct, but standard references put the river at about 1,800 miles / 2,850-2,900km, not 2,500 miles / 4,023km.",
+      "evidence_ids": [
+        "E004",
+        "E005"
+      ],
+      "grounding": {
+        "support_type": "contradicted",
+        "source_role": "two independent reference works",
+        "claim_elements_checked": [
+          "river length",
+          "course from Tibet to Bangladesh"
+        ],
+        "missing_assumptions": [
+          "Named river segments and source definitions can vary slightly, not by 700 miles."
+        ],
+        "confidence_cap": "high",
+        "misgrounding_risk": "High if the script wording is treated as fully established rather than narrowed to the supported formulation.",
+        "assessment": "The route from Tibet through India to Bangladesh is correct, but standard references put the river at about 1,800 miles / 2,850-2,900km, not 2,500 miles / 4,023km.",
+        "coverage": "direct",
+        "quality": "high",
+        "independence": 2
+      },
+      "human_review": "unreviewed",
+      "claim_text": "The Yarlung Tsangpo is a 2,500-mile river that starts in Tibet and ends in Bangladesh.",
+      "evidence_refs": [
+        "E004",
+        "E005"
+      ],
+      "spotlight_verdict": "false"
+    },
+    {
+      "claim_id": "C005",
+      "verdict": "verified",
+      "confidence": "high",
+      "finding": "Construction of the 510MW Zangmu station began in 2009 and it entered service in 2015; other main-stem projects have since been planned or developed upstream of India.",
+      "evidence_ids": [
+        "E003",
+        "E008"
+      ],
+      "grounding": {
+        "support_type": "direct",
+        "source_role": "expert historical analysis plus news corroboration",
+        "claim_elements_checked": [
+          "history of upstream dam construction"
+        ],
+        "missing_assumptions": [],
+        "confidence_cap": "high",
+        "misgrounding_risk": "Low if the stated scope and attribution are preserved.",
+        "assessment": "Construction of the 510MW Zangmu station began in 2009 and it entered service in 2015; other main-stem projects have since been planned or developed upstream of India.",
+        "coverage": "direct",
+        "quality": "medium-high",
+        "independence": 2
+      },
+      "human_review": "unreviewed",
+      "claim_text": "China has been building dams on the Yarlung Tsangpo upstream of India for years.",
+      "evidence_refs": [
+        "E003",
+        "E008"
+      ]
+    },
+    {
+      "claim_id": "C006",
+      "verdict": "mischaracterized",
+      "confidence": "high",
+      "finding": "Arunachal Pradesh Chief Minister Pema Khandu used the 'water bomb' phrase. The Indian national government expressed concerns but the evidence does not show 'India' institutionally adopting that label.",
+      "evidence_ids": [
+        "E008",
+        "E013",
+        "E014"
+      ],
+      "grounding": {
+        "support_type": "contradicted",
+        "source_role": "directly reported quotation plus national-government contrast",
+        "claim_elements_checked": [
+          "identity of water-bomb speaker",
+          "institutional attribution"
+        ],
+        "missing_assumptions": [
+          "The speaker's office and the national government should not be conflated."
+        ],
+        "confidence_cap": "high",
+        "misgrounding_risk": "High if the script wording is treated as fully established rather than narrowed to the supported formulation.",
+        "assessment": "Arunachal Pradesh Chief Minister Pema Khandu used the 'water bomb' phrase. The Indian national government expressed concerns but the evidence does not show 'India' institutionally adopting that label.",
+        "coverage": "direct attribution",
+        "quality": "high",
+        "independence": 2
+      },
+      "human_review": "unreviewed",
+      "claim_text": "India is already calling this a water bomb.",
+      "evidence_refs": [
+        "E008",
+        "E013",
+        "E014"
+      ]
+    },
+    {
+      "claim_id": "C007",
+      "verdict": "verified",
+      "confidence": "high",
+      "finding": "Khandu publicly described the project as an existential threat and a threat greater than military or other forms of threat. This is verified as an attribution, not as an objective risk ranking.",
+      "evidence_ids": [
+        "E008",
+        "E013"
+      ],
+      "grounding": {
+        "support_type": "direct",
+        "source_role": "directly reported quotation in two publications",
+        "claim_elements_checked": [
+          "existential/far-bigger-threat quotation",
+          "speaker attribution"
+        ],
+        "missing_assumptions": [
+          "Attribute the assessment to Khandu."
+        ],
+        "confidence_cap": "high",
+        "misgrounding_risk": "Low if the stated scope and attribution are preserved.",
+        "assessment": "Khandu publicly described the project as an existential threat and a threat greater than military or other forms of threat. This is verified as an attribution, not as an objective risk ranking.",
+        "coverage": "direct quote",
+        "quality": "high",
+        "independence": 2
+      },
+      "human_review": "unreviewed",
+      "claim_text": "An Indian official called the project a far bigger threat than anything else.",
+      "evidence_refs": [
+        "E008",
+        "E013"
+      ]
+    },
+    {
+      "claim_id": "C008",
+      "verdict": "verified",
+      "confidence": "medium",
+      "finding": "The Yarlung Tsangpo Grand Canyon is widely described as the deepest terrestrial canyon. Reported maximum depth is 6,009m versus about 1,880-2,000m for the Grand Canyon, so 'about three times' is defensible only as a maximum-to-maximum comparison.",
+      "evidence_ids": [
+        "E004",
+        "E006",
+        "E007"
+      ],
+      "grounding": {
+        "support_type": "direct",
+        "source_role": "reference and specialist secondary corroboration",
+        "claim_elements_checked": [
+          "deepest-canyon classification",
+          "maximum depth",
+          "Grand Canyon ratio"
+        ],
+        "missing_assumptions": [
+          "Its average depth is much less; the line should not imply the whole canyon is 6,000m deep."
+        ],
+        "confidence_cap": "medium",
+        "misgrounding_risk": "Low if the stated scope and attribution are preserved.",
+        "assessment": "The Yarlung Tsangpo Grand Canyon is widely described as the deepest terrestrial canyon. Reported maximum depth is 6,009m versus about 1,880-2,000m for the Grand Canyon, so 'about three times' is defensible only as a maximum-to-maximum comparison.",
+        "coverage": "direct for reported maxima",
+        "quality": "medium",
+        "independence": 2
+      },
+      "human_review": "unreviewed",
+      "claim_text": "The Yarlung Tsangpo flows through the deepest canyon on Earth; its maximum depth is over 6,000 metres, about three times the Grand Canyon's maximum depth.",
+      "evidence_refs": [
+        "E004",
+        "E006",
+        "E007"
+      ]
+    },
+    {
+      "claim_id": "C009",
+      "verdict": "verified",
+      "confidence": "medium",
+      "finding": "Expert analysis places a nearly 2,000m descent within about 50km at the Great Bend.",
+      "evidence_ids": [
+        "E003",
+        "E008"
+      ],
+      "grounding": {
+        "support_type": "direct",
+        "source_role": "expert estimate plus secondary corroboration",
+        "claim_elements_checked": [
+          "elevation loss at Great Bend",
+          "location relative to border"
+        ],
+        "missing_assumptions": [
+          "Public sources do not fix one official engineering measurement."
+        ],
+        "confidence_cap": "medium",
+        "misgrounding_risk": "Low if the stated scope and attribution are preserved.",
+        "assessment": "Expert analysis places a nearly 2,000m descent within about 50km at the Great Bend.",
+        "coverage": "direct estimate",
+        "quality": "medium-high",
+        "independence": 2
+      },
+      "human_review": "unreviewed",
+      "claim_text": "Near the Great Bend, before the border, the river drops about 2,000 metres.",
+      "evidence_refs": [
+        "E003",
+        "E008"
+      ]
+    },
+    {
+      "claim_id": "C010",
+      "verdict": "mischaracterized",
+      "confidence": "high",
+      "finding": "China confirms tunnel diversion and five cascade stations, but has not published detailed design. BBC says earlier reports described multiple 20km tunnels; an older proposal described three 34km tunnels. One definite 20km tunnel is not established.",
+      "evidence_ids": [
+        "E003",
+        "E008",
+        "E009"
+      ],
+      "grounding": {
+        "support_type": "contradicted",
+        "source_role": "official-status analysis and competing reported design proposals",
+        "claim_elements_checked": [
+          "tunnel count",
+          "tunnel length",
+          "river-diversion plan",
+          "design status"
+        ],
+        "missing_assumptions": [
+          "No authoritative current tunnel number or length is public."
+        ],
+        "confidence_cap": "high",
+        "misgrounding_risk": "High if the script wording is treated as fully established rather than narrowed to the supported formulation.",
+        "assessment": "China confirms tunnel diversion and five cascade stations, but has not published detailed design. BBC says earlier reports described multiple 20km tunnels; an older proposal described three 34km tunnels. One definite 20km tunnel is not established.",
+        "coverage": "directly tests design claim",
+        "quality": "mixed",
+        "independence": 2
+      },
+      "human_review": "unreviewed",
+      "claim_text": "China's plan is to drill one 20-kilometre tunnel through the mountain, divert the river and harness the two-kilometre drop.",
+      "evidence_refs": [
+        "E003",
+        "E008",
+        "E009"
+      ]
+    },
+    {
+      "claim_id": "C011",
+      "verdict": "partially_verified",
+      "confidence": "medium",
+      "finding": "A roughly 300TWh annual-generation projection is consistent with widely reported project estimates and the stated three-times-Three-Gorges scale, but the captured official groundbreaking notice does not publish the figure and actual annual generation cannot be known before completion. It should be labelled a projection.",
+      "evidence_ids": [
+        "E002",
+        "E003",
+        "E008"
+      ],
+      "grounding": {
+        "support_type": "indirect",
+        "source_role": "official project scale and secondary projection context",
+        "claim_elements_checked": [
+          "projected annual generation",
+          "projection versus realised output"
+        ],
+        "missing_assumptions": [
+          "No captured primary design document states 300TWh; use 'projected to generate up to'."
+        ],
+        "confidence_cap": "medium",
+        "misgrounding_risk": "High if the script wording is treated as fully established rather than narrowed to the supported formulation.",
+        "assessment": "A roughly 300TWh annual-generation projection is consistent with widely reported project estimates and the stated three-times-Three-Gorges scale, but the captured official groundbreaking notice does not publish the figure and actual annual generation cannot be known before completion. It should be labelled a projection.",
+        "coverage": "indirect",
+        "quality": "medium-high",
+        "independence": 2
+      },
+      "human_review": "unreviewed",
+      "claim_text": "The project will generate 300 TWh per year.",
+      "evidence_refs": [
+        "E002",
+        "E003",
+        "E008"
+      ]
+    },
+    {
+      "claim_id": "C012",
+      "verdict": "contradicted",
+      "confidence": "high",
+      "finding": "UK electricity demand was 319.0TWh in 2024. A 300TWh output would cover about 94% of that demand before transmission losses, not a full year.",
+      "evidence_ids": [
+        "E010"
+      ],
+      "grounding": {
+        "support_type": "contradicted",
+        "source_role": "official UK electricity statistics",
+        "claim_elements_checked": [
+          "300TWh comparison with UK annual demand"
+        ],
+        "missing_assumptions": [
+          "One official statistical source is sufficient for this arithmetic; 'almost Britain's annual electricity demand' would be accurate."
+        ],
+        "confidence_cap": "high",
+        "misgrounding_risk": "High if the script wording is treated as fully established rather than narrowed to the supported formulation.",
+        "assessment": "UK electricity demand was 319.0TWh in 2024. A 300TWh output would cover about 94% of that demand before transmission losses, not a full year.",
+        "coverage": "direct quantitative comparison",
+        "quality": "high",
+        "independence": 1
+      },
+      "human_review": "unreviewed",
+      "claim_text": "300 TWh is enough to power Britain for a year.",
+      "evidence_refs": [
+        "E010"
+      ],
+      "spotlight_verdict": "false"
+    },
+    {
+      "claim_id": "C013",
+      "verdict": "mischaracterized",
+      "confidence": "high",
+      "finding": "More than 100m depend on the basin across China, India and Bangladesh. ICIMOD's country estimates total about 97m for India and Bangladesh (39m plus 58m), and 'depend on' is not identical to 'live downstream'.",
+      "evidence_ids": [
+        "E011",
+        "E012",
+        "E014"
+      ],
+      "grounding": {
+        "support_type": "contradicted",
+        "source_role": "multilateral and intergovernmental population estimates",
+        "claim_elements_checked": [
+          "population number",
+          "countries included",
+          "live downstream versus basin dependence"
+        ],
+        "missing_assumptions": [
+          "Population boundary and dependence definitions differ among sources."
+        ],
+        "confidence_cap": "high",
+        "misgrounding_risk": "High if the script wording is treated as fully established rather than narrowed to the supported formulation.",
+        "assessment": "More than 100m depend on the basin across China, India and Bangladesh. ICIMOD's country estimates total about 97m for India and Bangladesh (39m plus 58m), and 'depend on' is not identical to 'live downstream'.",
+        "coverage": "direct",
+        "quality": "high",
+        "independence": 2
+      },
+      "human_review": "unreviewed",
+      "claim_text": "Over 100 million people live downstream in India and Bangladesh.",
+      "evidence_refs": [
+        "E011",
+        "E012",
+        "E014"
+      ]
+    },
+    {
+      "claim_id": "C014",
+      "verdict": "partially_verified",
+      "confidence": "high",
+      "finding": "The concern is real and Khandu explicitly warned that a sudden release could destroy the Siang belt; India's proposed buffer dam is also justified against surges. The catastrophic outcome remains a forecast based on Indian assessments, while China says the project will not harm downstream countries.",
+      "evidence_ids": [
+        "E008",
+        "E013",
+        "E014"
+      ],
+      "grounding": {
+        "support_type": "indirect",
+        "source_role": "attributed official concern, investigative modelling and Chinese response",
+        "claim_elements_checked": [
+          "existence of Indian concern",
+          "sudden-release consequence",
+          "China response"
+        ],
+        "missing_assumptions": [
+          "Hydrological consequences cannot be verified without the design and modelling inputs."
+        ],
+        "confidence_cap": "high",
+        "misgrounding_risk": "High if the script wording is treated as fully established rather than narrowed to the supported formulation.",
+        "assessment": "The concern is real and Khandu explicitly warned that a sudden release could destroy the Siang belt; India's proposed buffer dam is also justified against surges. The catastrophic outcome remains a forecast based on Indian assessments, while China says the project will not harm downstream countries.",
+        "coverage": "direct for attribution; not proof of outcome",
+        "quality": "high",
+        "independence": 2
+      },
+      "human_review": "unreviewed",
+      "claim_text": "India worries that a sudden Chinese water release could wipe out entire downstream communities.",
+      "evidence_refs": [
+        "E008",
+        "E013",
+        "E014"
+      ]
+    },
+    {
+      "claim_id": "C015",
+      "verdict": "partially_verified",
+      "confidence": "high",
+      "finding": "India has proposed and is advancing surveys/planning for the Upper Siang project as a downstream buffer. It is not yet a completed dam, and reporting describes local opposition and an unsettled proposal.",
+      "evidence_ids": [
+        "E008",
+        "E013",
+        "E014"
+      ],
+      "grounding": {
+        "support_type": "indirect",
+        "source_role": "independent reporting on proposed Indian project",
+        "claim_elements_checked": [
+          "Upper Siang project status",
+          "buffer rationale",
+          "downstream location"
+        ],
+        "missing_assumptions": [
+          "Construction status and final approval remain unsettled."
+        ],
+        "confidence_cap": "high",
+        "misgrounding_risk": "High if the script wording is treated as fully established rather than narrowed to the supported formulation.",
+        "assessment": "India has proposed and is advancing surveys/planning for the Upper Siang project as a downstream buffer. It is not yet a completed dam, and reporting describes local opposition and an unsettled proposal.",
+        "coverage": "direct",
+        "quality": "high",
+        "independence": 2
+      },
+      "human_review": "unreviewed",
+      "claim_text": "India is building its own mega-dam just downstream as a buffer against Chinese releases.",
+      "evidence_refs": [
+        "E008",
+        "E013",
+        "E014"
+      ]
+    },
+    {
+      "claim_id": "C016",
+      "verdict": "mischaracterized",
+      "confidence": "high",
+      "finding": "India is upstream of Bangladesh on several shared rivers and the Teesta dispute is real, but 'exactly what China is doing' is a false equivalence between different rivers, projects, legal settings and development stages.",
+      "evidence_ids": [
+        "E008",
+        "E015",
+        "E016"
+      ],
+      "grounding": {
+        "support_type": "contradicted",
+        "source_role": "independent reporting on two distinct transboundary disputes",
+        "claim_elements_checked": [
+          "India-Bangladesh upstream asymmetry",
+          "claimed equivalence to China-India case"
+        ],
+        "missing_assumptions": [
+          "The line offers no common metric on which the actions are 'exactly' alike."
+        ],
+        "confidence_cap": "high",
+        "misgrounding_risk": "High if the script wording is treated as fully established rather than narrowed to the supported formulation.",
+        "assessment": "India is upstream of Bangladesh on several shared rivers and the Teesta dispute is real, but 'exactly what China is doing' is a false equivalence between different rivers, projects, legal settings and development stages.",
+        "coverage": "supports underlying asymmetry, not identity",
+        "quality": "medium-high",
+        "independence": 2
+      },
+      "human_review": "unreviewed",
+      "claim_text": "Bangladesh is watching India do exactly what China is doing to India.",
+      "evidence_refs": [
+        "E008",
+        "E015",
+        "E016"
+      ]
+    },
+    {
+      "claim_id": "C017",
+      "verdict": "verified",
+      "confidence": "high",
+      "finding": "Two Bangladeshi reports document thousands rallying at multiple sites along the Teesta and demanding what organisers called a fair share of its water from India.",
+      "evidence_ids": [
+        "E015",
+        "E016"
+      ],
+      "grounding": {
+        "support_type": "direct",
+        "source_role": "two Bangladesh event reports",
+        "claim_elements_checked": [
+          "crowd size",
+          "Teesta location and route",
+          "fair-share attribution"
+        ],
+        "missing_assumptions": [
+          "The fair-share assertion is the protesters' position."
+        ],
+        "confidence_cap": "high",
+        "misgrounding_risk": "Low if the stated scope and attribution are preserved.",
+        "assessment": "Two Bangladeshi reports document thousands rallying at multiple sites along the Teesta and demanding what organisers called a fair share of its water from India.",
+        "coverage": "direct event reporting",
+        "quality": "medium-high",
+        "independence": 2
+      },
+      "human_review": "unreviewed",
+      "claim_text": "Thousands of Bangladeshis rallied beside the Teesta, which flows through India, saying Bangladesh is denied its fair share of water.",
+      "evidence_refs": [
+        "E015",
+        "E016"
+      ]
+    },
+    {
+      "claim_id": "C018",
+      "verdict": "mischaracterized",
+      "confidence": "high",
+      "finding": "The modern India-Pakistan dispute dates to 1947. At a 2026 publication date that is about 79 years, not 75; the broader statement that both states have fought over Kashmir for decades is correct.",
+      "evidence_ids": [
+        "E017",
+        "E018"
+      ],
+      "grounding": {
+        "support_type": "contradicted",
+        "source_role": "reference chronology plus policy analysis",
+        "claim_elements_checked": [
+          "dispute start date",
+          "elapsed years at 2026 publication"
+        ],
+        "missing_assumptions": [
+          "The number may derive from an older draft date but is stale for 2026."
+        ],
+        "confidence_cap": "high",
+        "misgrounding_risk": "High if the script wording is treated as fully established rather than narrowed to the supported formulation.",
+        "assessment": "The modern India-Pakistan dispute dates to 1947. At a 2026 publication date that is about 79 years, not 75; the broader statement that both states have fought over Kashmir for decades is correct.",
+        "coverage": "direct chronology",
+        "quality": "high",
+        "independence": 2
+      },
+      "human_review": "unreviewed",
+      "claim_text": "Kashmir has been fought over by India and Pakistan for 75 years.",
+      "evidence_refs": [
+        "E017",
+        "E018"
+      ]
+    },
+    {
+      "claim_id": "C019",
+      "verdict": "partially_verified",
+      "confidence": "high",
+      "finding": "China controls Aksai Chin/northeastern Ladakh, which India claims, and has done so since 1962. 'Occupied' expresses India's legal-political characterization; 'China-controlled territory claimed by India' is more neutral and precise.",
+      "evidence_ids": [
+        "E017"
+      ],
+      "grounding": {
+        "support_type": "indirect",
+        "source_role": "reference account of de facto control and claims",
+        "claim_elements_checked": [
+          "Chinese control of Aksai Chin",
+          "contested territorial terminology"
+        ],
+        "missing_assumptions": [
+          "Territorial terminology is contested."
+        ],
+        "confidence_cap": "high",
+        "misgrounding_risk": "High if the script wording is treated as fully established rather than narrowed to the supported formulation.",
+        "assessment": "China controls Aksai Chin/northeastern Ladakh, which India claims, and has done so since 1962. 'Occupied' expresses India's legal-political characterization; 'China-controlled territory claimed by India' is more neutral and precise.",
+        "coverage": "direct",
+        "quality": "high",
+        "independence": 1
+      },
+      "human_review": "unreviewed",
+      "claim_text": "Part of Kashmir is occupied by China.",
+      "evidence_refs": [
+        "E017"
+      ]
+    },
+    {
+      "claim_id": "C020",
+      "verdict": "verified",
+      "confidence": "high",
+      "finding": "The Indus flows through Ladakh, part of the historical Kashmir region.",
+      "evidence_ids": [
+        "E017",
+        "E018"
+      ],
+      "grounding": {
+        "support_type": "direct",
+        "source_role": "reference geography plus policy analysis",
+        "claim_elements_checked": [
+          "Indus course through historical Kashmir/Ladakh"
+        ],
+        "missing_assumptions": [],
+        "confidence_cap": "high",
+        "misgrounding_risk": "Low if the stated scope and attribution are preserved.",
+        "assessment": "The Indus flows through Ladakh, part of the historical Kashmir region.",
+        "coverage": "direct",
+        "quality": "high",
+        "independence": 2
+      },
+      "human_review": "unreviewed",
+      "claim_text": "The Indus River runs through Kashmir.",
+      "evidence_refs": [
+        "E017",
+        "E018"
+      ]
+    },
+    {
+      "claim_id": "C021",
+      "verdict": "verified",
+      "confidence": "high",
+      "finding": "Pakistan gets about one-fifth of its electricity from hydropower, all of its hydro plants are in the Indus Basin, and the Indus system waters more than 90% of its crops. 'Most of its farming' is fair shorthand for crop production, though less exact.",
+      "evidence_ids": [
+        "E018"
+      ],
+      "grounding": {
+        "support_type": "direct",
+        "source_role": "expert synthesis citing IEA, WAPDA and World Bank data",
+        "claim_elements_checked": [
+          "hydropower share of electricity",
+          "Indus share of crop irrigation"
+        ],
+        "missing_assumptions": [
+          "Hydropower's electricity share can vary by year; farming should be phrased as crops/irrigated agriculture."
+        ],
+        "confidence_cap": "high",
+        "misgrounding_risk": "Low if the stated scope and attribution are preserved.",
+        "assessment": "Pakistan gets about one-fifth of its electricity from hydropower, all of its hydro plants are in the Indus Basin, and the Indus system waters more than 90% of its crops. 'Most of its farming' is fair shorthand for crop production, though less exact.",
+        "coverage": "direct quantitative synthesis",
+        "quality": "high",
+        "independence": 1
+      },
+      "human_review": "unreviewed",
+      "claim_text": "Pakistan depends on the Indus for one-fifth of its electricity and most of its farming.",
+      "evidence_refs": [
+        "E018"
+      ]
+    },
+    {
+      "claim_id": "C022",
+      "verdict": "partially_verified",
+      "confidence": "medium",
+      "finding": "India has long operated and developed hydropower projects on Indus-system rivers in the disputed region, with additional projects underway. The captured sources support the long-running programme but do not enumerate a complete multi-decade construction chronology.",
+      "evidence_ids": [
+        "E018",
+        "E021"
+      ],
+      "grounding": {
+        "support_type": "indirect",
+        "source_role": "expert and news accounts of Indian hydropower development",
+        "claim_elements_checked": [
+          "Indian Indus-basin dam-building history",
+          "decades-long duration"
+        ],
+        "missing_assumptions": [
+          "A project-by-project timeline would be needed for a fully grounded 'for decades' claim."
+        ],
+        "confidence_cap": "medium",
+        "misgrounding_risk": "High if the script wording is treated as fully established rather than narrowed to the supported formulation.",
+        "assessment": "India has long operated and developed hydropower projects on Indus-system rivers in the disputed region, with additional projects underway. The captured sources support the long-running programme but do not enumerate a complete multi-decade construction chronology.",
+        "coverage": "partial",
+        "quality": "high",
+        "independence": 2
+      },
+      "human_review": "unreviewed",
+      "claim_text": "India has been building dams in the Kashmir/Indus region for decades.",
+      "evidence_refs": [
+        "E018",
+        "E021"
+      ]
+    },
+    {
+      "claim_id": "C023",
+      "verdict": "verified",
+      "confidence": "high",
+      "finding": "On 23 April 2025 India announced the treaty would be held in abeyance with immediate effect. 'Suspended' is ordinary-language shorthand, though 'held in abeyance' is India's exact phrase.",
+      "evidence_ids": [
+        "E019",
+        "E020",
+        "E021"
+      ],
+      "grounding": {
+        "support_type": "direct",
+        "source_role": "Indian official announcement plus independent and multilateral context",
+        "claim_elements_checked": [
+          "date and wording of India treaty action"
+        ],
+        "missing_assumptions": [
+          "Pakistan contests India's legal ability to suspend the treaty unilaterally; the fact checked here is India's action."
+        ],
+        "confidence_cap": "high",
+        "misgrounding_risk": "Low if the stated scope and attribution are preserved.",
+        "assessment": "On 23 April 2025 India announced the treaty would be held in abeyance with immediate effect. 'Suspended' is ordinary-language shorthand, though 'held in abeyance' is India's exact phrase.",
+        "coverage": "direct primary attribution",
+        "quality": "high",
+        "independence": 2
+      },
+      "human_review": "unreviewed",
+      "claim_text": "In 2025, India suspended the Indus Waters Treaty.",
+      "evidence_refs": [
+        "E019",
+        "E020",
+        "E021"
+      ]
+    },
+    {
+      "claim_id": "C024",
+      "verdict": "verified",
+      "confidence": "high",
+      "finding": "Signed in September 1960 and held in abeyance in April 2025, the treaty lasted about 64 years 7 months, conventionally rounded to 65 years. Reuters reports it survived three wars and other conflicts.",
+      "evidence_ids": [
+        "E020",
+        "E021"
+      ],
+      "grounding": {
+        "support_type": "direct",
+        "source_role": "multilateral treaty history plus independent war chronology",
+        "claim_elements_checked": [
+          "treaty duration",
+          "survival through three wars"
+        ],
+        "missing_assumptions": [
+          "Use 'about 65 years' for arithmetic precision."
+        ],
+        "confidence_cap": "high",
+        "misgrounding_risk": "Low if the stated scope and attribution are preserved.",
+        "assessment": "Signed in September 1960 and held in abeyance in April 2025, the treaty lasted about 64 years 7 months, conventionally rounded to 65 years. Reuters reports it survived three wars and other conflicts.",
+        "coverage": "direct",
+        "quality": "high",
+        "independence": 2
+      },
+      "human_review": "unreviewed",
+      "claim_text": "The Indus Waters Treaty endured for about 65 years and through three India-Pakistan wars.",
+      "evidence_refs": [
+        "E020",
+        "E021"
+      ]
+    },
+    {
+      "claim_id": "C025",
+      "verdict": "mischaracterized",
+      "confidence": "high",
+      "finding": "Afghanistan's ministry announced that a Chinese company expressed interest/readiness to invest in three named Kunar dams. That is not the same as Afghanistan announcing committed construction. Possible effects on Pakistan are analytical and contingent.",
+      "evidence_ids": [
+        "E022",
+        "E023"
+      ],
+      "grounding": {
+        "support_type": "contradicted",
+        "source_role": "local report of ministry statement plus independent analysis",
+        "claim_elements_checked": [
+          "status of three Kunar projects",
+          "nature of announcement",
+          "possible Pakistan impact"
+        ],
+        "missing_assumptions": [
+          "No financing agreement, start date or final design was reported."
+        ],
+        "confidence_cap": "high",
+        "misgrounding_risk": "High if the script wording is treated as fully established rather than narrowed to the supported formulation.",
+        "assessment": "Afghanistan's ministry announced that a Chinese company expressed interest/readiness to invest in three named Kunar dams. That is not the same as Afghanistan announcing committed construction. Possible effects on Pakistan are analytical and contingent.",
+        "coverage": "directly tests announcement status",
+        "quality": "medium",
+        "independence": 2
+      },
+      "human_review": "unreviewed",
+      "claim_text": "Afghanistan announced three dams that could threaten Pakistan.",
+      "evidence_refs": [
+        "E022",
+        "E023"
+      ]
+    },
+    {
+      "claim_id": "C026",
+      "verdict": "verified",
+      "confidence": "high",
+      "finding": "Applying an event-level case-insensitive country-field match for Afghanistan, Bangladesh, Bhutan, India, Maldives, Nepal, Pakistan and Sri Lanka to the project's Pacific Institute snapshot yields 196 unique incidents in 2020-2024: 27, 21, 28, 47 and 73. 'Nearly 200' is accurate.",
+      "evidence_ids": [
+        "E024",
+        "E025"
+      ],
+      "grounding": {
+        "support_type": "direct",
+        "source_role": "publisher documentation plus deterministic event-level recalculation",
+        "claim_elements_checked": [
+          "country scope",
+          "2020-2024 date window",
+          "unique-event total"
+        ],
+        "missing_assumptions": [
+          "Counts are database-snapshot and filter dependent; compound-country rows are counted once."
+        ],
+        "confidence_cap": "high",
+        "misgrounding_risk": "Low if the stated scope and attribution are preserved.",
+        "assessment": "Applying an event-level case-insensitive country-field match for Afghanistan, Bangladesh, Bhutan, India, Maldives, Nepal, Pakistan and Sri Lanka to the project's Pacific Institute snapshot yields 196 unique incidents in 2020-2024: 27, 21, 28, 47 and 73. 'Nearly 200' is accurate.",
+        "coverage": "direct reproducible calculation",
+        "quality": "medium-high",
+        "independence": 1
+      },
+      "human_review": "unreviewed",
+      "claim_text": "South Asia saw nearly 200 water-conflict incidents in the five years 2020-2024.",
+      "evidence_refs": [
+        "E024",
+        "E025"
+      ]
+    },
+    {
+      "claim_id": "C027",
+      "verdict": "verified",
+      "confidence": "high",
+      "finding": "In the same project snapshot and eight-country filter, 2024's 73 incidents are the highest annual count in the series. Pacific Institute separately reports 2024 as a global record year.",
+      "evidence_ids": [
+        "E024",
+        "E025"
+      ],
+      "grounding": {
+        "support_type": "direct",
+        "source_role": "publisher record statement plus deterministic scoped recalculation",
+        "claim_elements_checked": [
+          "2024 count",
+          "record status within scoped series"
+        ],
+        "missing_assumptions": [
+          "The narration must preserve the South Asia scope."
+        ],
+        "confidence_cap": "high",
+        "misgrounding_risk": "Low if the stated scope and attribution are preserved.",
+        "assessment": "In the same project snapshot and eight-country filter, 2024's 73 incidents are the highest annual count in the series. Pacific Institute separately reports 2024 as a global record year.",
+        "coverage": "direct for scoped series",
+        "quality": "medium-high",
+        "independence": 1
+      },
+      "human_review": "unreviewed",
+      "claim_text": "Within the cited South Asia series, 2024 was the worst year on record.",
+      "evidence_refs": [
+        "E024",
+        "E025"
+      ]
+    },
+    {
+      "claim_id": "C028",
+      "verdict": "verified",
+      "confidence": "high",
+      "finding": "IPCC assesses glacier shrinkage in high-mountain Asia with high confidence, and ICIMOD reports accelerated Hindu Kush Himalaya glacier mass loss.",
+      "evidence_ids": [
+        "E026",
+        "E027"
+      ],
+      "grounding": {
+        "support_type": "direct",
+        "source_role": "IPCC assessment plus ICIMOD regional findings",
+        "claim_elements_checked": [
+          "Hindu Kush Himalaya glacier loss"
+        ],
+        "missing_assumptions": [
+          "Individual glacier behaviour and each river's seasonal response differ."
+        ],
+        "confidence_cap": "high",
+        "misgrounding_risk": "Low if the stated scope and attribution are preserved.",
+        "assessment": "IPCC assesses glacier shrinkage in high-mountain Asia with high confidence, and ICIMOD reports accelerated Hindu Kush Himalaya glacier mass loss.",
+        "coverage": "direct scientific assessment",
+        "quality": "high",
+        "independence": 2
+      },
+      "human_review": "unreviewed",
+      "claim_text": "The glaciers feeding these South Asian rivers are melting.",
+      "evidence_refs": [
+        "E026",
+        "E027"
+      ]
+    },
+    {
+      "claim_id": "C029",
+      "verdict": "mischaracterized",
+      "confidence": "high",
+      "finding": "The cited research's working hypothesis is that conflict risk rises when the rate of basin change exceeds institutions' capacity to absorb it. Absence of a treaty is one example of low institutional capacity, not a stand-alone finding that treaty absence is one of the clearest predictors.",
+      "evidence_ids": [
+        "E028"
+      ],
+      "grounding": {
+        "support_type": "contradicted",
+        "source_role": "peer-reviewed original research",
+        "claim_elements_checked": [
+          "research predictor formulation",
+          "role of treaty absence"
+        ],
+        "missing_assumptions": [
+          "The superlative 'clearest' is not supported by the paper."
+        ],
+        "confidence_cap": "high",
+        "misgrounding_risk": "High if the script wording is treated as fully established rather than narrowed to the supported formulation.",
+        "assessment": "The cited research's working hypothesis is that conflict risk rises when the rate of basin change exceeds institutions' capacity to absorb it. Absence of a treaty is one example of low institutional capacity, not a stand-alone finding that treaty absence is one of the clearest predictors.",
+        "coverage": "direct to the research claim",
+        "quality": "high",
+        "independence": 1
+      },
+      "human_review": "unreviewed",
+      "claim_text": "Researchers have found that countries sharing rivers without a treaty is one of the clearest predictors of water conflict.",
+      "evidence_refs": [
+        "E028"
+      ]
+    },
+    {
+      "claim_id": "C030",
+      "verdict": "contradicted",
+      "confidence": "high",
+      "finding": "The visual shows 76 for 2024. The event-level filter that supports the narration yields 73 unique 2024 incidents. The 76 appears to come from an inconsistent aggregate that counts country columns rather than unique events and can double-count compound-country records.",
+      "evidence_ids": [
+        "E024",
+        "E025",
+        "E029"
+      ],
+      "grounding": {
+        "support_type": "contradicted",
+        "source_role": "project frame plus publisher data and deterministic recalculation",
+        "claim_elements_checked": [
+          "displayed 2024 value",
+          "unique-event 2024 value",
+          "aggregation mismatch"
+        ],
+        "missing_assumptions": [
+          "The visual was confirmed on master hash a1e5bd8a6617ae95755db7dada85e45742e78e0a3729e21599caea52c7c1b851, but the publication master must be rechecked after concurrent replacements stop."
+        ],
+        "confidence_cap": "high",
+        "misgrounding_risk": "High if the script wording is treated as fully established rather than narrowed to the supported formulation.",
+        "assessment": "The visual shows 76 for 2024. The event-level filter that supports the narration yields 73 unique 2024 incidents. The 76 appears to come from an inconsistent aggregate that counts country columns rather than unique events and can double-count compound-country records.",
+        "coverage": "direct visual plus reproducible calculation",
+        "quality": "high",
+        "independence": 1
+      },
+      "human_review": "unreviewed",
+      "claim_text": "The chart 'Annual water conflicts in South Asia' displays 76 incidents for 2024 and cites Pacific Institute 2025.",
+      "evidence_refs": [
+        "E024",
+        "E025",
+        "E029"
+      ],
+      "spotlight_verdict": "false"
+    },
+    {
+      "claim_id": "C031",
+      "verdict": "verified",
+      "confidence": "medium",
+      "finding": "The current master frame matches RFA's 13 December 2022 report, which describes the footage as Indian and Chinese troops clashing along their disputed border. The video's wording is supported because it does not claim the footage depicts a specific dated incident. RFA cautions that the filming date is uncertain and withdrew its initial implication that the clip necessarily showed the 9 December 2022 Tawang clash.",
+      "evidence_ids": [
+        "E033",
+        "E034"
+      ],
+      "grounding": {
+        "support_type": "direct",
+        "source_role": "observable project frame plus original RFA publication",
+        "claim_elements_checked": [
+          "clip identity",
+          "RFA publication match",
+          "location wording",
+          "scope of the video's claim"
+        ],
+        "missing_assumptions": [
+          "The underlying footage date remains uncertain; do not identify it as the 9 December 2022 Tawang clash."
+        ],
+        "confidence_cap": "medium",
+        "misgrounding_risk": "Medium if the clip is tied to a specific date or incident; low for the video's narrower statement that it shows a border clash.",
+        "assessment": "A matching current-master frame and the original RFA report directly support the video's narrow wording. Contradiction search found uncertainty about when the clip was filmed, not evidence that the depicted India-China clash was fabricated.",
+        "coverage": "direct for the wording shown; incomplete for exact date",
+        "quality": "medium-high",
+        "independence": 1
+      },
+      "human_review": "unreviewed",
+      "claim_text": "A Radio Free Asia-branded clip is presented with on-screen text identifying it as rare video of a border clash between Indian and Chinese troops.",
+      "evidence_refs": [
+        "E033",
+        "E034"
+      ],
+      "correction_note": "Correction 2026-07-28: the previous unverified verdict relied on a mislabelled glacier frame and failed to trace the clip to RFA's original report. The corrected verdict is verified at medium confidence; RFA's date caveat is preserved."
+    }
+  ],
+  "publication_gate": {
+    "required_actions": [
+      "Human editorial review of every contradicted, mischaracterized and unverified item.",
+      "Freeze and hash the publication master, then recheck all visual claims and source labels.",
+      "Resolve the chart's 76-versus-73 discrepancy in public supporting material even if the video cannot be changed.",
+      "Do not imply that predicted harms, engineering projections or political characterizations are settled facts."
+    ],
+    "approved": false,
+    "approved_by": null,
+    "approved_at": null
+  }
+}
