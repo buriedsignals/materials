@@ -7,7 +7,10 @@
   "collaborators": [
     { "name": "Buried Signals" }
   ],
-  "fundedBy": null,
+  "fundedBy": {
+    "name": "Remotion",
+    "url": "https://www.remotion.dev/"
+  },
   "database": null,
   "notebookUrl": null,
   "sources": [
