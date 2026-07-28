@@ -144,6 +144,8 @@ function render(inv) {
     const sponsor = typeof inv.fundedBy === 'string'
       ? {name: inv.fundedBy}
       : inv.fundedBy;
+    document.querySelector('#funded-pill .funded-label').textContent =
+      sponsor.label || 'Supported by';
     fundedBy.textContent = sponsor.name;
     if (sponsor.url) {
       fundedBy.href = sponsor.url;
