@@ -3,11 +3,12 @@
   "ref": "BS-WW-001",
   "date": "July 2026",
   "title": "Water Wars",
-  "summary": "Sources, methodology, AI disclosure and reusable animation tools for the Buried Signals Water Wars video. Material corrections and technical caveats are recorded below.",
+  "summary": "Sources, methodology, AI disclosure and reusable animation tools for the Buried Signals Water Wars video. Additional context and source notes are provided below.",
   "collaborators": [
     { "name": "Buried Signals" }
   ],
   "fundedBy": {
+    "label": "Sponsored by",
     "name": "Remotion",
     "url": "https://www.remotion.dev/"
   },
