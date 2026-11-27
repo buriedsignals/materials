@@ -1,0 +1,288 @@
+{
+  "id": "kiloverse",
+  "ref": "BS-KV-001",
+  "date": "November 2026",
+  "title": "Into the Kiloverse",
+  "summary": "Kilo grupė is a Lithuanian company that sells health apps and supplements. We mapped 49 companies, 163 websites and 77 apps around it, and collected 43,142 ads from seven of its network's Facebook pages, many of which feature doctors we could not find.",
+  "fundedBy": {
+    "label": "Sponsored by",
+    "name": "MapTiler",
+    "url": "https://www.maptiler.com/",
+    "logo": "/kiloverse/media/maptiler-logo-white.png"
+  },
+  "database": null,
+  "notebookUrl": null,
+  "sources": [
+    {
+      "group": "Company records and accounts",
+      "claim": "Kilo grupė reported audited revenue of €404.3 million for 2025 and €221.5 million in marketing expenses, which its accounts say mostly cover digital customer acquisition.",
+      "title": "Registrų centras — Kilo grupė consolidated annual accounts 2025",
+      "meta": "Lithuanian Register of Legal Entities · Audited accounts · Not linkable"
+    },
+    {
+      "group": "Company records and accounts",
+      "claim": "The company paying for the No.Diet ads is wholly owned by UAB Medical Score, and Kilo grupė holds 96 of Medical Score's 196 shares (48.98%), a minority stake.",
+      "title": "Registrų centras — JADIS shareholder extracts",
+      "meta": "Lithuanian Register of Legal Entities · Extract of 20 Oct 2026 · Contains personal data, not published"
+    },
+    {
+      "group": "Company records and accounts",
+      "claim": "Kilo grupė holds 90% of UAB Bioma Health, which had no revenue in 2023 and €34.6 million in 2024.",
+      "title": "Registrų centras — Kilo grupė consolidated annual accounts 2024 and 2025",
+      "meta": "Audited accounts · 2024 p.52, 2025 p.53"
+    },
+    {
+      "group": "Company records and accounts",
+      "claim": "Kiloverse is the name Kilo uses for its own platform. We use it as a label for the network around Kilo grupė, not as a finding that every entity belongs to that platform.",
+      "title": "Kilo — Kiloverse",
+      "url": "https://kilo.co/kiloverse/",
+      "meta": "Company page · Archived 25 Oct 2026"
+    },
+    {
+      "group": "Ads and reach",
+      "claim": "We collected 43,142 ads from the Meta Ad Library, out of at least 135,669 that Meta displays for seven of the network's pages. Every count on this page is a count of collected ads.",
+      "title": "Meta Ad Library",
+      "meta": "Ad-level records · Collected by Buried Signals and partners"
+    },
+    {
+      "group": "Ads and reach",
+      "claim": "The ads delivered in the EU reached 34 countries and territories, with a cumulative ad-level reach above 440 million. Reach counts deliveries across ads, not individual people.",
+      "title": "Meta Ad Library — EU ad transparency data",
+      "meta": "Reach as reported by Meta · EU only"
+    },
+    {
+      "group": "Ads and reach",
+      "claim": "Kilo's apps had almost 89,000 App Store ratings across 12 storefronts, and about 61,000 of them came from the US storefront.",
+      "title": "Apple App Store — ratings lookups for 28 apps",
+      "meta": "Buried Signals lookups · 12 storefronts"
+    },
+    {
+      "group": "Doctors and personas",
+      "claim": "Health Insider presented Alexandra Pierce, MD as a board-certified author. Pulsetto later told us she is a fictional persona created by an outside agency.",
+      "title": "Health Insider — Alexandra Pierce author page",
+      "url": "https://healthinsider.news/author/alexandra-pierce/",
+      "meta": "Archived by Buried Signals, 25 Oct 2026 · Page since removed"
+    },
+    {
+      "group": "Doctors and personas",
+      "claim": "Health Insider listed Dr Bryan Curtin, a gastroenterologist in Baltimore, on its medical team. His hospital says he had no knowledge of the team.",
+      "title": "Health Insider — Medical team page",
+      "url": "https://healthinsider.news/medical-team/",
+      "meta": "Archived by Buried Signals, 25 Oct 2026"
+    },
+    {
+      "group": "Pulsetto",
+      "claim": "Pulsetto's website said its neck device was helping people manage depressive symptoms.",
+      "title": "Pulsetto — Vagus nerve stimulation use cases",
+      "url": "https://web.archive.org/web/20260615202711/https://pulsetto.tech/pages/use-cases/vagus-nerve-stimulation-for-adhd",
+      "meta": "Internet Archive capture · 15 Jun 2026"
+    },
+    {
+      "group": "Pulsetto",
+      "claim": "The study Pulsetto pointed to is a 2021 University of Kent paper on vagus nerve stimulation through the tragus of the ear.",
+      "title": "Kent Academic Repository — Tragus Based Vagus Nerve Stimulation for Stress Reduction",
+      "url": "https://kar.kent.ac.uk/91409/",
+      "meta": "Original research · BIOSIGNALS 2021"
+    },
+    {
+      "group": "Pulsetto",
+      "claim": "Pulsetto's founder and CEO acknowledged that a plagiarised clinical study, bought from a third party, had been published on the company's website. The admission was first reported by Verslo žinios.",
+      "title": "LRT — Pulsetto admits to plagiarising a clinical study",
+      "url": "https://www.lrt.lt/naujienos/mokslas-ir-it/11/2776147/klajoklio-nervo-stimuliatoriu-siulanti-pulsetto-pripazino-nuplagijavusi-klinikini-tyrima",
+      "meta": "Lithuanian public broadcaster · 15 Dec 2025"
+    },
+    {
+      "group": "Pulsetto",
+      "claim": "Delfi reported the same admission by Pulsetto's chief executive.",
+      "title": "Delfi — Pulsetto's head admits to a plagiarised study",
+      "url": "https://www.delfi.lt/sveikata/sveikatos-naujienos/pulsetto-imones-vadovas-pripazino-del-nuplagijuoto-tyrimo-120187110",
+      "meta": "Lithuanian news site · Archived by Buried Signals, 25 Oct 2026"
+    },
+    {
+      "group": "Bioma",
+      "claim": "Bioma's product page showed a Clinicians' Choice badge saying more than a thousand clinicians share the product on FrontrowMD.",
+      "title": "Bioma — Product page",
+      "url": "https://bioma.health/weight-loss-green?f=default",
+      "meta": "Archived by Buried Signals, 25 Oct 2026"
+    },
+    {
+      "group": "Bioma",
+      "claim": "FrontrowMD's public store page for Bioma said 1,050 providers shared it. FrontrowMD told us a product counts as shared when it stays on a clinician's discount page for five days.",
+      "title": "FrontrowMD — Bioma store page",
+      "url": "https://app.thefrontrowhealth.com/general-store/all?pid=2597",
+      "meta": "Archived by Buried Signals, 25 Oct 2026 · FrontrowMD reply, 11 Nov 2026"
+    },
+    {
+      "group": "Responses",
+      "claim": "Kilo announced it had suspended sales of five digital products, required a compliance function in every group company and adopted a common marketing standard, at a cost of more than €2 million in lost revenue.",
+      "title": "Kilo — Internal audit and marketing standard",
+      "url": "https://kilo.co/newsroom/kilo-internal-audit-marketing-standard/",
+      "meta": "Company statement · 20 Nov 2026"
+    },
+    {
+      "group": "Responses",
+      "claim": "Tadas Burgaila, Kilo's co-founder and largest shareholder, was asked on LRT what he would never invest in.",
+      "title": "LRT — Stonkus tiesiogiai, 20 Nov 2025",
+      "url": "https://www.youtube.com/watch?v=1kpcGaGI4Tc",
+      "meta": "Broadcast interview · Clip used in the video"
+    },
+    {
+      "group": "Context",
+      "claim": "Reset Tech found that 20% of the supplements on its list of advertised products had been flagged by health authorities as illegal or dangerous.",
+      "title": "Reset Tech — Clickbait Cures",
+      "url": "https://reset.tech/resources/clickbait-cures/",
+      "meta": "Research report · 15 Apr 2026"
+    },
+    {
+      "group": "Rules",
+      "claim": "In the EU, submitting or commissioning false consumer reviews or endorsements to promote products is listed as an unfair commercial practice in all circumstances.",
+      "title": "EUR-Lex — Unfair Commercial Practices Directive 2005/29/EC, Annex I, point 23c",
+      "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02005L0029-20220528",
+      "meta": "EU law · Consolidated 28 May 2022"
+    },
+    {
+      "group": "Rules",
+      "claim": "In the US, a business may not buy consumer reviews or testimonials that misrepresent, for example, that the reviewer exists.",
+      "title": "eCFR — 16 CFR 465.2(b)",
+      "url": "https://www.ecfr.gov/current/title-16/chapter-I/subchapter-D/part-465/section-465.2",
+      "meta": "US federal regulation · FTC rule on consumer reviews and testimonials"
+    },
+    {
+      "group": "Rules",
+      "claim": "In the US, an endorser presented as an expert must actually have the expertise the ad claims.",
+      "title": "eCFR — 16 CFR 255.3(a)",
+      "url": "https://www.ecfr.gov/current/title-16/chapter-I/subchapter-B/part-255/section-255.3",
+      "meta": "US federal regulation · FTC endorsement guides"
+    },
+    {
+      "group": "Geodata",
+      "claim": "MapTiler supplied the globe, basemaps and country borders used in the map animations.",
+      "title": "MapTiler — Maps and geodata platform",
+      "url": "https://www.maptiler.com/",
+      "meta": "© MapTiler © OpenStreetMap contributors"
+    }
+  ],
+  "aiDisclosure": {
+    "models": [
+      "Spotlight, the Buried Signals OSINT investigation tool, ran the September 2026 research cycle on the companies and doctor names. Its investigator agent searched public records and proposed findings, and a separate fact-checking agent checked each one against its sources before a journalist reviewed it.",
+      "AI coding assistants helped build the Kiloverse map, the scripts that collected and counted the ads, the archive and the Remotion animations.",
+      "Our partners checked doctor photos with three AI-image detectors, Google SynthID, OpenAI's image checker and Hive, alongside reverse image searches. A detector score is a likelihood, and we report it as one.",
+      "The voice of the former Kilo employee in the video is generated with ElevenLabs to protect her identity. It reads a human translation of her own words, and her recording was never sent to an outside service.",
+      "Interviews were transcribed with Whisper running on our own computer, to find and cut quotes."
+    ],
+    "tasks": [
+      "Searching public records, registries and archived pages for leads during the Spotlight research cycle. Every finding we used was checked again by a person against the original record.",
+      "Sorting and counting the 43,142 collected Meta ads by payer, page, landing page and the doctor names in the ad text.",
+      "Finding and cropping faces in ad images with Apple's on-device face detector. We did not use face recognition.",
+      "Checking every number on the map against the registry extract or capture it came from, with scripts that fail when a figure doesn't match."
+    ],
+    "notAi": [
+      "Registry extracts, company accounts, ad records and web captures. AI output was never treated as evidence.",
+      "Reporting, interviews, translations of quotes, questions to the companies, verification, editorial framing and publication decisions."
+    ]
+  },
+  "methodology": [
+    {
+      "heading": "What we looked at",
+      "text": "We mapped the companies, websites, apps, ad payers, Facebook pages and doctor names around UAB Kilo grupė. The evidence comes from Lithuanian registry extracts, Kilo's audited accounts, captures of 163 websites, 77 apps and 43,142 ads collected from the Meta Ad Library. Registry extracts were supplied by a partner and were not re-pulled."
+    },
+    {
+      "heading": "How each link is graded",
+      "text": "A link is documented when a registry extract, Kilo's audited accounts, a site's own legal text or the company's own written statement names the company. Links that rest on a shared person, a matching brand name or a partner list are shown as indirect, and the map draws them fainter. A shareholding says who holds shares, not who controls the business, so a minority stake is never called a subsidiary."
+    },
+    {
+      "heading": "How we collected the ads",
+      "items": [
+        "We collected the ads from the public Meta Ad Library website with Apify's Facebook Ads Scraper. We did not use Meta's Ad Library API.",
+        "The first run, on 12 June 2026, took 2,362 of the 2,434 active Health Insider ads and the roughly 19,800 inactive ones with the most impressions.",
+        "The second run, on 17 June 2026, took the ads with the most impressions from Healthtime, Health Horizon, Alexandra Pierce and three Luke Hoffman pages.",
+        "Each run sorted ads by impressions, highest first, across all countries. Meta's site stops loading results at about 20,000 ads per search, which limits how many inactive ads can be collected.",
+        "Meta displayed at least 135,669 ads for these seven pages, and we hold 43,142 of them, about a third. Every count describes the collected ads, not everything the pages ran.",
+        "Duplicate ads were merged by their Ad Library ID, and the Apify run and dataset IDs are kept with the raw files."
+      ]
+    },
+    {
+      "heading": "Reach and spend",
+      "items": [
+        "Reach is the sum of Meta's per-ad reach in the EU, so it counts deliveries, not people.",
+        "10,323 of the ads (23.9%) have no EU audience data because they weren't shown in the EU. Their reach is unknown, not zero.",
+        "Meta publishes no spend for these ads, so any spend shown on the map is modeled from reach and country ad prices."
+      ]
+    },
+    {
+      "heading": "Doctors and faces",
+      "text": "Doctor names are the names as they appear in the ads. A name we couldn't match to a real professional is reported as unverified, not as fake. Where a real doctor shares a name with a persona and we have no evidence they're involved, we don't show them. Photos are attributed by the name in the ad text, never by the page that ran the ad."
+    },
+    {
+      "heading": "Archiving and removals",
+      "items": [
+        "We archived the key pages on 25 October 2026 as WARC, MHTML, PDF and screenshots, with a checksum for every file, and submitted them to the Internet Archive.",
+        "We checked every site, article and app listing again on 12 and 20 November, and checked the app listings a third time on 27 November.",
+        "A page counts as removed only when we have a dated copy from before and a dated check showing it gone. On 27 November, 12 apps were missing from every store we had a link for."
+      ]
+    },
+    {
+      "heading": "Right of reply",
+      "text": "We sent our findings and questions to Kilo, its co-founder Tadas Burgaila, Pulsetto, FrontrowMD, Meta and the companies behind the Hartman ads before publication. Their answers are reflected in the video and in the sources above."
+    },
+    {
+      "heading": "Personal data",
+      "text": "Natural persons are not nodes on the map and their names are left out of the published data. Registry extracts that contain personal codes, emails or phone numbers are kept in the case file and are not published."
+    }
+  ],
+  "skills": [
+    {
+      "name": "Map Explainer",
+      "description": "2D routes, regions and geographic explainers, the method behind the reach map in the video.",
+      "href": "/skill-docs/map-explainer/"
+    }
+  ],
+  "downloads": [],
+  "partnersLabel": "Reported with",
+  "partners": [
+    {
+      "name": "Indicator",
+      "logo": "/kiloverse/media/indicator.svg",
+      "url": "https://indicator.media/"
+    },
+    {
+      "name": "15min",
+      "logo": "/kiloverse/media/15min.png",
+      "url": "https://www.15min.lt/"
+    },
+    {
+      "name": "Le Monde",
+      "logo": "/kiloverse/media/lemonde.svg",
+      "url": "https://www.lemonde.fr/"
+    },
+    {
+      "name": "NDR",
+      "logo": "/kiloverse/media/ndr.svg",
+      "url": "https://www.ndr.de/"
+    },
+    {
+      "name": "Maldita",
+      "logo": "/kiloverse/media/maldita.svg",
+      "url": "https://maldita.es/"
+    },
+    {
+      "name": "Facta",
+      "logo": "/kiloverse/media/facta.svg",
+      "url": "https://facta.news/"
+    }
+  ],
+  "featuredLab": {
+    "name": "The Kiloverse map",
+    "kicker": "Lab · Interactive map",
+    "description": "Explore the companies, websites, apps and doctor names around Kilo grupė, and see the evidence behind every link.",
+    "href": "https://kiloverse.buriedsignals.com/",
+    "image": "/kiloverse/media/kiloverse-map-preview.png",
+    "imageAlt": "The Kiloverse network map: companies, websites and apps linked around Kilo grupė",
+    "cta": "Open the map"
+  },
+  "archive": {
+    "url": "https://kiloverse.buriedsignals.com/archive/",
+    "label": "Open the full archive",
+    "stats": "Screenshots and downloadable copies of the pages behind the video's claims, saved on 25 October 2026, with the 43,142 Meta ads we collected and the dated checks of what went offline."
+  }
+}
