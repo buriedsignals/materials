@@ -164,16 +164,17 @@
   ],
   "aiDisclosure": {
     "models": [
-      "Spotlight, the Buried Signals OSINT investigation tool, ran the September 2026 research cycle on the companies and doctor names. Its investigator agent searched public records and proposed findings, and a separate fact-checking agent checked each one against its sources before a journalist reviewed it.",
-      "AI coding assistants helped build the Kiloverse map, the scripts that collected and counted the ads, the archive and the Remotion animations.",
-      "Our partners checked doctor photos with three AI-image detectors, Google SynthID, OpenAI's image checker and Hive, alongside reverse image searches. A detector score is a likelihood, and we report it as one.",
-      "The voice of the former Kilo employee in the video is generated with ElevenLabs to protect her identity. It reads a human translation of her own words, and her recording was never sent to an outside service.",
-      "Interviews were transcribed with Whisper running on our own computer, to find and cut quotes."
+      "[Spotlight](https://spotlight.buriedsignals.com/), the Buried Signals OSINT investigation tool, ran the September 2026 research cycle on the companies and doctor names. Its investigator agent searched public records and proposed findings, and a separate fact-checking agent checked each one against its sources before a journalist reviewed it.",
+      "AI coding assistants helped build the Kiloverse map, the scripts that collected and counted the ads, the archive and the [Remotion](https://www.remotion.dev/) animations.",
+      "Our partners checked doctor photos with three AI-image detectors, [Google SynthID](https://deepmind.google/models/synthid/), OpenAI's image checker and [Hive](https://hivemoderation.com/ai-generated-content-detection), alongside reverse image searches such as [TinEye](https://tineye.com/). A detector score is a likelihood, and we report it as one.",
+      "The voice of the former Kilo employee in the video is generated with [ElevenLabs](https://elevenlabs.io/) to protect her identity. It reads a human translation of her own words, and her recording was never sent to an outside service.",
+      "Interviews were transcribed with [Whisper](https://github.com/openai/whisper) running on our own computer, to find and cut quotes.",
+      "We captured web pages and checked which ones went offline with [Firecrawl](https://www.firecrawl.dev/)."
     ],
     "tasks": [
       "Searching public records, registries and archived pages for leads during the Spotlight research cycle. Every finding we used was checked again by a person against the original record.",
       "Sorting and counting the 43,142 collected Meta ads by payer, page, landing page and the doctor names in the ad text.",
-      "Finding and cropping faces in ad images with Apple's on-device face detector. We did not use face recognition.",
+      "Finding faces in ad images, grouping copies of the same picture and reading text in screenshots with Apple's [Vision](https://developer.apple.com/documentation/vision) framework on our own computer. This is how we counted 28 distinct pictures under the name Elizabeth Hartman. It compares pictures, not people, and we did not use face recognition.",
       "Checking every number on the map against the registry extract or capture it came from, with scripts that fail when a figure doesn't match."
     ],
     "notAi": [
@@ -193,7 +194,7 @@
     {
       "heading": "How we collected the ads",
       "items": [
-        "We collected the ads from the public Meta Ad Library website with Apify's Facebook Ads Scraper. We did not use Meta's Ad Library API.",
+        "We collected the ads from the public Meta Ad Library website with [Apify's Facebook Ads Scraper](https://apify.com/apify/facebook-ads-scraper). We did not use Meta's Ad Library API.",
         "The first run, on 12 June 2026, took 2,362 of the 2,434 active Health Insider ads and the roughly 19,800 inactive ones with the most impressions.",
         "The second run, on 17 June 2026, took the ads with the most impressions from Healthtime, Health Horizon, Alexandra Pierce and three Luke Hoffman pages.",
         "Each run sorted ads by impressions, highest first, across all countries. Meta's site stops loading results at about 20,000 ads per search, which limits how many inactive ads can be collected.",
@@ -284,5 +285,12 @@
     "url": "https://kiloverse.buriedsignals.com/archive/",
     "label": "Open the full archive",
     "stats": "Screenshots and downloadable copies of the pages behind the video's claims, saved on 25 October 2026, with the 43,142 Meta ads we collected and the dated checks of what went offline."
+  },
+  "researchedWith": {
+    "label": "Researched with",
+    "name": "Spotlight",
+    "wordmark": "Spotlight",
+    "url": "https://spotlight.buriedsignals.com/",
+    "logo": "/kiloverse/media/spotlight-mark.svg"
   }
 }

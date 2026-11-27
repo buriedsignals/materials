@@ -37,10 +37,16 @@ function renderSources(sources, invId) {
   }).join('');
 }
 
+// esc() first, then turn [label](https://...) into a link; nothing else is interpreted
+function rich(s) {
+  return esc(s).replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g,
+    '<a class="inline-link" href="$2" target="_blank" rel="noopener">$1</a>');
+}
+
 function renderDisclosure(d) {
   const section = (label, items) => `<div class="disclosure-section">
     <span class="disclosure-label">${esc(label)}</span>
-    <ul class="disclosure-list">${items.map(i => `<li>${esc(i)}</li>`).join('')}</ul>
+    <ul class="disclosure-list">${items.map(i => `<li>${rich(i)}</li>`).join('')}</ul>
   </div>`;
   return [
     ['Models and use', d.models],
@@ -63,9 +69,9 @@ function renderMethodology(paragraphs) {
     const link = p.url && p.linkText
       ? ` <a class="methodology-link" href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.linkText)}</a>`
       : '';
-    const text = p.text ? `<p class="methodology-text">${esc(p.text)}${link}</p>` : '';
+    const text = p.text ? `<p class="methodology-text">${rich(p.text)}${link}</p>` : '';
     const items = p.items?.length
-      ? `<ul class="methodology-list">${p.items.map(i => `<li>${esc(i)}</li>`).join('')}</ul>`
+      ? `<ul class="methodology-list">${p.items.map(i => `<li>${rich(i)}</li>`).join('')}</ul>`
       : '';
     return `<div class="methodology-block">${heading}${text}${items}</div>`;
   }).join('');
@@ -176,31 +182,38 @@ function render(inv) {
     return `<div class="meta-tag"><div class="meta-dot meta-dot--teal"></div><span class="meta-label meta-label--teal">${esc(c.name)}</span></div>`;
   }).join('');
 
+  const pill = (label, p) => {
+    const mark = p.logo ? `<img class="funded-logo${p.wordmark ? ' funded-logo--mark' : ''}" src="${esc(p.logo)}" alt="${p.wordmark ? '' : esc(p.name)}">` : '';
+    const word = p.wordmark ? `<span class="funded-word">${esc(p.wordmark)}</span>` : (p.logo ? '' : esc(p.name));
+    const inner = `<span class="funded-label">${esc(label)}</span><span class="funded-name">${mark}${word}</span>`;
+    return p.url
+      ? `<a class="funded-pill" href="${esc(p.url)}" target="_blank" rel="noopener" title="${esc(p.name)}">${inner}</a>`
+      : `<div class="funded-pill">${inner}</div>`;
+  };
+  const pills = [];
   if (inv.fundedBy) {
-    const fundedBy = document.getElementById('funded-by');
-    const sponsor = typeof inv.fundedBy === 'string'
-      ? {name: inv.fundedBy}
-      : inv.fundedBy;
-    document.querySelector('#funded-pill .funded-label').textContent =
-      sponsor.label || 'Supported by';
-    if (sponsor.logo) {
-      fundedBy.innerHTML = `<img class="funded-logo" src="${esc(sponsor.logo)}" alt="${esc(sponsor.name)}">`;
-      fundedBy.title = sponsor.name;
-    } else {
-      fundedBy.textContent = sponsor.name;
-    }
-    if (sponsor.url) {
-      fundedBy.href = sponsor.url;
-      fundedBy.target = '_blank';
-      fundedBy.rel = 'noopener';
-    }
-    document.getElementById('funded-pill').style.display = '';
+    const sponsor = typeof inv.fundedBy === 'string' ? {name: inv.fundedBy} : inv.fundedBy;
+    pills.push(pill(sponsor.label || 'Supported by', sponsor));
+  }
+  if (inv.researchedWith) {
+    pills.push(pill(inv.researchedWith.label || 'Researched with', inv.researchedWith));
+  }
+  if (pills.length) {
+    const row = document.getElementById('funded-row');
+    row.innerHTML = pills.join('');
+    row.hidden = false;
+  }
+
+  if (inv.archive) {
+    const el = document.getElementById('archive-cta');
+    el.innerHTML = renderDatabase(inv.archive);
+    el.hidden = false;
   }
 
   const fileList = document.getElementById('file-list');
   fileList.innerHTML =
     (inv.database ? buildFile(ICONS.database, 'Data', renderDatabase(inv.database)) : '') +
-    (inv.sources?.length ? buildFile(ICONS.sources, 'Sources', (inv.archive ? renderDatabase(inv.archive) : '') + renderSources(inv.sources, inv.id)) : '') +
+    (inv.sources?.length ? buildFile(ICONS.sources, 'Sources', renderSources(inv.sources, inv.id)) : '') +
     buildFile(ICONS.ai, 'AI Disclosure', renderDisclosure(inv.aiDisclosure)) +
     buildFile(ICONS.methodology, 'Methodology', renderMethodology(inv.methodology)) +
     (inv.skills?.length ? buildFile(ICONS.skills, 'Skills', renderSkills(inv.skills)) : '') +
