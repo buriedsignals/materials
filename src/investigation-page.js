@@ -63,7 +63,11 @@ function renderMethodology(paragraphs) {
     const link = p.url && p.linkText
       ? ` <a class="methodology-link" href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.linkText)}</a>`
       : '';
-    return `<div class="methodology-block">${heading}<p class="methodology-text">${esc(p.text)}${link}</p></div>`;
+    const text = p.text ? `<p class="methodology-text">${esc(p.text)}${link}</p>` : '';
+    const items = p.items?.length
+      ? `<ul class="methodology-list">${p.items.map(i => `<li>${esc(i)}</li>`).join('')}</ul>`
+      : '';
+    return `<div class="methodology-block">${heading}${text}${items}</div>`;
   }).join('');
 }
 
@@ -134,10 +138,43 @@ function render(inv) {
   document.getElementById('title').textContent = inv.title;
   document.getElementById('summary-text').textContent = inv.summary;
 
+  if (inv.partners?.length) {
+    const el = document.getElementById('partners');
+    el.innerHTML = `<span class="partners-label">${esc(inv.partnersLabel || 'Reported with')}</span>
+      <div class="partners-grid">${inv.partners.map(p => {
+        const img = `<img src="${esc(p.logo)}" alt="${esc(p.name)}" loading="lazy">`;
+        return p.url
+          ? `<a class="partner-card" href="${esc(p.url)}" target="_blank" rel="noopener" title="${esc(p.name)}">${img}</a>`
+          : `<span class="partner-card" title="${esc(p.name)}">${img}</span>`;
+      }).join('')}</div>`;
+    el.hidden = false;
+  }
+
+  if (inv.featuredLab) {
+    const lab = inv.featuredLab;
+    const el = document.getElementById('featured-lab');
+    el.innerHTML = `<a class="featured-lab-link" href="${esc(lab.href)}" target="_blank" rel="noopener">
+        <img class="featured-lab-image" src="${esc(lab.image)}" alt="${esc(lab.imageAlt || lab.name)}">
+        <span class="featured-lab-body">
+          <span class="featured-lab-kicker">${ICONS.ar}<span>${esc(lab.kicker || 'Lab')}</span></span>
+          <span class="featured-lab-title">${esc(lab.name)}</span>
+          <span class="featured-lab-text">${esc(lab.description)}</span>
+          <span class="featured-lab-cta">${esc(lab.cta || 'Open')} <span aria-hidden="true">→</span></span>
+        </span>
+      </a>`;
+    el.hidden = false;
+  }
+
   const metaRow = document.getElementById('meta-row');
-  metaRow.innerHTML = inv.collaborators.map(c =>
-    `<div class="meta-tag"><div class="meta-dot meta-dot--teal"></div><span class="meta-label meta-label--teal">${esc(c.name)}</span></div>`
-  ).join('');
+  metaRow.innerHTML = (inv.collaborators || []).map(c => {
+    if (c.logo) {
+      const img = `<img class="meta-logo-img" src="${esc(c.logo)}" alt="${esc(c.name)}">`;
+      return c.url
+        ? `<a class="meta-logo" href="${esc(c.url)}" target="_blank" rel="noopener" title="${esc(c.name)}">${img}</a>`
+        : `<span class="meta-logo" title="${esc(c.name)}">${img}</span>`;
+    }
+    return `<div class="meta-tag"><div class="meta-dot meta-dot--teal"></div><span class="meta-label meta-label--teal">${esc(c.name)}</span></div>`;
+  }).join('');
 
   if (inv.fundedBy) {
     const fundedBy = document.getElementById('funded-by');
@@ -146,7 +183,12 @@ function render(inv) {
       : inv.fundedBy;
     document.querySelector('#funded-pill .funded-label').textContent =
       sponsor.label || 'Supported by';
-    fundedBy.textContent = sponsor.name;
+    if (sponsor.logo) {
+      fundedBy.innerHTML = `<img class="funded-logo" src="${esc(sponsor.logo)}" alt="${esc(sponsor.name)}">`;
+      fundedBy.title = sponsor.name;
+    } else {
+      fundedBy.textContent = sponsor.name;
+    }
     if (sponsor.url) {
       fundedBy.href = sponsor.url;
       fundedBy.target = '_blank';
@@ -158,7 +200,7 @@ function render(inv) {
   const fileList = document.getElementById('file-list');
   fileList.innerHTML =
     (inv.database ? buildFile(ICONS.database, 'Data', renderDatabase(inv.database)) : '') +
-    (inv.sources?.length ? buildFile(ICONS.sources, 'Sources', renderSources(inv.sources, inv.id)) : '') +
+    (inv.sources?.length ? buildFile(ICONS.sources, 'Sources', (inv.archive ? renderDatabase(inv.archive) : '') + renderSources(inv.sources, inv.id)) : '') +
     buildFile(ICONS.ai, 'AI Disclosure', renderDisclosure(inv.aiDisclosure)) +
     buildFile(ICONS.methodology, 'Methodology', renderMethodology(inv.methodology)) +
     (inv.skills?.length ? buildFile(ICONS.skills, 'Skills', renderSkills(inv.skills)) : '') +
